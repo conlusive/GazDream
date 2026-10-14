@@ -108,7 +108,16 @@
     "priceLine": "Fuel prices",
     "withVat": "incl. VAT",
     "withoutVat": "excl. VAT",
-    "contactLine": "Contact"
+    "contactLine": "Contact",
+    "boilerPrice": "Boiler price (optional)",
+    "paybackTitle": "Boiler payback",
+    "paybackUnit": {
+      "season": "seasons",
+      "year": "years"
+    },
+    "paybackNeedPeriod": "Choose “per season” or “per year” to calculate payback.",
+    "paybackNever": "At these prices the boiler does not pay back.",
+    "pricesAsOf": "Indicative prices as of {date}."
   },
   "about": {
     "title": "About us",

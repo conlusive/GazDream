@@ -108,7 +108,16 @@
     "priceLine": "Brennstoffpreise",
     "withVat": "inkl. MwSt.",
     "withoutVat": "ohne MwSt.",
-    "contactLine": "Kontakt"
+    "contactLine": "Kontakt",
+    "boilerPrice": "Kesselpreis (optional)",
+    "paybackTitle": "Amortisation des Kessels",
+    "paybackUnit": {
+      "season": "Saisons",
+      "year": "Jahre"
+    },
+    "paybackNeedPeriod": "„Pro Saison“ oder „Pro Jahr“ wählen, um die Amortisation zu berechnen.",
+    "paybackNever": "Bei diesen Preisen amortisiert sich der Kessel nicht.",
+    "pricesAsOf": "Richtpreise vom {date}."
   },
   "about": {
     "title": "Über uns",

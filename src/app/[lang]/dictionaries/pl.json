@@ -108,7 +108,16 @@
     "priceLine": "Ceny paliw",
     "withVat": "z VAT",
     "withoutVat": "bez VAT",
-    "contactLine": "Kontakt"
+    "contactLine": "Kontakt",
+    "boilerPrice": "Cena kotła (opcjonalnie)",
+    "paybackTitle": "Okres zwrotu kotła",
+    "paybackUnit": {
+      "season": "sezonu",
+      "year": "roku"
+    },
+    "paybackNeedPeriod": "Wybierz okres „na sezon” lub „na rok”, aby policzyć zwrot.",
+    "paybackNever": "Przy tych cenach kocioł się nie zwraca.",
+    "pricesAsOf": "Ceny orientacyjne z dnia {date}."
   },
   "about": {
     "title": "O firmie",

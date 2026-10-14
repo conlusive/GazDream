@@ -3,24 +3,20 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { calculateBatches, type Fuel } from "@/lib/calculator";
+import { calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
 import { CONTACT } from "@/lib/content";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/i18n/config";
 
 type Crop = "corn" | "soy" | "rapeseed";
 type Currency = "EUR" | "PLN";
+type PriceTable = Record<Currency, Record<Fuel, number>>;
 type Period = "day" | "season" | "year";
 type Row = { id: number; crop: Crop; from: number; to: number; tonnes: string };
 
 const CROP_TARGET: Record<Crop, number> = { corn: 14, soy: 13, rapeseed: 8 };
 const CROP_START: Record<Crop, number> = { corn: 20, soy: 18, rapeseed: 12 };
 const MAX_ROWS = 5;
-// Placeholder market prices, to be managed from the admin screen later.
-const DEFAULT_PRICES: Record<Currency, Record<Fuel, number>> = {
-  EUR: { gas: 400, chips: 70, pellets: 160 },
-  PLN: { gas: 1700, chips: 300, pellets: 690 },
-};
 const VAT_RATE: Record<Locale, number> = { pl: 0.23, de: 0.19, en: 0.2 };
 const FUEL_ORDER: Fuel[] = ["gas", "chips", "pellets"];
 
@@ -28,16 +24,19 @@ const FUEL_ORDER: Fuel[] = ["gas", "chips", "pellets"];
 const num = (v: string) => Math.max(0, Number(v.replace(",", ".")) || 0);
 const newRow = (id: number, crop: Crop): Row => ({ id, crop, from: CROP_START[crop], to: CROP_TARGET[crop], tonnes: "1000" });
 
-export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: Dictionary["calc"] }) {
+type Props = { lang: Locale; dict: Dictionary["calc"]; defaultPrices: PriceTable; pricesDate: string };
+
+export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate }: Props) {
   const [currency, setCurrency] = useState<Currency>(lang === "pl" ? "PLN" : "EUR");
   const [rows, setRows] = useState<Row[]>([newRow(1, "corn")]);
   const [nextId, setNextId] = useState(2);
   const [period, setPeriod] = useState<Period>("season");
   const [prices, setPrices] = useState<Record<Fuel, string>>(() => {
-    const p = DEFAULT_PRICES[lang === "pl" ? "PLN" : "EUR"];
+    const p = defaultPrices[lang === "pl" ? "PLN" : "EUR"];
     return { gas: String(p.gas), chips: String(p.chips), pellets: String(p.pellets) };
   });
   const [withVat, setWithVat] = useState(false);
+  const [boilerPrice, setBoilerPrice] = useState("");
   const [printedAt, setPrintedAt] = useState("");
 
   const money = useMemo(
@@ -72,7 +71,7 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
   };
   const pickCurrency = (c: Currency) => {
     setCurrency(c);
-    const p = DEFAULT_PRICES[c];
+    const p = defaultPrices[c];
     setPrices({ gas: String(p.gas), chips: String(p.chips), pellets: String(p.pellets) });
   };
   const printReport = () => {
@@ -83,6 +82,18 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
   const maxCost = Math.max(...result.results.map((r) => r.costPerTonne), 0.0001);
   const winner = result.results.find((r) => r.fuel === result.cheapest);
   const winnerSaves = winner && winner.fuel !== "gas" && winner.savingsVsGas > 0;
+  const wantsPayback = num(boilerPrice) > 0;
+  const periodOk = period !== "day";
+  const payback =
+    winnerSaves && periodOk ? paybackPeriods(num(boilerPrice), winner.savingsVsGas) : null;
+  const paybackText = !wantsPayback
+    ? ""
+    : !periodOk
+      ? dict.paybackNeedPeriod
+      : payback === null
+        ? dict.paybackNever
+        : `${dict.paybackTitle}: ${payback.toLocaleString(lang, { maximumFractionDigits: 1, minimumFractionDigits: 1 })} ${dict.paybackUnit[period]}`;
+  const priceDate = new Date(`${pricesDate}T00:00:00Z`).toLocaleDateString(lang, { timeZone: "UTC" });
   const summary = winnerSaves
     ? dict.summary
         .replace("{fuel}", lang === "de" ? dict.fuels[winner.fuel] : dict.fuels[winner.fuel].toLowerCase())
@@ -183,6 +194,12 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
               <input type="checkbox" checked={withVat} onChange={(e) => setWithVat(e.target.checked)} className="accent-brand-green" />
               {vatLabel}
             </label>
+            <p className="mt-2 text-xs text-muted">{dict.pricesAsOf.replace("{date}", priceDate)}</p>
+          </div>
+
+          <div>
+            <label className={label} htmlFor="boiler">{dict.boilerPrice}: {currency}</label>
+            <input id="boiler" inputMode="decimal" value={boilerPrice} onChange={(e) => setBoilerPrice(e.target.value)} className={field} />
           </div>
         </div>
 
@@ -216,6 +233,7 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
           </div>
 
           <p className="mt-4 rounded-md bg-white p-3 font-semibold">{summary}</p>
+          {paybackText && <p className="mt-2 rounded-md bg-white p-3 font-semibold">{paybackText}</p>}
 
           <figure className="mt-5" aria-label={dict.chart}>
             <figcaption className="mb-2 text-sm font-semibold">{dict.chart}</figcaption>
@@ -261,6 +279,7 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
         <h2 className="mb-1 mt-5 text-base font-bold">{dict.result}</h2>
         <ResultTable result={result} dict={dict} money={money} money2={money2} />
         <p className="mt-4 text-base font-bold">{summary}</p>
+        {paybackText && <p className="mt-1 text-base font-bold">{paybackText}</p>}
         <div className="mt-4 max-w-md">
           <Bars result={result} dict={dict} maxCost={maxCost} />
         </div>

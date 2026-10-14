@@ -117,3 +117,13 @@ export function calculateBatches({ batches, ...rest }: BatchesInput): BatchesRes
 
   return { removedPercent, results, cheapest, totalTonnes };
 }
+
+/**
+ * Number of periods (seasons/years) for the boiler price to be paid back by the
+ * savings vs gas. Returns null when it cannot pay back or inputs are not usable.
+ */
+export function paybackPeriods(boilerPrice: number, savingsPerPeriod: number): number | null {
+  if (!Number.isFinite(boilerPrice) || !Number.isFinite(savingsPerPeriod)) return null;
+  if (boilerPrice <= 0 || savingsPerPeriod <= 0) return null;
+  return boilerPrice / savingsPerPeriod;
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculate, calculateBatches } from "./index";
+import { calculate, calculateBatches, paybackPeriods } from "./index";
 
 const base = {
   moistureFrom: 20,
@@ -82,5 +82,18 @@ describe("calculateBatches", () => {
   it("handles an empty list and zero tonnes without a winner", () => {
     expect(calculateBatches({ batches: [], prices }).cheapest).toBeNull();
     expect(calculateBatches({ batches: [{ ...a, tonnes: 0 }], prices }).cheapest).toBeNull();
+  });
+});
+
+describe("paybackPeriods", () => {
+  it("divides the price by the savings", () => {
+    expect(paybackPeriods(100_000, 50_000)).toBe(2);
+    expect(paybackPeriods(75_000, 50_000)).toBeCloseTo(1.5, 6);
+  });
+  it("returns null when it never pays back or input is unusable", () => {
+    expect(paybackPeriods(100_000, 0)).toBeNull();
+    expect(paybackPeriods(100_000, -5)).toBeNull();
+    expect(paybackPeriods(0, 5)).toBeNull();
+    expect(paybackPeriods(NaN, 5)).toBeNull();
   });
 });
