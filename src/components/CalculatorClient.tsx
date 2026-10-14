@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import AnimatedNumber from "@/components/AnimatedNumber";
 import { calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
 import { CONTACT } from "@/lib/content";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
@@ -94,12 +95,23 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
         ? dict.paybackNever
         : `${dict.paybackTitle}: ${payback.toLocaleString(lang, { maximumFractionDigits: 1, minimumFractionDigits: 1 })} ${dict.paybackUnit[period]}`;
   const priceDate = new Date(`${pricesDate}T00:00:00Z`).toLocaleDateString(lang, { timeZone: "UTC" });
-  const summary = winnerSaves
+  const summaryTemplate = winnerSaves
     ? dict.summary
         .replace("{fuel}", lang === "de" ? dict.fuels[winner.fuel] : dict.fuels[winner.fuel].toLowerCase())
-        .replace("{amount}", money.format(winner.savingsVsGas))
         .replace("{period}", dict.period[period])
     : dict.noSaving;
+  const summary = summaryTemplate.replace("{amount}", winnerSaves ? money.format(winner.savingsVsGas) : "");
+  const [summaryBefore, summaryAfter] = summaryTemplate.split("{amount}");
+  const summaryNode =
+    winnerSaves && summaryAfter !== undefined ? (
+      <>
+        {summaryBefore}
+        <AnimatedNumber value={winner.savingsVsGas} format={money.format} />
+        {summaryAfter}
+      </>
+    ) : (
+      summary
+    );
   const rowsLabel = rows.map((r) => `${dict.crops[r.crop]} ${num(r.tonnes)} ${dict.tonnes}`).join(", ");
   const calcSummary = winnerSaves
     ? `${rowsLabel} ${dict.period[period]}, ${dict.fuels[winner.fuel]}: ${money.format(winner.savingsVsGas)}`
@@ -203,7 +215,8 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           </div>
         </div>
 
-        <div className="min-w-0 self-start rounded-xl border border-line bg-soft p-5 lg:sticky lg:top-24" aria-live="polite">
+        <div className="min-w-0 self-start rounded-xl border border-line bg-soft p-5 lg:sticky lg:top-24">
+          <p className="sr-only" aria-live="polite">{summary} {paybackText}</p>
           <h2 className="mb-4 text-xl font-bold">{dict.result}</h2>
           <ul className="space-y-2 sm:hidden">
             {result.results.map((r) => {
@@ -215,12 +228,12 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                     {best && <span className="rounded bg-brand-green px-2 py-0.5 text-xs text-white">{dict.best}</span>}
                   </div>
                   <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
-                    <dt className="text-muted">{dict.perTonne}</dt><dd className="text-right font-semibold">{money2.format(r.costPerTonne)}</dd>
-                    <dt className="text-muted">{dict.total}</dt><dd className="text-right font-semibold">{money.format(r.totalCost)}</dd>
+                    <dt className="text-muted">{dict.perTonne}</dt><dd className="text-right font-semibold"><AnimatedNumber value={r.costPerTonne} format={money2.format} /></dd>
+                    <dt className="text-muted">{dict.total}</dt><dd className="text-right font-semibold"><AnimatedNumber value={r.totalCost} format={money.format} /></dd>
                     {r.fuel !== "gas" && (
                       <>
                         <dt className="text-muted">{dict.saving}</dt>
-                        <dd className="text-right font-semibold">{money.format(r.savingsVsGas)} ({r.savingsPercent.toFixed(0)}%)</dd>
+                        <dd className="text-right font-semibold"><Savings r={r} money={money} /></dd>
                       </>
                     )}
                   </dl>
@@ -232,7 +245,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
             <ResultTable result={result} dict={dict} money={money} money2={money2} />
           </div>
 
-          <p className="mt-4 rounded-md bg-white p-3 font-semibold">{summary}</p>
+          <p className="mt-4 rounded-md bg-white p-3 font-semibold">{summaryNode}</p>
           {paybackText && <p className="mt-2 rounded-md bg-white p-3 font-semibold">{paybackText}</p>}
 
           <figure className="mt-5" aria-label={dict.chart}>
@@ -278,7 +291,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
 
         <h2 className="mb-1 mt-5 text-base font-bold">{dict.result}</h2>
         <ResultTable result={result} dict={dict} money={money} money2={money2} />
-        <p className="mt-4 text-base font-bold">{summary}</p>
+        <p className="mt-4 text-base font-bold">{summaryNode}</p>
         {paybackText && <p className="mt-1 text-base font-bold">{paybackText}</p>}
         <div className="mt-4 max-w-md">
           <Bars result={result} dict={dict} maxCost={maxCost} />
@@ -315,9 +328,9 @@ function ResultTable({ result, dict, money, money2 }: SharedProps & { money: Int
                 {dict.fuels[r.fuel]}
                 {best && <span className="ml-2 rounded bg-brand-green px-2 py-0.5 text-xs text-white">{dict.best}</span>}
               </td>
-              <td className="py-2 pr-2">{money2.format(r.costPerTonne)}</td>
-              <td className="py-2 pr-2">{money.format(r.totalCost)}</td>
-              <td className="py-2">{r.fuel === "gas" ? "—" : `${money.format(r.savingsVsGas)} (${r.savingsPercent.toFixed(0)}%)`}</td>
+              <td className="py-2 pr-2"><AnimatedNumber value={r.costPerTonne} format={money2.format} /></td>
+              <td className="py-2 pr-2"><AnimatedNumber value={r.totalCost} format={money.format} /></td>
+              <td className="py-2">{r.fuel === "gas" ? "—" : <Savings r={r} money={money} />}</td>
             </tr>
           );
         })}
@@ -341,5 +354,16 @@ function Bars({ result, dict, maxCost }: SharedProps & { maxCost: number }) {
         </div>
       ))}
     </div>
+  );
+}
+
+const pct = (n: number) => n.toFixed(0);
+
+function Savings({ r, money }: { r: { savingsVsGas: number; savingsPercent: number }; money: Intl.NumberFormat }) {
+  return (
+    <>
+      <AnimatedNumber value={r.savingsVsGas} format={money.format} /> (
+      <AnimatedNumber value={r.savingsPercent} format={pct} />%)
+    </>
   );
 }

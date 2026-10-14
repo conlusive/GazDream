@@ -20,7 +20,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           <ContactForm lang={lang} dict={c} />
         </Suspense>
         <div className="space-y-4 text-sm">
-          <div className="flex gap-3">
+          <div className="hidden gap-3 lg:flex">
             <a href={CONTACT.phoneHref} className="rounded-md bg-brand-green px-4 py-2 font-semibold text-white">{dict.cta.call}: {CONTACT.phone}</a>
           </div>
           <p><span className="text-muted">{c.email}:</span> <a className="font-semibold" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>

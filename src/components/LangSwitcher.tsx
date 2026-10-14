@@ -21,8 +21,8 @@ export default function LangSwitcher({ current }: { current: Locale }) {
           }}
           className={
             locale === current
-              ? "rounded px-2 py-1 bg-brand-green text-white"
-              : "rounded px-2 py-1 text-muted hover:text-brand-green"
+              ? "rounded px-2.5 py-2 bg-brand-green text-white"
+              : "rounded px-2.5 py-2 text-muted hover:text-brand-green"
           }
         >
           {locale.toUpperCase()}
