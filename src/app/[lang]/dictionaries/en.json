@@ -21,7 +21,9 @@
   "hero": {
     "title": "Dry grain cheaper than with gas",
     "subtitle": "Wood chip and pellet heat generators up to 20 MW. Made in Poland.",
-    "badge": "Made in Poland"
+    "badge": "Made in Poland",
+    "titleLead": "Dry grain",
+    "titleHighlight": "cheaper than with gas"
   },
   "benefits": {
     "title": "Why GazDream",
@@ -281,5 +283,14 @@
     "ok": "Thank you! We will call you back within one business day.",
     "error": "Could not send. Please try again or call us.",
     "calc": "Calculate your savings first"
-  }
+  },
+  "marquee": [
+    "Wood chips",
+    "Corn cobs",
+    "Sunflower husks",
+    "Pellets",
+    "100 kW – 20 MW",
+    "Grain drying",
+    "Temperature control ±1 °C"
+  ]
 }

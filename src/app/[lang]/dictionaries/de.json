@@ -21,7 +21,9 @@
   "hero": {
     "title": "Getreide günstiger trocknen als mit Gas",
     "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets bis 20 MW. Made in Poland.",
-    "badge": "Made in Poland"
+    "badge": "Made in Poland",
+    "titleLead": "Getreide trocknen",
+    "titleHighlight": "günstiger als mit Gas"
   },
   "benefits": {
     "title": "Warum GazDream",
@@ -281,5 +283,14 @@
     "ok": "Danke! Wir rufen Sie innerhalb eines Werktags zurück.",
     "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen.",
     "calc": "Zuerst Ersparnis berechnen"
-  }
+  },
+  "marquee": [
+    "Hackschnitzel",
+    "Maiskolben",
+    "Sonnenblumenschalen",
+    "Pellets",
+    "100 kW – 20 MW",
+    "Getreidetrocknung",
+    "Temperaturregelung ±1 °C"
+  ]
 }

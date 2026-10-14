@@ -14,6 +14,7 @@
   --color-line: #e4e6df;
   --color-soft: #f5f5ef;
   --color-paper: #faf9f4;
+  --color-mint: #e5efdd;
   --font-sans: var(--font-manrope), system-ui, sans-serif;
   --ease-out-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
 }
@@ -141,6 +142,57 @@ body {
   }
 }
 
+/* Hero headline: words rise from behind a mask, then the key phrase gets a marker sweep. */
+@keyframes word-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes hl-sweep {
+  from {
+    background-size: 0% 100%;
+  }
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes slide-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.word-up {
+  animation: word-up 0.95s var(--ease-out-soft) both;
+}
+.hl {
+  background-image: linear-gradient(var(--color-brand-orange), var(--color-brand-orange));
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding: 0.02em 0.2em 0.06em;
+  border-radius: 0.22em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  animation: hl-sweep 1s var(--ease-out-soft) 0.95s both;
+}
+
+.marquee {
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 46s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
 /* Smooth accordion where the browser supports animating to auto height. */
 @supports (interpolate-size: allow-keywords) {
   :root {
@@ -177,7 +229,10 @@ input[type="range"] {
   .rise,
   .kenburns,
   .page-in,
-  .reveal {
+  .reveal,
+  .word-up,
+  .hl,
+  .marquee-track {
     animation: none !important;
   }
   .btn,

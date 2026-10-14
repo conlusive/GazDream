@@ -21,7 +21,9 @@
   "hero": {
     "title": "Suszenie zboża taniej niż na gazie",
     "subtitle": "Generatory ciepła na zrębki i pellet o mocy do 20 MW. Wyprodukowano w Polsce.",
-    "badge": "Made in Poland"
+    "badge": "Made in Poland",
+    "titleLead": "Suszenie zboża",
+    "titleHighlight": "taniej niż na gazie"
   },
   "benefits": {
     "title": "Dlaczego GazDream",
@@ -281,5 +283,14 @@
     "ok": "Dziękujemy! Oddzwonimy w ciągu dnia roboczego.",
     "error": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń.",
     "calc": "Najpierw policz oszczędność"
-  }
+  },
+  "marquee": [
+    "Zrębki drzewne",
+    "Kolby kukurydzy",
+    "Łuski słonecznika",
+    "Pellet",
+    "Moc 100 kW – 20 MW",
+    "Suszenie zboża",
+    "Kontrola temperatury ±1 °C"
+  ]
 }
