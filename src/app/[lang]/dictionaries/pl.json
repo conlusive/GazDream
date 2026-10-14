@@ -53,7 +53,8 @@
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
     "legalName": "Strasslider sp. z o.o.",
-    "address": "Sielecka 7, 37-700 Przemyśl"
+    "address": "Sielecka 7, 37-700 Przemyśl",
+    "privacy": "Polityka prywatności"
   },
   "calc": {
     "title": "Kalkulator korzyści z *suszenia*",
@@ -144,7 +145,15 @@
     "unitYears": "latach",
     "chartDay": "Wybierz okres „na sezon” lub „na rok”, aby zobaczyć wykres.",
     "details": "Szczegóły obliczeń",
-    "perUnit": "zł"
+    "perUnit": "zł",
+    "emailTitle": "Wyślij wynik na e-mail",
+    "emailText": "Otrzymasz zestawienie z Twoimi danymi i cenami.",
+    "emailPlaceholder": "Twój adres e-mail",
+    "emailConsent": "Zgadzam się na wysłanie raportu i kontakt w sprawie oferty.",
+    "emailSend": "Wyślij",
+    "emailSending": "Wysyłanie…",
+    "emailOk": "Wysłano! Sprawdź skrzynkę (także folder spam).",
+    "emailError": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń."
   },
   "about": {
     "title": "O *firmie*",
@@ -552,6 +561,79 @@
       {
         "t": "Kontener wymiennika ciepła",
         "x": "Wymiennik z rurkami odpornymi na wysoką temperaturę, izolacja 100 mm wełny bazaltowej oraz szafy sterownicze z jednostką alarmową."
+      }
+    ]
+  },
+  "seo": {
+    "about": {
+      "title": "O firmie",
+      "description": "Generatory ciepła na paliwo stałe 100 kW – 20 MW: technologia całkowitego spalania, 9 zalet i rodzaje paliwa."
+    },
+    "boilers": {
+      "title": "Generatory ciepła PUT",
+      "description": "Modele PUT-1,5, PUT-2,5, PUT-4 i PUT-6: dobór mocy, porównanie parametrów i budowa instalacji."
+    },
+    "projects": {
+      "title": "Realizacje",
+      "description": "Zrealizowana instalacja generatora ciepła na biomasę oraz wybrane obiekty na suszarniach zbożowych."
+    },
+    "calculator": {
+      "title": "Kalkulator korzyści z suszenia",
+      "description": "Porównaj koszt suszenia zboża na gazie, zrębkach i pellecie. Policz oszczędność i zwrot kotła."
+    },
+    "faq": {
+      "title": "Najczęstsze pytania",
+      "description": "Odpowiedzi o paliwach, bezpieczeństwie pożarowym, obsłudze i zużyciu prądu generatorów ciepła na biomasę."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Zapytaj o ofertę: dział handlowy Strasslider sp. z o.o., Przemyśl. Telefon, e-mail i formularz."
+    },
+    "privacy": {
+      "title": "Polityka prywatności",
+      "description": "Jak przetwarzamy dane z formularzy kontaktowych na stronie."
+    }
+  },
+  "privacy": {
+    "title": "Polityka prywatności",
+    "updated": "Ostatnia aktualizacja: 15.10.2026",
+    "sections": [
+      {
+        "h": "Administrator danych",
+        "p": [
+          "Administratorem danych jest Strasslider sp. z o.o., Sielecka 7, 37-700 Przemyśl, e-mail: sales@strasslider.com, tel. +48 601 073 119."
+        ]
+      },
+      {
+        "h": "Jakie dane zbieramy",
+        "p": [
+          "Gdy wysyłasz formularz kontaktowy lub szybkie zapytanie, otrzymujemy: imię i nazwisko, telefon lub e-mail, treść wiadomości, wybrany model lub temat, podsumowanie z kalkulatora (jeśli je dołączysz), język strony i adres podstrony, z której wysłano zapytanie.",
+          "Obliczenia w kalkulatorze wykonują się w Twojej przeglądarce i nie są wysyłane do nas, dopóki nie klikniesz „Otrzymaj ofertę”."
+        ]
+      },
+      {
+        "h": "Cel i podstawa prawna",
+        "p": [
+          "Dane przetwarzamy, aby odpowiedzieć na Twoje zapytanie i przygotować ofertę (art. 6 ust. 1 lit. b RODO) oraz w prawnie uzasadnionym interesie prowadzenia działalności i dochodzenia roszczeń (art. 6 ust. 1 lit. f RODO)."
+        ]
+      },
+      {
+        "h": "Odbiorcy i okres przechowywania",
+        "p": [
+          "Zapytanie trafia e-mailem do naszego działu handlowego i jest zapisywane w kopii zapasowej na serwerze. Dane przechowujemy tak długo, jak to potrzebne do obsługi zapytania oraz, w razie potrzeby, do czasu przedawnienia roszczeń. Nie sprzedajemy danych i nie przekazujemy ich podmiotom trzecim w celach marketingowych."
+        ]
+      },
+      {
+        "h": "Pliki cookie",
+        "p": [
+          "Używamy wyłącznie funkcjonalnego pliku cookie „gd_lang”, który zapamiętuje wybrany język (do 12 miesięcy). Nie stosujemy cookie analitycznych ani reklamowych i nie ładujemy zewnętrznych skryptów śledzących. Czcionki i multimedia serwujemy z naszego serwera."
+        ]
+      },
+      {
+        "h": "Twoje prawa",
+        "p": [
+          "Masz prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz sprzeciwu. Aby skorzystać z tych praw, napisz na sales@strasslider.com. Masz też prawo wnieść skargę do Prezesa Urzędu Ochrony Danych Osobowych."
+        ]
       }
     ]
   }

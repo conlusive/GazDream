@@ -1,0 +1,18 @@
+# Production run: `docker compose up -d --build`
+# Settings are read from a local `.env` file next to this file (never commit it); see .env.example.
+services:
+  web:
+    build:
+      context: .
+      args:
+        SITE_URL: ${SITE_URL:-http://localhost:3000}
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - gazdream-data:/data
+
+volumes:
+  gazdream-data:

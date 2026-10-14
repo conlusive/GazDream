@@ -8,6 +8,8 @@ import { PHOTOS } from "@/lib/images";
 
 import { MODELS } from "@/lib/content";
 import { rich } from "@/lib/rich";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getDictionary } from "../dictionaries";
 
 function Check() {
@@ -16,6 +18,12 @@ function Check() {
       <path d="M4 10.5l4 4 8-9" />
     </svg>
   );
+}
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/boilers">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  return pageMetadata(lang, await getDictionary(lang), "boilers", "/boilers");
 }
 
 export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers">) {

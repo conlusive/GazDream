@@ -39,7 +39,10 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: Dictionary 
         </address>
       </div>
       <div className="border-t border-white/10">
-        <p className="container-x py-5 text-xs text-white/60">© {dict.footer.legalName} · {dict.hero.badge} · {dict.footer.rights}.</p>
+        <div className="container-x flex flex-wrap items-center justify-between gap-3 py-5 text-xs text-white/60">
+          <p>© {dict.footer.legalName} · {dict.hero.badge} · {dict.footer.rights}.</p>
+          <Link href={`/${lang}/privacy`} className="inline-block py-2 transition hover:text-white">{dict.footer.privacy}</Link>
+        </div>
       </div>
     </footer>
   );

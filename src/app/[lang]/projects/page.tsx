@@ -5,7 +5,15 @@ import { hasLocale } from "@/i18n/config";
 import { PHOTOS } from "@/lib/images";
 
 import { PROJECTS } from "@/lib/content";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getDictionary } from "../dictionaries";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/projects">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  return pageMetadata(lang, await getDictionary(lang), "projects", "/projects");
+}
 
 export default async function ProjectsPage({ params }: PageProps<"/[lang]/projects">) {
   const { lang } = await params;

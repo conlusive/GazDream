@@ -53,7 +53,8 @@
   "footer": {
     "rights": "All rights reserved",
     "legalName": "Strasslider sp. z o.o.",
-    "address": "Sielecka 7, 37-700 Przemyśl, Poland"
+    "address": "Sielecka 7, 37-700 Przemyśl, Poland",
+    "privacy": "Privacy policy"
   },
   "calc": {
     "title": "Drying savings *calculator*",
@@ -144,7 +145,15 @@
     "unitYears": "years",
     "chartDay": "Choose “per season” or “per year” to see the chart.",
     "details": "Calculation details",
-    "perUnit": ""
+    "perUnit": "",
+    "emailTitle": "Send the result to your e-mail",
+    "emailText": "You will get a summary with your data and prices.",
+    "emailPlaceholder": "Your e-mail address",
+    "emailConsent": "I agree to receive the report and to be contacted about a quote.",
+    "emailSend": "Send",
+    "emailSending": "Sending…",
+    "emailOk": "Sent! Check your inbox (and spam folder).",
+    "emailError": "Could not send. Please try again or call us."
   },
   "about": {
     "title": "About *us*",
@@ -552,6 +561,79 @@
       {
         "t": "Heat exchanger container",
         "x": "A heat exchanger with high-temperature tubes, 100 mm basalt wool insulation and control cabinets with an alarm unit."
+      }
+    ]
+  },
+  "seo": {
+    "about": {
+      "title": "About us",
+      "description": "Solid-fuel heat generators from 100 kW to 20 MW: total-combustion technology, nine advantages and fuel types."
+    },
+    "boilers": {
+      "title": "PUT heat generators",
+      "description": "PUT-1.5, PUT-2.5, PUT-4 and PUT-6 models: output selector, comparison table and installation anatomy."
+    },
+    "projects": {
+      "title": "Projects",
+      "description": "A completed biomass heat generator installation and selected installations on grain dryers."
+    },
+    "calculator": {
+      "title": "Drying savings calculator",
+      "description": "Compare the cost of drying grain on gas, wood chips and pellets. Work out savings and boiler payback."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "description": "Answers about fuels, fire safety, operation and electricity use of biomass heat generators."
+    },
+    "contact": {
+      "title": "Contact",
+      "description": "Ask for a quote: sales team at Strasslider sp. z o.o., Przemyśl. Phone, e-mail and a form."
+    },
+    "privacy": {
+      "title": "Privacy policy",
+      "description": "How we process the data you send through the contact forms on this site."
+    }
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "updated": "Last updated: 15 October 2026",
+    "sections": [
+      {
+        "h": "Data controller",
+        "p": [
+          "The data controller is Strasslider sp. z o.o., Sielecka 7, 37-700 Przemyśl, Poland, e-mail: sales@strasslider.com, tel. +48 601 073 119."
+        ]
+      },
+      {
+        "h": "What data we collect",
+        "p": [
+          "When you send a contact form or the quick request we receive: your name, phone or e-mail, your message, the selected model or topic, the calculator summary (if you attach it), the site language and the page the request was sent from.",
+          "Calculator results are computed in your browser and are not sent to us until you click “Get a quote”."
+        ]
+      },
+      {
+        "h": "Purpose and legal basis",
+        "p": [
+          "We process the data to answer your enquiry and prepare a quote (Art. 6(1)(b) GDPR) and for our legitimate interest in running our business and defending claims (Art. 6(1)(f) GDPR)."
+        ]
+      },
+      {
+        "h": "Recipients and retention",
+        "p": [
+          "Your enquiry reaches our sales team by e-mail and is also kept in a backup log on our server. We keep the data for as long as needed to handle the enquiry and, where necessary, until claims expire. We do not sell data or pass it to third parties for marketing."
+        ]
+      },
+      {
+        "h": "Cookies",
+        "p": [
+          "We only use the functional cookie “gd_lang”, which remembers the language you chose (up to 12 months). We use no analytics or advertising cookies and load no external tracking scripts. Fonts and media are served from our own server."
+        ]
+      },
+      {
+        "h": "Your rights",
+        "p": [
+          "You have the right to access, rectify, erase, restrict, port and object to the processing of your data. To use these rights write to sales@strasslider.com. You may also lodge a complaint with your data protection supervisory authority."
+        ]
       }
     ]
   }

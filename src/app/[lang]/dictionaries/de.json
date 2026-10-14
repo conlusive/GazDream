@@ -53,7 +53,8 @@
   "footer": {
     "rights": "Alle Rechte vorbehalten",
     "legalName": "Strasslider sp. z o.o.",
-    "address": "Sielecka 7, 37-700 Przemyśl, Polen"
+    "address": "Sielecka 7, 37-700 Przemyśl, Polen",
+    "privacy": "Datenschutz"
   },
   "calc": {
     "title": "Trocknungs-Ersparnis*rechner*",
@@ -144,7 +145,15 @@
     "unitYears": "Jahren",
     "chartDay": "„Pro Saison“ oder „Pro Jahr“ wählen, um das Diagramm zu sehen.",
     "details": "Details der Berechnung",
-    "perUnit": ""
+    "perUnit": "",
+    "emailTitle": "Ergebnis per E-Mail senden",
+    "emailText": "Sie erhalten eine Zusammenfassung mit Ihren Daten und Preisen.",
+    "emailPlaceholder": "Ihre E-Mail-Adresse",
+    "emailConsent": "Ich bin mit dem Versand des Berichts und der Kontaktaufnahme zu einem Angebot einverstanden.",
+    "emailSend": "Senden",
+    "emailSending": "Wird gesendet …",
+    "emailOk": "Gesendet! Bitte Posteingang (und Spam-Ordner) prüfen.",
+    "emailError": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen."
   },
   "about": {
     "title": "Über *uns*",
@@ -552,6 +561,79 @@
       {
         "t": "Wärmetauscher-Container",
         "x": "Wärmetauscher mit hitzebeständigen Rohren, 100 mm Basaltwolle-Isolierung und Schaltschränke mit Alarmeinheit."
+      }
+    ]
+  },
+  "seo": {
+    "about": {
+      "title": "Über uns",
+      "description": "Festbrennstoff-Wärmeerzeuger von 100 kW bis 20 MW: Technologie der vollständigen Verbrennung, neun Vorteile und Brennstoffarten."
+    },
+    "boilers": {
+      "title": "PUT-Wärmeerzeuger",
+      "description": "Modelle PUT-1,5, PUT-2,5, PUT-4 und PUT-6: Leistungswahl, Modellvergleich und Aufbau der Anlage."
+    },
+    "projects": {
+      "title": "Referenzen",
+      "description": "Eine realisierte Biomasse-Wärmeerzeuger-Anlage und ausgewählte Anlagen an Getreidetrocknern."
+    },
+    "calculator": {
+      "title": "Trocknungs-Ersparnisrechner",
+      "description": "Vergleichen Sie die Trocknungskosten mit Gas, Hackschnitzeln und Pellets. Ersparnis und Amortisation berechnen."
+    },
+    "faq": {
+      "title": "Häufige Fragen",
+      "description": "Antworten zu Brennstoffen, Brandschutz, Bedienung und Stromverbrauch von Biomasse-Wärmeerzeugern."
+    },
+    "contact": {
+      "title": "Kontakt",
+      "description": "Angebot anfragen: Vertrieb der Strasslider sp. z o.o., Przemyśl. Telefon, E-Mail und Formular."
+    },
+    "privacy": {
+      "title": "Datenschutzerklärung",
+      "description": "Wie wir die Daten verarbeiten, die Sie über die Kontaktformulare dieser Seite senden."
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzerklärung",
+    "updated": "Stand: 15. Oktober 2026",
+    "sections": [
+      {
+        "h": "Verantwortlicher",
+        "p": [
+          "Verantwortlich ist die Strasslider sp. z o.o., Sielecka 7, 37-700 Przemyśl, Polen, E-Mail: sales@strasslider.com, Tel. +48 601 073 119."
+        ]
+      },
+      {
+        "h": "Welche Daten wir erheben",
+        "p": [
+          "Wenn Sie das Kontaktformular oder die Schnellanfrage senden, erhalten wir: Name, Telefon oder E-Mail, Ihre Nachricht, das gewählte Modell oder Thema, die Zusammenfassung aus dem Rechner (falls angehängt), die Sprache der Seite und die Unterseite, von der die Anfrage kam.",
+          "Die Berechnungen im Rechner laufen in Ihrem Browser und werden erst übermittelt, wenn Sie auf „Kesselangebot erhalten“ klicken."
+        ]
+      },
+      {
+        "h": "Zweck und Rechtsgrundlage",
+        "p": [
+          "Wir verarbeiten die Daten, um Ihre Anfrage zu beantworten und ein Angebot zu erstellen (Art. 6 Abs. 1 lit. b DSGVO) sowie aufgrund unseres berechtigten Interesses am Geschäftsbetrieb und an der Durchsetzung von Ansprüchen (Art. 6 Abs. 1 lit. f DSGVO)."
+        ]
+      },
+      {
+        "h": "Empfänger und Speicherdauer",
+        "p": [
+          "Ihre Anfrage erreicht unseren Vertrieb per E-Mail und wird zusätzlich in einem Sicherungsprotokoll auf unserem Server gespeichert. Wir speichern die Daten so lange, wie es für die Bearbeitung nötig ist, und bei Bedarf bis zur Verjährung von Ansprüchen. Wir verkaufen keine Daten und geben sie nicht zu Werbezwecken an Dritte weiter."
+        ]
+      },
+      {
+        "h": "Cookies",
+        "p": [
+          "Wir verwenden nur das funktionale Cookie „gd_lang“, das die gewählte Sprache speichert (bis zu 12 Monate). Es gibt keine Analyse- oder Werbe-Cookies und keine externen Tracking-Skripte. Schriften und Medien liefern wir von unserem eigenen Server."
+        ]
+      },
+      {
+        "h": "Ihre Rechte",
+        "p": [
+          "Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung, Übertragbarkeit und Widerspruch. Schreiben Sie dazu an sales@strasslider.com. Sie können sich außerdem bei Ihrer Datenschutzaufsichtsbehörde beschweren."
+        ]
       }
     ]
   }

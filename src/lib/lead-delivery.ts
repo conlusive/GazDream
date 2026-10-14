@@ -28,14 +28,14 @@ export function formatLead(lead: Lead, receivedAt = new Date()): string {
   return [`Nowe zapytanie ze strony Eco Straßmayr Energy (${receivedAt.toISOString()})`, ...rows].join("\n");
 }
 
-const isEmail = (v: string) => /^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(v);
+export const isEmail = (v: string) => /^[^\s@<>,;]+@[^\s@<>,;]+\.[^\s@<>,;]+$/.test(v);
 
 /** E-mail is the only delivery channel. It is configured when host, recipient and sender are all set. */
 export const emailConfigured = (env: Env) => Boolean(env.SMTP_HOST && env.LEADS_EMAIL_TO && (env.LEADS_EMAIL_FROM || env.SMTP_USER));
 
-async function sendEmail(lead: Lead, env: Env, createTransport: typeof nodemailer.createTransport) {
+function makeTransport(env: Env, createTransport: typeof nodemailer.createTransport) {
   const port = Number(env.SMTP_PORT ?? 587);
-  const transport = createTransport({
+  return createTransport({
     host: env.SMTP_HOST,
     port,
     secure: port === 465,
@@ -43,6 +43,33 @@ async function sendEmail(lead: Lead, env: Env, createTransport: typeof nodemaile
     connectionTimeout: TIMEOUT_MS,
     socketTimeout: TIMEOUT_MS,
   });
+}
+
+/** Sends a calculator report to the visitor. Returns false when mail is not configured or sending fails. */
+export async function sendReportEmail(
+  message: { to: string; subject: string; text: string },
+  env: Env = process.env,
+  deps: Deps = {},
+): Promise<boolean> {
+  if (!emailConfigured(env) || !isEmail(message.to)) return false;
+  const createTransport = deps.createTransport ?? nodemailer.createTransport.bind(nodemailer);
+  try {
+    await makeTransport(env, createTransport).sendMail({
+      from: env.LEADS_EMAIL_FROM ?? env.SMTP_USER,
+      to: message.to,
+      subject: message.subject.slice(0, 150),
+      text: message.text,
+      replyTo: env.LEADS_EMAIL_TO,
+    });
+    return true;
+  } catch (err) {
+    console.error("Report e-mail failed:", err instanceof Error ? err.message : err);
+    return false;
+  }
+}
+
+async function sendEmail(lead: Lead, env: Env, createTransport: typeof nodemailer.createTransport) {
+  const transport = makeTransport(env, createTransport);
   await transport.sendMail({
     from: env.LEADS_EMAIL_FROM ?? env.SMTP_USER,
     to: env.LEADS_EMAIL_TO,

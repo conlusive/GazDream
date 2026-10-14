@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuickForm from "@/components/QuickForm";
 import { CONTACT } from "@/lib/content";
+import { alternatesFor, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin", "latin-ext"], display: "swap" });
 
@@ -18,11 +19,13 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
   if (!hasLocale(lang)) return {};
   const dict = await getDictionary(lang);
   return {
-    title: dict.meta.title,
+    metadataBase: new URL(SITE_URL),
+    title: { default: dict.meta.title, template: `%s | ${SITE_NAME}` },
     description: dict.meta.description,
-    alternates: {
-      languages: Object.fromEntries(locales.map((l) => [l, `/${l}`])),
-    },
+    applicationName: SITE_NAME,
+    alternates: alternatesFor(lang, ""),
+    openGraph: { siteName: SITE_NAME, title: dict.meta.title, description: dict.meta.description, locale: lang, type: "website", url: `/${lang}` },
+    twitter: { card: "summary_large_image" },
   };
 }
 
@@ -34,6 +37,22 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
   return (
     <html lang={lang} className={manrope.variable}>
       <body className="flex min-h-screen flex-col pb-20 antialiased lg:pb-0">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: SITE_NAME,
+              legalName: dict.footer.legalName,
+              url: SITE_URL,
+              logo: `${SITE_URL}/brand/logo.svg`,
+              telephone: CONTACT.phone,
+              email: CONTACT.email,
+              address: { "@type": "PostalAddress", streetAddress: "Sielecka 7", postalCode: "37-700", addressLocality: "Przemyśl", addressCountry: "PL" },
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
         <Header lang={lang} nav={dict.nav} cta={dict.cta} />
         <main className="flex-1">{children}</main>
         <QuickForm lang={lang} dict={dict.quick} calcLabel={dict.nav.calculator} />

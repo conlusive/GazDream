@@ -3,10 +3,12 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import CumulativeChart from "@/components/CumulativeChart";
+import ReportForm from "@/components/ReportForm";
 import Select from "@/components/Select";
 import Logo from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { breakEvenPrice, calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
+import { VAT_RATE } from "@/lib/calculator/config";
 import { CONTACT } from "@/lib/content";
 import { TONNES_KEY } from "@/components/HeroCard";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
@@ -21,7 +23,6 @@ type Row = { id: number; crop: Crop; from: number; to: number; tonnes: string };
 const CROP_TARGET: Record<Crop, number> = { corn: 14, soy: 13, rapeseed: 8 };
 const CROP_START: Record<Crop, number> = { corn: 20, soy: 18, rapeseed: 12 };
 const MAX_ROWS = 5;
-const VAT_RATE: Record<Locale, number> = { pl: 0.23, de: 0.19, en: 0.2 };
 const FUEL_ORDER: Fuel[] = ["gas", "chips", "pellets"];
 const PRESETS = [500, 1000, 5000, 10000, 20000];
 
@@ -67,9 +68,9 @@ function CropIcon({ crop }: { crop: Crop }) {
   );
 }
 
-type Props = { lang: Locale; dict: Dictionary["calc"]; defaultPrices: PriceTable; pricesDate: string };
+type Props = { lang: Locale; dict: Dictionary["calc"]; defaultPrices: PriceTable; pricesDate: string; privacyLabel: string };
 
-export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate }: Props) {
+export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate, privacyLabel }: Props) {
   const [currency, setCurrency] = useState<Currency>(lang === "pl" ? "PLN" : "EUR");
   const [rows, setRows] = useState<Row[]>([newRow(1, "corn")]);
   const [nextId, setNextId] = useState(2);
@@ -422,6 +423,19 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           </div>
 
 
+        <ReportForm
+          lang={lang}
+          dict={dict}
+          privacyLabel={privacyLabel}
+          input={{
+            currency,
+            withVat,
+            period,
+            boilerPrice: boilerNum,
+            prices: priceNums,
+            rows: rows.map((r) => ({ crop: r.crop, from: r.from, to: r.to, tonnes: num(r.tonnes) })),
+          }}
+        />
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="card p-6 sm:p-8">
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-muted">{dict.breakTitle}</h2>

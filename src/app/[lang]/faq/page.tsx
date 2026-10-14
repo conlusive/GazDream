@@ -5,7 +5,15 @@ import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
 import { PHOTOS } from "@/lib/images";
 
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getDictionary } from "../dictionaries";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/faq">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  return pageMetadata(lang, await getDictionary(lang), "faq", "/faq");
+}
 
 export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
   const { lang } = await params;

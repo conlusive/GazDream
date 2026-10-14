@@ -6,7 +6,15 @@ import { hasLocale } from "@/i18n/config";
 import { PHOTOS } from "@/lib/images";
 
 import { rich } from "@/lib/rich";
+import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/seo";
 import { getDictionary } from "../dictionaries";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/about">): Promise<Metadata> {
+  const { lang } = await params;
+  if (!hasLocale(lang)) return {};
+  return pageMetadata(lang, await getDictionary(lang), "about", "/about");
+}
 
 export default async function AboutPage({ params }: PageProps<"/[lang]/about">) {
   const { lang } = await params;
