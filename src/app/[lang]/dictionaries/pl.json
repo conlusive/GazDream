@@ -21,7 +21,9 @@
   "hero": {
     "title": "Suszenie zboża taniej niż na gazie",
     "subtitle": "Generatory ciepła na zrębki i pellet o mocy od 100 kW do 20 MW dla suszarni zboża.",
-    "badge": "Eco Straßmayr Energy"
+    "badge": "Eco Straßmayr Energy",
+    "titleLead": "Suszenie zboża",
+    "titleHighlight": "taniej niż na gazie"
   },
   "benefits": {
     "title": "Dlaczego Eco Straßmayr Energy",
@@ -119,7 +121,30 @@
     "paybackNeedPeriod": "Wybierz okres „na sezon” lub „na rok”, aby policzyć zwrot.",
     "paybackNever": "Przy tych cenach kocioł się nie zwraca.",
     "pricesAsOf": "Ceny orientacyjne z dnia {date}.",
-    "periodLabel": "Okres"
+    "periodLabel": "Okres",
+    "stepCrop": "Kultura",
+    "stepMoisture": "Wilgotność",
+    "stepVolume": "Ilość zboża",
+    "stepPrices": "Ceny paliw",
+    "stepBoiler": "Kocioł (opcjonalnie)",
+    "scaleNow": "teraz",
+    "scaleTarget": "cel",
+    "quick": "Szybki wybór",
+    "marketPrice": "Cena rynkowa",
+    "reset": "Przywróć",
+    "fuelCards": "Koszt suszenia 1 tony",
+    "breakTitle": "Cena progowa",
+    "breakHint": "Powyżej tej ceny gaz wychodzi taniej.",
+    "breakNow": "teraz",
+    "chartTitle": "Narastające oszczędności",
+    "chartAfter": "Po {n} {unit}",
+    "chartBoiler": "Cena kotła",
+    "chartPayback": "Zwrot",
+    "unitSeasons": "sezonach",
+    "unitYears": "latach",
+    "chartDay": "Wybierz okres „na sezon” lub „na rok”, aby zobaczyć wykres.",
+    "details": "Szczegóły obliczeń",
+    "perUnit": "zł"
   },
   "about": {
     "title": "O firmie",
@@ -306,6 +331,9 @@
       "Kontener i szafy sterownicze",
       "Widok z zewnątrz: odpylacz i wentylator"
     ],
-    "more": "Zobacz realizacje"
+    "more": "Zobacz realizacje",
+    "close": "Zamknij",
+    "prev": "Poprzednie zdjęcie",
+    "next": "Następne zdjęcie"
   }
 }

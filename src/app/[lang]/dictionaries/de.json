@@ -21,7 +21,9 @@
   "hero": {
     "title": "Getreide günstiger trocknen als mit Gas",
     "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets von 100 kW bis 20 MW für Getreidetrockner.",
-    "badge": "Eco Straßmayr Energy"
+    "badge": "Eco Straßmayr Energy",
+    "titleLead": "Getreide trocknen",
+    "titleHighlight": "günstiger als mit Gas"
   },
   "benefits": {
     "title": "Warum Eco Straßmayr Energy",
@@ -119,7 +121,30 @@
     "paybackNeedPeriod": "„Pro Saison“ oder „Pro Jahr“ wählen, um die Amortisation zu berechnen.",
     "paybackNever": "Bei diesen Preisen amortisiert sich der Kessel nicht.",
     "pricesAsOf": "Richtpreise vom {date}.",
-    "periodLabel": "Zeitraum"
+    "periodLabel": "Zeitraum",
+    "stepCrop": "Kultur",
+    "stepMoisture": "Feuchtigkeit",
+    "stepVolume": "Getreidemenge",
+    "stepPrices": "Brennstoffpreise",
+    "stepBoiler": "Kessel (optional)",
+    "scaleNow": "jetzt",
+    "scaleTarget": "Ziel",
+    "quick": "Schnellauswahl",
+    "marketPrice": "Marktpreis",
+    "reset": "Zurücksetzen",
+    "fuelCards": "Trocknungskosten pro Tonne",
+    "breakTitle": "Preisschwelle",
+    "breakHint": "Über diesem Preis ist Gas günstiger.",
+    "breakNow": "jetzt",
+    "chartTitle": "Kumulierte Ersparnis",
+    "chartAfter": "Nach {n} {unit}",
+    "chartBoiler": "Kesselpreis",
+    "chartPayback": "Amortisation",
+    "unitSeasons": "Saisons",
+    "unitYears": "Jahren",
+    "chartDay": "„Pro Saison“ oder „Pro Jahr“ wählen, um das Diagramm zu sehen.",
+    "details": "Details der Berechnung",
+    "perUnit": ""
   },
   "about": {
     "title": "Über uns",
@@ -306,6 +331,9 @@
       "Container und Schaltschränke",
       "Außenansicht: Entstauber und Ventilator"
     ],
-    "more": "Referenzen ansehen"
+    "more": "Referenzen ansehen",
+    "close": "Schließen",
+    "prev": "Vorheriges Foto",
+    "next": "Nächstes Foto"
   }
 }

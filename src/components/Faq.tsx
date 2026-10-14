@@ -6,9 +6,12 @@ export default function Faq({ items }: { items: readonly Item[] }) {
     <div className="divide-y divide-line border-y border-line">
       {items.map((item) => (
         <details key={item.q} className="group py-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-base font-semibold transition-colors hover:text-brand-green sm:text-lg [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold tracking-tight transition-colors hover:text-brand-green [&::-webkit-details-marker]:hidden">
             {item.q}
-            <span aria-hidden="true" className="shrink-0 text-2xl font-light leading-none text-muted transition-transform duration-300 group-open:rotate-45">
+            <span
+              aria-hidden="true"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-soft text-xl leading-none text-brand-green transition duration-300 group-open:rotate-45 group-open:bg-brand-green group-open:text-white"
+            >
               +
             </span>
           </summary>

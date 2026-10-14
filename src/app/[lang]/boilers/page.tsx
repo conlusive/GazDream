@@ -17,27 +17,27 @@ function Check() {
 export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const { boilers: b } = await getDictionary(lang);
+  const { boilers: b, hero } = await getDictionary(lang);
 
   return (
     <>
-      <PageHero eyebrow="PUT" title={b.title} lead={b.lead} />
+      <PageHero eyebrow={hero.badge} title={b.title} lead={b.lead} />
 
       <section className="section !pb-10">
         <div className="container-x">
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {MODELS.map((m) => (
-              <article key={m.name} className="card card-hover reveal flex flex-col p-7">
+              <article key={m.name} className="card card-hover reveal group flex flex-col border-t-4 border-t-transparent p-7 hover:border-t-brand-orange">
                 <p className="text-sm font-semibold text-muted">{b.types[m.type]}</p>
-                <h2 className="mt-1 text-4xl font-bold tracking-tight text-brand-green">{m.name}</h2>
+                <h2 className="mt-1 text-4xl font-extrabold tracking-tight text-brand-green">{m.name}</h2>
                 <dl className="mt-6 space-y-4 text-sm">
                   <div className="border-t border-line pt-3">
                     <dt className="text-muted">{b.power}</dt>
-                    <dd className="mt-0.5 text-lg font-bold">{m.powerKw}</dd>
+                    <dd className="mt-0.5 text-lg font-extrabold">{m.powerKw}</dd>
                   </div>
                   <div className="border-t border-line pt-3">
                     <dt className="text-muted">{b.burner}</dt>
-                    <dd className="mt-0.5 text-lg font-bold">{m.burnerKw}</dd>
+                    <dd className="mt-0.5 text-lg font-extrabold">{m.burnerKw}</dd>
                   </div>
                 </dl>
                 <div className="mt-7">
@@ -68,8 +68,8 @@ export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers
               ))}
             </ul>
           </div>
-          <div className="reveal overflow-hidden rounded-lg self-start">
-            <Image src="/photos/install-hopper.jpg" alt="" width={1280} height={960} className="max-h-[640px] w-full object-cover " />
+          <div className="reveal group self-start overflow-hidden rounded-3xl">
+            <Image src="/photos/install-hopper.jpg" alt="" width={1280} height={960} className="w-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105" />
           </div>
         </div>
       </section>

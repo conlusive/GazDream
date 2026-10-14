@@ -127,3 +127,12 @@ export function paybackPeriods(boilerPrice: number, savingsPerPeriod: number): n
   if (boilerPrice <= 0 || savingsPerPeriod <= 0) return null;
   return boilerPrice / savingsPerPeriod;
 }
+
+/**
+ * Price (per tonne) at which wood chips or pellets cost exactly as much as gas for the same drying
+ * job. It does not depend on moisture, volume or VAT: both sides scale by the same factors.
+ */
+export function breakEvenPrice(fuel: Exclude<Fuel, "gas">, gasPrice: number, fuelUse: FuelUse = DEFAULT_FUEL_USE): number | null {
+  if (!Number.isFinite(gasPrice) || gasPrice <= 0 || fuelUse[fuel] <= 0) return null;
+  return (fuelUse.gas * gasPrice) / fuelUse[fuel];
+}

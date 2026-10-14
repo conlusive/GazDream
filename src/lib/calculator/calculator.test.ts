@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculate, calculateBatches, paybackPeriods } from "./index";
+import { breakEvenPrice, calculate, calculateBatches, paybackPeriods } from "./index";
 
 const base = {
   moistureFrom: 20,
@@ -95,5 +95,22 @@ describe("paybackPeriods", () => {
     expect(paybackPeriods(100_000, -5)).toBeNull();
     expect(paybackPeriods(0, 5)).toBeNull();
     expect(paybackPeriods(NaN, 5)).toBeNull();
+  });
+});
+
+describe("breakEvenPrice", () => {
+  it("is the fuel price at which the cost equals gas", () => {
+    expect(breakEvenPrice("chips", 400)).toBeCloseTo(192, 6);
+    expect(breakEvenPrice("pellets", 1700)).toBeCloseTo(816, 6);
+  });
+  it("really makes the costs equal in the calculation", () => {
+    const prices = { gas: 400, chips: breakEvenPrice("chips", 400)!, pellets: 160 };
+    const r = calculate({ moistureFrom: 22, moistureTo: 14, tonnes: 777, prices, vatRate: 0.23 });
+    expect(r.results[1].totalCost).toBeCloseTo(r.results[0].totalCost, 6);
+    expect(r.results[1].savingsVsGas).toBeCloseTo(0, 6);
+  });
+  it("returns null for unusable gas prices", () => {
+    expect(breakEvenPrice("chips", 0)).toBeNull();
+    expect(breakEvenPrice("chips", NaN)).toBeNull();
   });
 });

@@ -1,22 +1,20 @@
 @import "tailwindcss";
 
-/*
- * Strict industrial palette derived from the logo:
- * graphite for text and dark surfaces, cool greys for structure, the logo green for links and
- * states, and the logo orange reserved for the single primary action on a screen.
- */
+/* Palette from the logo: white, orange, green and dark green. */
 @theme {
-  --color-ink: #15191a;
-  --color-muted: #596164;
-  --color-line: #dde1e0;
-  --color-soft: #f3f5f4;
-  --color-paper: #ffffff;
-  --color-forest: #12201a;
-  --color-leaf: #93c9a0;
   --color-brand-green: #1b7a1e;
-  --color-brand-green-dark: #14591a;
+  --color-brand-green-dark: #135616;
   --color-brand-orange: #f47c0f;
   --color-brand-orange-dark: #d9680a;
+  --color-forest: #0b2a16;
+  --color-forest-soft: #123a1f;
+  --color-leaf: #8fd69a;
+  --color-ink: #112018;
+  --color-muted: #5d665f;
+  --color-line: #e2e8e0;
+  --color-soft: #f3f7f2;
+  --color-paper: #ffffff;
+  --color-tint: #e9f2e6;
   --font-sans: var(--font-manrope), system-ui, sans-serif;
   --ease-out-soft: cubic-bezier(0.22, 0.7, 0.2, 1);
 }
@@ -33,8 +31,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+::selection {
+  background: var(--color-brand-orange);
+  color: #fff;
+}
+
 :focus-visible {
-  outline: 2px solid var(--color-brand-green);
+  outline: 2px solid var(--color-brand-orange);
   outline-offset: 3px;
 }
 
@@ -46,37 +49,37 @@ body {
     @apply py-16 sm:py-24;
   }
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.16em] text-brand-green;
+    @apply text-xs font-bold uppercase tracking-[0.2em] text-brand-green;
   }
   .display {
-    @apply font-bold leading-[1.1] tracking-tight text-balance;
+    @apply font-extrabold leading-[1.05] tracking-tight text-balance;
   }
   .lead {
-    @apply text-lg leading-relaxed text-muted;
+    @apply text-lg leading-relaxed text-muted sm:text-xl;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-md px-6 py-3 text-sm font-semibold transition-colors duration-200;
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition duration-300 ease-out-soft active:scale-[0.98];
   }
   .btn-primary {
-    @apply bg-brand-orange text-white hover:bg-brand-orange-dark;
+    @apply bg-brand-orange text-white shadow-[0_8px_24px_-10px_rgba(244,124,15,0.8)] hover:-translate-y-0.5 hover:bg-brand-orange-dark hover:shadow-[0_14px_28px_-10px_rgba(244,124,15,0.85)];
   }
   .btn-outline {
-    @apply border border-ink/25 text-ink hover:border-ink hover:bg-ink hover:text-white;
+    @apply border-2 border-brand-green/70 text-brand-green hover:-translate-y-0.5 hover:border-brand-green hover:bg-brand-green hover:text-white;
   }
   .btn-light {
-    @apply border border-white/40 text-white hover:border-white hover:bg-white hover:text-ink;
+    @apply border-2 border-white/60 text-white hover:-translate-y-0.5 hover:border-white hover:bg-white hover:text-forest;
   }
 
   .card {
-    @apply rounded-lg border border-line bg-white transition-colors duration-200;
+    @apply rounded-2xl border border-line bg-white transition duration-300 ease-out-soft;
   }
   .card-hover {
-    @apply hover:border-ink/40;
+    @apply hover:-translate-y-1 hover:border-brand-green/40 hover:shadow-[0_18px_40px_-24px_rgba(11,42,22,0.45)];
   }
 
   .field {
-    @apply w-full min-w-0 rounded-md border border-line bg-white px-3.5 py-3 text-base transition-colors duration-200 placeholder:text-muted/60 hover:border-ink/40 focus:border-brand-green focus:outline-none focus:ring-2 focus:ring-brand-green/20;
+    @apply w-full min-w-0 rounded-xl border border-line bg-white px-4 py-3 text-base transition duration-200 placeholder:text-muted/60 hover:border-brand-green/40 focus:border-brand-green focus:outline-none focus:ring-4 focus:ring-brand-green/10;
   }
 
   .link-underline {
@@ -84,7 +87,7 @@ body {
   }
   .link-underline::after {
     content: "";
-    @apply absolute -bottom-1.5 left-0 h-px w-full origin-left scale-x-0 bg-ink transition-transform duration-300 ease-out-soft;
+    @apply absolute -bottom-1 left-0 h-0.5 w-full origin-left scale-x-0 bg-brand-orange transition-transform duration-300 ease-out-soft;
   }
   .link-underline:hover::after,
   .link-underline[aria-current="page"]::after {
@@ -92,11 +95,11 @@ body {
   }
 }
 
-/* Motion is deliberately minimal: a short fade/slide on entry and a fade between pages. */
+/* Entrance motion. Everything here is progressive: without support the content is simply visible. */
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(22px);
   }
   to {
     opacity: 1;
@@ -111,12 +114,23 @@ body {
     opacity: 1;
   }
 }
+@keyframes zoom-out {
+  from {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 
 .rise {
-  animation: rise 0.7s var(--ease-out-soft) both;
+  animation: rise 0.9s var(--ease-out-soft) both;
+}
+.kenburns {
+  animation: zoom-out 22s ease-out both;
 }
 .page-in {
-  animation: fade 0.35s ease-out both;
+  animation: fade 0.45s ease-out both;
 }
 
 /* Scroll reveal via scroll-driven animations: no JS, no flash of hidden content. */
@@ -124,8 +138,19 @@ body {
   .reveal {
     animation: rise linear both;
     animation-timeline: view();
-    animation-range: entry 5% entry 30%;
+    animation-range: entry 5% entry 38%;
   }
+}
+
+/* Hero headline: words rise from behind a mask. */
+@keyframes word-up {
+  from {
+    transform: translateY(105%);
+  }
+}
+
+.word-up {
+  animation: word-up 0.95s var(--ease-out-soft) both;
 }
 
 /* Smooth accordion where the browser supports animating to auto height. */
@@ -138,9 +163,9 @@ body {
     overflow: clip;
     opacity: 0;
     transition:
-      height 0.3s var(--ease-out-soft),
-      opacity 0.25s ease,
-      content-visibility 0.3s allow-discrete;
+      height 0.35s var(--ease-out-soft),
+      opacity 0.3s ease,
+      content-visibility 0.35s allow-discrete;
   }
   details[open]::details-content {
     height: auto;
@@ -162,8 +187,10 @@ input[type="range"] {
     scroll-behavior: auto;
   }
   .rise,
+  .kenburns,
   .page-in,
-  .reveal {
+  .reveal,
+  .word-up {
     animation: none !important;
   }
   .btn,

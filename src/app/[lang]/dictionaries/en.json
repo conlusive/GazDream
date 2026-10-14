@@ -21,7 +21,9 @@
   "hero": {
     "title": "Dry grain cheaper than with gas",
     "subtitle": "Wood chip and pellet heat generators from 100 kW to 20 MW for grain dryers.",
-    "badge": "Eco Straßmayr Energy"
+    "badge": "Eco Straßmayr Energy",
+    "titleLead": "Dry grain",
+    "titleHighlight": "cheaper than with gas"
   },
   "benefits": {
     "title": "Why Eco Straßmayr Energy",
@@ -119,7 +121,30 @@
     "paybackNeedPeriod": "Choose “per season” or “per year” to calculate payback.",
     "paybackNever": "At these prices the boiler does not pay back.",
     "pricesAsOf": "Indicative prices as of {date}.",
-    "periodLabel": "Period"
+    "periodLabel": "Period",
+    "stepCrop": "Crop",
+    "stepMoisture": "Moisture",
+    "stepVolume": "Grain volume",
+    "stepPrices": "Fuel prices",
+    "stepBoiler": "Boiler (optional)",
+    "scaleNow": "now",
+    "scaleTarget": "target",
+    "quick": "Quick pick",
+    "marketPrice": "Market price",
+    "reset": "Reset",
+    "fuelCards": "Drying cost per tonne",
+    "breakTitle": "Break-even price",
+    "breakHint": "Above this price gas is cheaper.",
+    "breakNow": "now",
+    "chartTitle": "Cumulative savings",
+    "chartAfter": "After {n} {unit}",
+    "chartBoiler": "Boiler price",
+    "chartPayback": "Payback",
+    "unitSeasons": "seasons",
+    "unitYears": "years",
+    "chartDay": "Choose “per season” or “per year” to see the chart.",
+    "details": "Calculation details",
+    "perUnit": ""
   },
   "about": {
     "title": "About us",
@@ -306,6 +331,9 @@
       "Container and control cabinets",
       "Outside view: dust collector and fan"
     ],
-    "more": "See projects"
+    "more": "See projects",
+    "close": "Close",
+    "prev": "Previous photo",
+    "next": "Next photo"
   }
 }
