@@ -3,8 +3,20 @@
     "title": "GazDream – przemysłowe generatory ciepła na biomasę | Suszenie zboża",
     "description": "Polski producent przemysłowych generatorów ciepła na biomasę do 20 MW: suszenie zboża, ogrzewanie przemysłowe, zastąpienie gazu ziemnego."
   },
-  "nav": { "home": "Strona główna", "about": "O firmie", "boilers": "Kotły", "projects": "Realizacje", "calculator": "Kalkulator", "contact": "Kontakt", "menu": "Menu" },
-  "cta": { "calculate": "Oblicz korzyść", "request": "Zapytaj o ofertę", "call": "Zadzwoń" },
+  "nav": {
+    "home": "Strona główna",
+    "about": "O firmie",
+    "boilers": "Kotły",
+    "projects": "Realizacje",
+    "calculator": "Kalkulator",
+    "contact": "Kontakt",
+    "menu": "Menu"
+  },
+  "cta": {
+    "calculate": "Oblicz korzyść",
+    "request": "Zapytaj o ofertę",
+    "call": "Zadzwoń"
+  },
   "hero": {
     "title": "Suszenie zboża taniej niż na gazie",
     "subtitle": "Generatory ciepła na zrębki i pellet o mocy do 20 MW. Wyprodukowano w Polsce.",
@@ -13,12 +25,75 @@
   "benefits": {
     "title": "Dlaczego GazDream",
     "items": [
-      { "title": "Niższy koszt suszenia", "text": "Zrębki i pellet zamiast gazu: oszczędność liczona w euro na tonie." },
-      { "title": "Moc do 20 MW", "text": "Rozwiązania dla dużych gospodarstw i elewatorów." },
-      { "title": "Pasują do suszarni", "text": "Montaż na suszarniach znanych marek." },
-      { "title": "Wyprodukowano w Polsce", "text": "Własna produkcja, serwis i dokumentacja CE." }
+      {
+        "title": "Niższy koszt suszenia",
+        "text": "Zrębki i pellet zamiast gazu: oszczędność liczona w euro na tonie."
+      },
+      {
+        "title": "Moc do 20 MW",
+        "text": "Rozwiązania dla dużych gospodarstw i elewatorów."
+      },
+      {
+        "title": "Pasują do suszarni",
+        "text": "Montaż na suszarniach znanych marek."
+      },
+      {
+        "title": "Wyprodukowano w Polsce",
+        "text": "Własna produkcja, serwis i dokumentacja CE."
+      }
     ]
   },
-  "calcTeaser": { "title": "Policz, ile zaoszczędzisz", "text": "Podaj kulturę, wilgotność i ilość ton. Wynik w pół minuty." },
-  "footer": { "rights": "Wszelkie prawa zastrzeżone", "legalName": "[nazwa prawna spółki]", "address": "[adres produkcji]" }
+  "calcTeaser": {
+    "title": "Policz, ile zaoszczędzisz",
+    "text": "Podaj kulturę, wilgotność i ilość ton. Wynik w pół minuty."
+  },
+  "footer": {
+    "rights": "Wszelkie prawa zastrzeżone",
+    "legalName": "[nazwa prawna spółki]",
+    "address": "[adres produkcji]"
+  },
+  "calc": {
+    "title": "Kalkulator korzyści z suszenia",
+    "lead": "Podaj dane — wynik pojawi się od razu. Ceny możesz zmieniać.",
+    "crop": "Kultura",
+    "crops": {
+      "corn": "Kukurydza",
+      "soy": "Soja",
+      "rapeseed": "Rzepak"
+    },
+    "moistureNow": "Wilgotność obecna",
+    "moistureTarget": "Suszymy do",
+    "removed": "Do usunięcia",
+    "volume": "Ilość zboża",
+    "tonnes": "ton",
+    "period": {
+      "day": "na dobę",
+      "season": "na sezon",
+      "year": "na rok"
+    },
+    "prices": "Ceny paliw",
+    "priceHint": "Ceny można zmieniać, a obliczenia odświeżą się od razu.",
+    "fuels": {
+      "gas": "Gaz ziemny",
+      "chips": "Zrębki",
+      "pellets": "Pellet"
+    },
+    "units": {
+      "gas": "za 1000 m³",
+      "chips": "za tonę",
+      "pellets": "za tonę"
+    },
+    "currency": "Waluta",
+    "vat": "Ceny z VAT 23%",
+    "result": "Wynik",
+    "perTonne": "Koszt suszenia 1 t",
+    "total": "Koszt całkowity",
+    "saving": "Oszczędność vs gaz",
+    "best": "Najkorzystniej",
+    "noSaving": "Przy tych cenach gaz jest najtańszy.",
+    "summary": "Na {fuel} zaoszczędzisz {amount} {period} w porównaniu z gazem.",
+    "disclaimer": "Obliczenia orientacyjne; dokładną ofertę przygotuje nasz menedżer.",
+    "cta": "Otrzymaj ofertę na kocioł",
+    "chart": "Koszt suszenia 1 t"
+  }
 }
