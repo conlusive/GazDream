@@ -254,5 +254,23 @@
   "testimonials": {
     "title": "Kundenstimmen",
     "items": []
+  },
+  "quick": {
+    "title": "Schnellanfrage",
+    "lead": "Nummer hinterlassen, wir rufen innerhalb eines Werktags zurück.",
+    "name": "Name",
+    "phone": "Telefon",
+    "interest": "Wofür interessieren Sie sich?",
+    "options": [
+      "Kesselangebot",
+      "Ersparnisberechnung",
+      "Modernisierung eines bestehenden Wärmeerzeugers",
+      "Sonstiges"
+    ],
+    "send": "Rückruf anfordern",
+    "sending": "Wird gesendet …",
+    "ok": "Danke! Wir rufen Sie innerhalb eines Werktags zurück.",
+    "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen.",
+    "calc": "Zuerst Ersparnis berechnen"
   }
 }

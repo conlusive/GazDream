@@ -9,6 +9,7 @@ type Lead = {
   model: string;
   calc: string;
   lang: string;
+  page: string;
 };
 
 const clean = (v: unknown, max: number) =>
@@ -32,6 +33,7 @@ export async function POST(request: Request) {
     model: clean(body.model, MAX.short),
     calc: clean(body.calc, 400),
     lang: clean(body.lang, 5),
+    page: clean(body.page, 120),
   };
   if (!lead.name || !lead.contact) return NextResponse.json({ ok: false }, { status: 422 });
 

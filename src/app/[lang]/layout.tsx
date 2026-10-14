@@ -6,6 +6,7 @@ import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "./dictionaries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import QuickForm from "@/components/QuickForm";
 import { CONTACT } from "@/lib/content";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "latin-ext"] });
@@ -35,6 +36,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
       <body className="flex min-h-screen flex-col pb-16 antialiased lg:pb-0">
         <Header lang={lang} nav={dict.nav} cta={dict.cta} />
         <main className="flex-1">{children}</main>
+        <QuickForm lang={lang} dict={dict.quick} calcLabel={dict.nav.calculator} />
         <Footer lang={lang} dict={dict} />
         <a
           href={CONTACT.phoneHref}

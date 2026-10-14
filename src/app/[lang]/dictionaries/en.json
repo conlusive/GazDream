@@ -254,5 +254,23 @@
   "testimonials": {
     "title": "Customer reviews",
     "items": []
+  },
+  "quick": {
+    "title": "Quick request",
+    "lead": "Leave your number and we will call you back within one business day.",
+    "name": "Name",
+    "phone": "Phone",
+    "interest": "What are you interested in?",
+    "options": [
+      "Boiler quote",
+      "Savings calculation",
+      "Upgrade of an existing generator",
+      "Other"
+    ],
+    "send": "Call me back",
+    "sending": "Sending…",
+    "ok": "Thank you! We will call you back within one business day.",
+    "error": "Could not send. Please try again or call us.",
+    "calc": "Calculate your savings first"
   }
 }

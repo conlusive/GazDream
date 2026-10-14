@@ -254,5 +254,23 @@
   "testimonials": {
     "title": "Opinie klientów",
     "items": []
+  },
+  "quick": {
+    "title": "Szybkie zapytanie",
+    "lead": "Zostaw numer, oddzwonimy w ciągu dnia roboczego.",
+    "name": "Imię",
+    "phone": "Telefon",
+    "interest": "Co Cię interesuje?",
+    "options": [
+      "Oferta na kocioł",
+      "Obliczenie oszczędności",
+      "Modernizacja istniejącego generatora",
+      "Inne"
+    ],
+    "send": "Oddzwońcie do mnie",
+    "sending": "Wysyłanie…",
+    "ok": "Dziękujemy! Oddzwonimy w ciągu dnia roboczego.",
+    "error": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń.",
+    "calc": "Najpierw policz oszczędność"
   }
 }

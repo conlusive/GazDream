@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/i18n/config";
+import { postLead } from "@/lib/lead-client";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
@@ -17,16 +18,17 @@ export default function ContactForm({ lang, dict }: { lang: Locale; dict: Dictio
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     setStatus("sending");
-    try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ ...Object.fromEntries(form), model, calc, lang }),
-      });
-      setStatus(res.ok ? "ok" : "error");
-    } catch {
-      setStatus("error");
-    }
+    const ok = await postLead({
+      name: String(form.get("name") ?? ""),
+      contact: String(form.get("contact") ?? ""),
+      message: String(form.get("message") ?? ""),
+      website: String(form.get("website") ?? ""),
+      model,
+      calc,
+      lang,
+      page: "/contact",
+    });
+    setStatus(ok ? "ok" : "error");
   }
 
   if (status === "ok") {
