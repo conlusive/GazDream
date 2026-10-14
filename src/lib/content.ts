@@ -1,3 +1,5 @@
+import { PHOTOS } from "./images";
+
 // Source: strasslider.com/kontakty. Sales is the main contact for product enquiries.
 export const CONTACT = {
   phone: "+48 601 073 119",
@@ -10,15 +12,10 @@ export const CONTACT = {
 
 // Real photos and videos of a completed Straßmayr biomass heat generator installation.
 export const INSTALLATION = {
-  photos: [
-    "/photos/install-wide.jpg",
-    "/photos/install-container.jpg",
-    "/photos/install-hopper.jpg",
-    "/photos/install-hall.jpg",
-  ],
+  photos: [PHOTOS.wide, PHOTOS.container, PHOTOS.hopper, PHOTOS.hall],
   videos: [
-    { src: "/video/install-walkaround.mp4", poster: "/video/install-walkaround.jpg" },
-    { src: "/video/install-exterior.mp4", poster: "/video/install-exterior.jpg" },
+    { src: "/video/install-walkaround.mp4", poster: "/video/install-walkaround.webp" },
+    { src: "/video/install-exterior.mp4", poster: "/video/install-exterior.webp" },
   ],
 } as const;
 

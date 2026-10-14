@@ -3,6 +3,8 @@ import FaqList from "@/components/FaqList";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { getDictionary } from "../dictionaries";
 
 export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
@@ -22,7 +24,7 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
 
   return (
     <>
-      <PageHero eyebrow="FAQ" title={dict.faq.title} lead={dict.faq.lead} image="/photos/install-container.jpg" />
+      <PageHero eyebrow="FAQ" title={dict.faq.title} lead={dict.faq.lead} image={PHOTOS.container} />
       <section className="section">
         <div className="container-x max-w-3xl">
           <FaqList items={dict.faq.items} placeholder={dict.faqSearch.placeholder} none={dict.faqSearch.none} />

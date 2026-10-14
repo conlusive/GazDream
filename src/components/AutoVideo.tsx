@@ -2,7 +2,14 @@
 
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 
-type Props = { src: string; poster: string; className?: string; soundLabel?: string };
+type Props = {
+  src: string;
+  poster?: string;
+  className?: string;
+  soundLabel?: string;
+  /** Load right after the page is ready (hero). Otherwise the file is only requested near the viewport. */
+  eager?: boolean;
+};
 
 const subscribe = (cb: () => void) => {
   const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -12,34 +19,70 @@ const subscribe = (cb: () => void) => {
 const reducedNow = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 /**
- * Silent looping video that starts by itself and pauses while off-screen. With reduced motion it
- * shows the poster with native controls instead. Pass `soundLabel` to add a sound toggle.
+ * Silent looping video that starts by itself.
+ * - The file is not requested until it is about to be seen (or right after load for `eager`), so
+ *   it never competes with the images that are needed first.
+ * - It fades in over whatever is behind it (poster/photo) once it is really playing.
+ * - It pauses while off-screen. With reduced motion or Data Saver it stays on the poster with controls.
  */
-export default function AutoVideo({ src, poster, className = "", soundLabel }: Props) {
+export default function AutoVideo({ src, poster, className = "", soundLabel, eager = false }: Props) {
   const ref = useRef<HTMLVideoElement>(null);
   const [soundOn, setSoundOn] = useState(false);
+  const [playing, setPlaying] = useState(false);
   const reduced = useSyncExternalStore(subscribe, reducedNow, () => false);
 
   useEffect(() => {
     const video = ref.current;
-    if (!video || reduced) return;
-    // Data saver: do not stream video, keep the poster and show controls instead.
+    if (!video) return;
+
     const conn = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
-    if (conn?.saveData) {
-      video.pause();
+    if (reduced || conn?.saveData) {
       video.controls = true;
+      video.preload = "none";
+      video.src = src;
       return;
     }
+
+    const onPlaying = () => setPlaying(true);
+    video.addEventListener("playing", onPlaying);
+
+    let loaded = false;
+    const load = () => {
+      if (loaded) return;
+      loaded = true;
+      video.src = src;
+      video.load();
+    };
+
+    let idle = 0;
+    if (eager) {
+      const start = () => {
+        idle = window.setTimeout(load, 150);
+      };
+      if (document.readyState === "complete") start();
+      else window.addEventListener("load", start, { once: true });
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) void video.play().catch(() => {});
-        else video.pause();
+        if (entry.isIntersecting) {
+          load();
+          void video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
       },
-      { threshold: 0.25 },
+      { rootMargin: "300px 0px", threshold: 0.01 },
     );
     observer.observe(video);
-    return () => observer.disconnect();
-  }, [reduced]);
+
+    return () => {
+      observer.disconnect();
+      video.removeEventListener("play", onPlaying);
+      video.removeEventListener("playing", onPlaying);
+      window.clearTimeout(idle);
+    };
+  }, [src, eager, reduced]);
 
   const toggleSound = () => {
     const video = ref.current;
@@ -52,18 +95,14 @@ export default function AutoVideo({ src, poster, className = "", soundLabel }: P
     <div className="relative h-full w-full">
       <video
         ref={ref}
-        className={className}
+        className={`${className} transition-opacity duration-700 ${playing || reduced ? "opacity-100" : "opacity-0"}`}
         poster={poster}
-        autoPlay={!reduced}
         muted
         loop
         playsInline
-        controls={reduced}
+        preload="none"
         disablePictureInPicture
-        preload="auto"
-      >
-        <source src={src} type="video/mp4" />
-      </video>
+      />
       {soundLabel && !reduced && (
         <button
           type="button"

@@ -1,13 +1,14 @@
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
+import { PHOTOS } from "@/lib/images";
 import { rich } from "@/lib/rich";
 
-type Props = { eyebrow?: string; title: string; lead?: string; image?: string };
+type Props = { eyebrow?: string; title: string; lead?: string; image?: StaticImageData };
 
 /** Dark cinematic page header. Accent words are marked with *asterisks* in the title. */
-export default function PageHero({ eyebrow, title, lead, image = "/photos/install-container.jpg" }: Props) {
+export default function PageHero({ eyebrow, title, lead, image = PHOTOS.container }: Props) {
   return (
     <header className="relative isolate overflow-hidden bg-forest text-white">
-      <Image src={image} alt="" fill priority sizes="100vw" className="-z-20 object-cover opacity-60" />
+      <Image src={image} alt="" fill priority placeholder="blur" sizes="100vw" className="-z-20 object-cover opacity-60" />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/85 to-forest/40" />
       <div className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-forest/85 to-transparent" />
       <div className="container-x pb-16 pt-32 sm:pb-24 sm:pt-44">

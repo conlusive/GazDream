@@ -4,6 +4,8 @@ import ModelPicker from "@/components/ModelPicker";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { MODELS } from "@/lib/content";
 import { rich } from "@/lib/rich";
 import { getDictionary } from "../dictionaries";
@@ -32,7 +34,7 @@ export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers
 
   return (
     <>
-      <PageHero eyebrow={hero.badge} title={b.title} lead={b.lead} image="/photos/install-hopper.jpg" />
+      <PageHero eyebrow={hero.badge} title={b.title} lead={b.lead} image={PHOTOS.hopper} />
 
       <section className="section">
         <div className="container-x">
@@ -70,7 +72,7 @@ export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers
 
       <section className="section">
         <div className="container-x reveal">
-          <Anatomy eyebrow={dict.anatomy.eyebrow} title={dict.anatomy.title} hint={dict.anatomy.hint} items={dict.anatomy.items} photo="/photos/install-hopper.jpg" alt={dict.installation.captions[2]} />
+          <Anatomy eyebrow={dict.anatomy.eyebrow} title={dict.anatomy.title} hint={dict.anatomy.hint} items={dict.anatomy.items} photo={PHOTOS.hopper} alt={dict.installation.captions[2]} />
         </div>
       </section>
 

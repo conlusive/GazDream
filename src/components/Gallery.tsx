@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useRef, useState, type KeyboardEvent } from "react";
 
-type Item = { src: string; caption: string };
+type Item = { src: StaticImageData; caption: string };
 
 const TILE = [
   "col-span-2 row-span-2 aspect-[4/3] lg:aspect-auto",
@@ -33,7 +33,7 @@ export default function Gallery({ items, closeLabel, prevLabel, nextLabel }: { i
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:grid-rows-2">
         {items.map((item, i) => (
           <button
-            key={item.src}
+            key={item.src.src}
             type="button"
             onClick={() => open(i)}
             aria-label={item.caption}
@@ -43,6 +43,7 @@ export default function Gallery({ items, closeLabel, prevLabel, nextLabel }: { i
               src={item.src}
               alt={item.caption}
               fill
+              placeholder="blur"
               sizes="(min-width: 1024px) 40vw, 50vw"
               className="object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
             />
@@ -62,7 +63,7 @@ export default function Gallery({ items, closeLabel, prevLabel, nextLabel }: { i
       >
         <div className="relative">
           <div className="relative aspect-[4/3] max-h-[78vh] w-full bg-black sm:aspect-[16/10]">
-            <Image src={current.src} alt={current.caption} fill sizes="94vw" className="object-contain" />
+            <Image src={current.src} alt={current.caption} fill placeholder="blur" sizes="94vw" className="object-contain" />
           </div>
           <button type="button" onClick={() => dialog.current?.close()} aria-label={closeLabel} className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-xl backdrop-blur transition hover:bg-white/30">
             ×

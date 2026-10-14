@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import Image, { type StaticImageData } from "next/image";
 import { useState } from "react";
 import { rich } from "@/lib/rich";
 
@@ -14,7 +14,7 @@ const SPOTS = [
 ];
 
 /** Real photo with clickable markers; each marker and list entry explains one part of the installation. */
-export default function Anatomy({ eyebrow, title, hint, items, photo, alt }: { eyebrow: string; title: string; hint: string; items: Item[]; photo: string; alt: string }) {
+export default function Anatomy({ eyebrow, title, hint, items, photo, alt }: { eyebrow: string; title: string; hint: string; items: Item[]; photo: StaticImageData; alt: string }) {
   const [active, setActive] = useState(0);
 
   return (
@@ -25,7 +25,7 @@ export default function Anatomy({ eyebrow, title, hint, items, photo, alt }: { e
 
       <div className="mt-10 grid gap-8 lg:grid-cols-[1.5fr_1fr] lg:items-start">
         <div className="relative overflow-hidden rounded-3xl bg-soft">
-          <Image src={photo} alt={alt} width={1280} height={960} sizes="(min-width: 1024px) 60vw, 100vw" className="h-auto w-full" />
+          <Image src={photo} alt={alt} placeholder="blur" sizes="(min-width: 1024px) 60vw, 100vw" className="h-auto w-full" />
           {items.map((it, i) => {
             const on = i === active;
             return (

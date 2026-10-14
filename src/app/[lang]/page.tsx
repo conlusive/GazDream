@@ -14,6 +14,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
 import { calculateBatches, type Fuel } from "@/lib/calculator";
 import { CONTACT, MODELS } from "@/lib/content";
+import { PHOTOS } from "@/lib/images";
 import { getPrices } from "@/lib/prices";
 import { plain, rich } from "@/lib/rich";
 import { getDictionary } from "./dictionaries";
@@ -42,7 +43,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* ---------- hero ---------- */}
       <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-forest pt-24 text-white">
         <div className="absolute inset-0 -z-20">
-          <AutoVideo src="/video/hero-loop.mp4" poster="/photos/install-wide.jpg" className="h-full w-full object-cover" />
+          {/* The photo is the instant first frame; the silent loop fades in over it once it is playing. */}
+          <Image src={PHOTOS.wide} alt="" fill priority placeholder="blur" sizes="100vw" className="object-cover" />
+          <AutoVideo src="/video/hero-loop.mp4" eager className="absolute inset-0 h-full w-full object-cover" />
         </div>
         <div className="absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-forest/85 to-transparent" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/80 to-forest/20" />
@@ -222,7 +225,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       <section className="pb-16 sm:pb-24">
         <div className="container-x">
           <div className="reveal relative isolate overflow-hidden rounded-3xl bg-forest p-8 text-white sm:p-14">
-            <Image src="/photos/install-hall.jpg" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-25" />
+            <Image src={PHOTOS.hall} alt="" fill placeholder="blur" sizes="100vw" className="-z-20 object-cover opacity-25" />
             <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/90 to-forest/50" />
             <h2 className="display max-w-2xl text-3xl sm:text-5xl">{rich(dict.home.ctaTitle)}</h2>
             <p className="mt-4 max-w-xl text-white/75">{dict.home.ctaText}</p>

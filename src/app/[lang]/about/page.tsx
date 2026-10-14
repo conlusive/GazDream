@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { rich } from "@/lib/rich";
 import { getDictionary } from "../dictionaries";
 
@@ -14,7 +16,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
 
   return (
     <>
-      <PageHero eyebrow={dict.hero.badge} title={about.title} lead={about.lead} image="/photos/install-container.jpg" />
+      <PageHero eyebrow={dict.hero.badge} title={about.title} lead={about.lead} image={PHOTOS.container} />
 
       <section className="section">
         <dl className="container-x grid grid-cols-2 gap-x-8 gap-y-10 lg:grid-cols-4">
@@ -68,7 +70,7 @@ export default async function AboutPage({ params }: PageProps<"/[lang]/about">) 
             </div>
           </div>
           <div className="reveal overflow-hidden rounded-3xl">
-            <Image src="/photos/install-container.jpg" alt={dict.installation.captions[1]} width={1280} height={960} className="transition-transform duration-700 ease-out-soft hover:scale-105" />
+            <Image src={PHOTOS.container} alt={dict.installation.captions[1]} placeholder="blur" sizes="(min-width: 1024px) 50vw, 100vw" className="transition-transform duration-700 ease-out-soft hover:scale-105" />
           </div>
         </div>
       </section>

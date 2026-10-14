@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
 import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { CONTACT } from "@/lib/content";
 import { getDictionary } from "../dictionaries";
 
@@ -14,7 +16,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
 
   return (
     <>
-      <PageHero eyebrow={dict.nav.contact} title={c.title} lead={c.lead} image="/photos/install-hall.jpg" />
+      <PageHero eyebrow={dict.nav.contact} title={c.title} lead={c.lead} image={PHOTOS.hall} />
       <section className="section">
         <div className="container-x grid gap-12 lg:grid-cols-[1.3fr_1fr]">
           <div className="card p-7 sm:p-10">

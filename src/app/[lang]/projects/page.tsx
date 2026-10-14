@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import Installation from "@/components/Installation";
 import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { PROJECTS } from "@/lib/content";
 import { getDictionary } from "../dictionaries";
 
@@ -13,7 +15,7 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/projec
 
   return (
     <>
-      <PageHero eyebrow={dict.nav.projects} title={p.title} lead={p.lead} image="/photos/install-hall.jpg" />
+      <PageHero eyebrow={dict.nav.projects} title={p.title} lead={p.lead} image={PHOTOS.hall} />
 
       <section className="border-b border-line">
         <dl className="container-x grid grid-cols-3 gap-6 py-10">

@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import CalculatorClient from "@/components/CalculatorClient";
 import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
+import { PHOTOS } from "@/lib/images";
+
 import { getPrices } from "@/lib/prices";
 import { getDictionary } from "../dictionaries";
 
@@ -13,7 +15,7 @@ export default async function CalculatorPage({ params }: PageProps<"/[lang]/calc
   return (
     <>
       <div className="print:hidden">
-        <PageHero eyebrow={dict.nav.calculator} title={dict.calc.title} lead={dict.calc.lead} image="/photos/install-wide.jpg" />
+        <PageHero eyebrow={dict.nav.calculator} title={dict.calc.title} lead={dict.calc.lead} image={PHOTOS.wide} />
       </div>
       <div className="container-x py-12 sm:py-16 print:p-0">
         <CalculatorClient lang={lang} dict={dict.calc} defaultPrices={prices.table} pricesDate={prices.updatedAt} />
