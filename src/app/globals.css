@@ -1,26 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Palette taken from the logo: green leaf/text, orange arrow, black outline. */
+@theme {
+  --color-brand-green: #1b7a1e;
+  --color-brand-green-dark: #135616;
+  --color-brand-orange: #f47c0f;
+  --color-brand-orange-dark: #d9680a;
+  --color-ink: #1f2421;
+  --color-muted: #5b625d;
+  --color-line: #e3e7e4;
+  --color-soft: #f4f7f4;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

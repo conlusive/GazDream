@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "GazDream – industrielle Biomasse-Wärmeerzeuger | Getreidetrocknung",
+    "description": "Polnischer Hersteller industrieller Biomasse-Wärmeerzeuger bis 20 MW für Getreidetrocknung, Industrieheizung und den Ersatz von Erdgas."
+  },
+  "nav": { "home": "Startseite", "about": "Über uns", "boilers": "Kessel", "projects": "Referenzen", "calculator": "Rechner", "contact": "Kontakt", "menu": "Menü" },
+  "cta": { "calculate": "Ersparnis berechnen", "request": "Angebot anfragen", "call": "Anrufen" },
+  "hero": {
+    "title": "Getreide günstiger trocknen als mit Gas",
+    "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets bis 20 MW. Made in Poland.",
+    "badge": "Made in Poland"
+  },
+  "benefits": {
+    "title": "Warum GazDream",
+    "items": [
+      { "title": "Geringere Trocknungskosten", "text": "Hackschnitzel und Pellets statt Gas: Ersparnis in Euro pro Tonne." },
+      { "title": "Bis 20 MW", "text": "Lösungen für Großbetriebe und Getreidelager." },
+      { "title": "Passt zu Ihrem Trockner", "text": "Einsatz an Trocknern bekannter Marken." },
+      { "title": "Made in Poland", "text": "Eigene Fertigung, Service und CE-Dokumentation." }
+    ]
+  },
+  "calcTeaser": { "title": "Berechnen Sie Ihre Ersparnis", "text": "Kultur, Feuchtigkeit und Menge eingeben. Ergebnis in 30 Sekunden." },
+  "footer": { "rights": "Alle Rechte vorbehalten", "legalName": "[Firmenname]", "address": "[Produktionsadresse]" }
+}

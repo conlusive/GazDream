@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "GazDream – przemysłowe generatory ciepła na biomasę | Suszenie zboża",
+    "description": "Polski producent przemysłowych generatorów ciepła na biomasę do 20 MW: suszenie zboża, ogrzewanie przemysłowe, zastąpienie gazu ziemnego."
+  },
+  "nav": { "home": "Strona główna", "about": "O firmie", "boilers": "Kotły", "projects": "Realizacje", "calculator": "Kalkulator", "contact": "Kontakt", "menu": "Menu" },
+  "cta": { "calculate": "Oblicz korzyść", "request": "Zapytaj o ofertę", "call": "Zadzwoń" },
+  "hero": {
+    "title": "Suszenie zboża taniej niż na gazie",
+    "subtitle": "Generatory ciepła na zrębki i pellet o mocy do 20 MW. Wyprodukowano w Polsce.",
+    "badge": "Made in Poland"
+  },
+  "benefits": {
+    "title": "Dlaczego GazDream",
+    "items": [
+      { "title": "Niższy koszt suszenia", "text": "Zrębki i pellet zamiast gazu: oszczędność liczona w euro na tonie." },
+      { "title": "Moc do 20 MW", "text": "Rozwiązania dla dużych gospodarstw i elewatorów." },
+      { "title": "Pasują do suszarni", "text": "Montaż na suszarniach znanych marek." },
+      { "title": "Wyprodukowano w Polsce", "text": "Własna produkcja, serwis i dokumentacja CE." }
+    ]
+  },
+  "calcTeaser": { "title": "Policz, ile zaoszczędzisz", "text": "Podaj kulturę, wilgotność i ilość ton. Wynik w pół minuty." },
+  "footer": { "rights": "Wszelkie prawa zastrzeżone", "legalName": "[nazwa prawna spółki]", "address": "[adres produkcji]" }
+}

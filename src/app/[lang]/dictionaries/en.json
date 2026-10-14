@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "title": "GazDream – industrial biomass heat generators | Grain drying",
+    "description": "Polish manufacturer of industrial biomass heat generators up to 20 MW for grain drying, industrial heating and replacing natural gas."
+  },
+  "nav": { "home": "Home", "about": "About us", "boilers": "Boilers", "projects": "Projects", "calculator": "Calculator", "contact": "Contact", "menu": "Menu" },
+  "cta": { "calculate": "Calculate savings", "request": "Request a quote", "call": "Call us" },
+  "hero": {
+    "title": "Dry grain cheaper than with gas",
+    "subtitle": "Wood chip and pellet heat generators up to 20 MW. Made in Poland.",
+    "badge": "Made in Poland"
+  },
+  "benefits": {
+    "title": "Why GazDream",
+    "items": [
+      { "title": "Lower drying cost", "text": "Wood chips and pellets instead of gas: savings counted in euro per tonne." },
+      { "title": "Up to 20 MW", "text": "Solutions for large farms and grain elevators." },
+      { "title": "Fits your dryer", "text": "Installed on dryers of well-known brands." },
+      { "title": "Made in Poland", "text": "In-house production, service and CE documentation." }
+    ]
+  },
+  "calcTeaser": { "title": "See how much you save", "text": "Enter crop, moisture and tonnage. Result in half a minute." },
+  "footer": { "rights": "All rights reserved", "legalName": "[company legal name]", "address": "[production address]" }
+}
