@@ -316,7 +316,15 @@
     "worksWith": "Instalacje na suszarniach",
     "ctaTitle": "Porozmawiajmy o *Twojej suszarni*",
     "ctaText": "Napisz lub zadzwoń: dobierzemy model, policzymy koszty i przygotujemy ofertę.",
-    "ctaCall": "Zadzwoń do działu handlowego"
+    "ctaCall": "Zadzwoń do działu handlowego",
+    "card": {
+      "title": "Policz w 10 sekund",
+      "question": "Ile ton zboża suszysz w sezonie?",
+      "save": "Możesz zaoszczędzić",
+      "gasVsChips": "Gaz → zrębki, za sezon",
+      "assume": "Kukurydza 20% → 14%, zrębki zamiast gazu. Dane orientacyjne.",
+      "cta": "Policz dla swojego gospodarstwa"
+    }
   },
   "testimonials": {
     "title": "Opinie klientów",

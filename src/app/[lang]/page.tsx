@@ -3,8 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Applications from "@/components/Applications";
 import AutoVideo from "@/components/AutoVideo";
-import CountUp from "@/components/CountUp";
 import Faq from "@/components/Faq";
+import HeroCard from "@/components/HeroCard";
 import HowItWorks from "@/components/HowItWorks";
 import Installation from "@/components/Installation";
 import Marquee from "@/components/Marquee";
@@ -34,7 +34,6 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   });
   const chips = example.results.find((r) => r.fuel === "chips")!;
   const maxCost = Math.max(...example.results.map((r) => r.costPerTonne));
-  const money = new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0, useGrouping: "always" });
   const money2 = new Intl.NumberFormat(lang, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" });
   const labels = { close: dict.installation.close, prev: dict.installation.prev, next: dict.installation.next };
 
@@ -61,18 +60,15 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             </div>
           </div>
 
-          <aside className="rise w-full rounded-3xl border border-white/20 bg-forest/70 p-7 sm:p-8 lg:w-[22rem] lg:shrink-0" style={{ animationDelay: "420ms" }}>
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{dict.home.exampleEyebrow}</p>
-            <p className="numeral mt-3 text-7xl text-white sm:text-8xl">
-              <CountUp to={chips.savingsPercent} prefix="−" suffix="%" />
-            </p>
-            <p className="tabular mt-2 text-xl font-bold text-leaf">{money.format(chips.savingsVsGas)}</p>
-            <p className="mt-3 text-sm text-white/75">{dict.home.exampleText}</p>
-            <Link href={`/${lang}/calculator`} className="group mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-orange">
-              {dict.home.exampleCta}
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
-          </aside>
+          <HeroCard
+            lang={lang}
+            currency={currency}
+            prices={prices.table[currency]}
+            tonnesLabel={dict.calc.tonnes}
+            gasLabel={dict.calc.fuels.gas}
+            chipsLabel={dict.calc.fuels.chips}
+            text={dict.home.card}
+          />
         </div>
 
         <div className="rise border-t border-white/15" style={{ animationDelay: "500ms" }}>

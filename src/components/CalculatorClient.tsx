@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import CumulativeChart from "@/components/CumulativeChart";
 import Select from "@/components/Select";
@@ -8,6 +8,7 @@ import Logo from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { breakEvenPrice, calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
 import { CONTACT } from "@/lib/content";
+import { TONNES_KEY } from "@/components/HeroCard";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -80,6 +81,21 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
   const [withVat, setWithVat] = useState(false);
   const [boilerPrice, setBoilerPrice] = useState("");
   const [printedAt, setPrintedAt] = useState("");
+
+  // Carry over the volume picked in the home-page card, once.
+  useEffect(() => {
+    try {
+      const saved = sessionStorage.getItem(TONNES_KEY);
+      if (!saved) return;
+      sessionStorage.removeItem(TONNES_KEY);
+      const t = Number(saved);
+      // Reading browser storage is only possible after mount (the server render must stay identical).
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      if (Number.isFinite(t) && t > 0) setRows((rs) => rs.map((r, i) => (i === 0 ? { ...r, tonnes: String(Math.round(t)) } : r)));
+    } catch {
+      /* storage unavailable: keep defaults */
+    }
+  }, []);
 
   const market = defaultPrices[currency];
   const money = useMemo(

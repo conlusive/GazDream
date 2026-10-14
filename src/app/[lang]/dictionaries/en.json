@@ -316,7 +316,15 @@
     "worksWith": "Installations on dryers",
     "ctaTitle": "Let's talk about *your dryer*",
     "ctaText": "Write or call: we will select the model, work out the costs and prepare a quote.",
-    "ctaCall": "Call the sales team"
+    "ctaCall": "Call the sales team",
+    "card": {
+      "title": "Work it out in 10 seconds",
+      "question": "How many tonnes of grain do you dry per season?",
+      "save": "You could save",
+      "gasVsChips": "Gas → wood chips, per season",
+      "assume": "Corn 20% → 14%, wood chips instead of gas. Indicative figures.",
+      "cta": "Calculate for your farm"
+    }
   },
   "testimonials": {
     "title": "Customer reviews",

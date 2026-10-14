@@ -316,7 +316,15 @@
     "worksWith": "Anlagen an Trocknern",
     "ctaTitle": "Sprechen wir über *Ihren Trockner*",
     "ctaText": "Schreiben oder rufen Sie an: Wir wählen das Modell, berechnen die Kosten und erstellen ein Angebot.",
-    "ctaCall": "Vertrieb anrufen"
+    "ctaCall": "Vertrieb anrufen",
+    "card": {
+      "title": "In 10 Sekunden berechnet",
+      "question": "Wie viele Tonnen Getreide trocknen Sie pro Saison?",
+      "save": "Sie könnten sparen",
+      "gasVsChips": "Gas → Hackschnitzel, pro Saison",
+      "assume": "Mais 20 % → 14 %, Hackschnitzel statt Gas. Richtwerte.",
+      "cta": "Für Ihren Betrieb berechnen"
+    }
   },
   "testimonials": {
     "title": "Kundenstimmen",
