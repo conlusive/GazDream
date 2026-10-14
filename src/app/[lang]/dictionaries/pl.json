@@ -49,8 +49,8 @@
   },
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
-    "legalName": "[nazwa prawna spółki]",
-    "address": "[adres produkcji]"
+    "legalName": "Kraksten",
+    "address": "ul. Chłodna 51, Warszawa"
   },
   "calc": {
     "title": "Kalkulator korzyści z suszenia",
@@ -95,5 +95,96 @@
     "disclaimer": "Obliczenia orientacyjne; dokładną ofertę przygotuje nasz menedżer.",
     "cta": "Otrzymaj ofertę na kocioł",
     "chart": "Koszt suszenia 1 t"
+  },
+  "about": {
+    "title": "O firmie",
+    "lead": "GazDream to generatory ciepła na paliwo stałe (PUT) o mocy od 100 kW do 20 MW, które pracują na drewnie, odpadach rolniczych i bytowych bez wstępnego przygotowania paliwa.",
+    "stats": [
+      {
+        "v": "100 kW – 20 MW",
+        "l": "zakres mocy"
+      },
+      {
+        "v": "od 2015",
+        "l": "na rynku"
+      },
+      {
+        "v": "±1 °C",
+        "l": "kontrola temperatury suszenia"
+      },
+      {
+        "v": "do 45%",
+        "l": "wilgotność paliwa bez suszenia"
+      }
+    ],
+    "techTitle": "Technologia „całkowitego spalania”",
+    "tech": "Zasada zgazowania pozwala spalać surowiec niemal w 100%. Emisja CO w spalinach jest niższa niż 0,1 g/m³, przy dopuszczalnych 0,6 g/m³ dla gazu ziemnego.",
+    "officeTitle": "Biuro w Polsce",
+    "officeText": "Kraksten, Warszawa. Doradztwo, oferty i obsługa klientów w Polsce, Niemczech i UE."
+  },
+  "boilers": {
+    "title": "Generatory ciepła PUT",
+    "lead": "Piec na paliwo stały z powietrznym wymiennikiem ciepła do suszenia zboża, warzyw, owoców, ziół i drewna.",
+    "model": "Model",
+    "power": "Moc, kW",
+    "type": "Typ komory",
+    "burner": "Palnik, kW",
+    "types": {
+      "mobile": "mobilny",
+      "stationary": "stacjonarny"
+    },
+    "fuel": "Główne paliwo: zrębki drzewne, kolby kukurydzy.",
+    "includesTitle": "W zestawie",
+    "includes": [
+      "Palnik generatora ciepła",
+      "Stabilizator temperatury wyłożony cegłą szamotową",
+      "Gorący cyklon do dopalania pozostałości węglowych",
+      "Wymiennik ciepła z rurkami odpornymi na wysoką temperaturę",
+      "Izolacja 100 mm wełny bazaltowej",
+      "Szafa sterownicza, falownik, osprzęt elektryczny",
+      "Odpylacz cyklonowy i iskrochron ze stali nierdzewnej",
+      "Komin ze stali nierdzewnej, schody i balustrady"
+    ],
+    "optionsTitle": "Opcje na życzenie",
+    "options": [
+      "Automatyczna regulacja mocy",
+      "Integracja z systemem sterowania zakładu, zdalny monitoring"
+    ],
+    "request": "Zapytaj o ofertę"
+  },
+  "projects": {
+    "title": "Realizacje",
+    "lead": "Wybrane instalacje na suszarniach zbożowych.",
+    "power": "Moc",
+    "fuel": "Paliwo",
+    "dryer": "Suszarnia",
+    "capacity": "Wydajność",
+    "perDay": "t/dobę",
+    "chips": "zrębki",
+    "moist": "wilgotna zrębka",
+    "featured": "Modernizacja generatora ciepła 5 MW dla suszarni „Ukraina-50”",
+    "featuredText": "Nowy palnik o wysokiej wydajności, automatyczny system podawania paliwa i integracja z istniejącym generatorem bez wymiany wymiennika ciepła. Praca zespołu stała się stabilniejsza, a obsługa prostsza i bezpieczniejsza.",
+    "items": {
+      "shostka": "Obwód sumski, Ukraina",
+      "pereselenske": "Obwód kijowski, Ukraina",
+      "skrebyshi": "Obwód kijowski, Ukraina",
+      "buzovytsia": "Obwód czerniowiecki, Ukraina",
+      "katowice": "Katowice, Polska",
+      "iziaslav": "Obwód chmielnicki, Ukraina"
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "lead": "Zostaw dane, a skontaktujemy się z Tobą i zaproponujemy najlepsze rozwiązanie.",
+    "name": "Imię i nazwisko",
+    "phone": "Telefon lub e-mail",
+    "message": "Wiadomość (opcjonalnie)",
+    "send": "Wyślij zapytanie",
+    "sending": "Wysyłanie…",
+    "ok": "Dziękujemy! Odpowiemy w ciągu dnia roboczego.",
+    "error": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń.",
+    "calcNote": "Dołączymy wyniki z kalkulatora:",
+    "address": "Adres",
+    "email": "E-mail"
   }
 }

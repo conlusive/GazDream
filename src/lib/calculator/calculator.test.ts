@@ -9,16 +9,16 @@ const base = {
 };
 
 describe("calculate", () => {
-  it("reproduces the example table from the spec", () => {
+  it("matches hand-calculated costs for 6% removal", () => {
     const r = calculate(base);
     const by = Object.fromEntries(r.results.map((x) => [x.fuel, x]));
     expect(r.removedPercent).toBe(6);
-    expect(by.gas.costPerTonne).toBeCloseTo(3.36, 2);
-    expect(by.chips.costPerTonne).toBeCloseTo(1.96, 2);
-    expect(by.pellets.costPerTonne).toBeCloseTo(2.86, 2);
-    expect(by.chips.savingsVsGas).toBeCloseTo(1400, 0);
-    expect(by.chips.savingsPercent).toBeCloseTo(41.7, 1);
-    expect(by.pellets.savingsVsGas).toBeCloseTo(500, 0);
+    expect(by.gas.costPerTonne).toBeCloseTo(2.88, 2);
+    expect(by.chips.costPerTonne).toBeCloseTo(1.05, 2);
+    expect(by.pellets.costPerTonne).toBeCloseTo(2.4, 2);
+    expect(by.chips.savingsVsGas).toBeCloseTo(1830, 0);
+    expect(by.chips.savingsPercent).toBeCloseTo(63.5, 1);
+    expect(by.pellets.savingsVsGas).toBeCloseTo(480, 0);
     expect(r.cheapest).toBe("chips");
   });
 

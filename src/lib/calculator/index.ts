@@ -4,14 +4,14 @@ export type FuelPrices = Record<Fuel, number>; // gas: per 1000 m3, chips/pellet
 export type FuelUse = Record<Fuel, number>; // fuel units per 1 tonne of grain per 1% moisture removed
 
 /**
- * PLACEHOLDER values derived from the illustrative example in the spec
- * (6% removed: gas 3.36, chips 1.96, pellets 2.86 EUR/t at 400 / 70 / 160 prices).
- * Replace with real boiler data from the technical specialist before launch.
+ * Consumption per 1 tonne of corn per 1% moisture removed, as published on the
+ * current gazdream.com (2023 data): 1.2 m3 gas, 2.5 kg chips, 2.5 kg pellets.
+ * Must be confirmed by the technical specialist, and per crop, before launch.
  */
-export const PLACEHOLDER_FUEL_USE: FuelUse = {
-  gas: 1.4 / 1000, // 1000 m3 units
-  chips: 0.028 / 6,
-  pellets: 0.017875 / 6,
+export const DEFAULT_FUEL_USE: FuelUse = {
+  gas: 1.2 / 1000, // units of 1000 m3
+  chips: 2.5 / 1000, // tonnes
+  pellets: 2.5 / 1000, // tonnes
 };
 
 export type CalculatorInput = {
@@ -41,7 +41,7 @@ const FUELS: Fuel[] = ["gas", "chips", "pellets"];
 
 export function calculate(input: CalculatorInput): CalculatorResult {
   const { moistureFrom, moistureTo, tonnes, prices, vatRate = 0 } = input;
-  const fuelUse = input.fuelUse ?? PLACEHOLDER_FUEL_USE;
+  const fuelUse = input.fuelUse ?? DEFAULT_FUEL_USE;
 
   if (![moistureFrom, moistureTo, tonnes, ...Object.values(prices)].every(Number.isFinite)) {
     throw new RangeError("All inputs must be finite numbers");

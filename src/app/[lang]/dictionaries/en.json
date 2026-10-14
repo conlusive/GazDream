@@ -49,8 +49,8 @@
   },
   "footer": {
     "rights": "All rights reserved",
-    "legalName": "[company legal name]",
-    "address": "[production address]"
+    "legalName": "Kraksten",
+    "address": "ul. Chłodna 51, Warsaw"
   },
   "calc": {
     "title": "Drying savings calculator",
@@ -95,5 +95,96 @@
     "disclaimer": "Estimate only; our manager will prepare an exact quote.",
     "cta": "Get a boiler quote",
     "chart": "Drying cost per tonne"
+  },
+  "about": {
+    "title": "About us",
+    "lead": "GazDream makes solid-fuel heat generators (PUT) from 100 kW to 20 MW that run on wood, agricultural and household waste with no fuel preparation.",
+    "stats": [
+      {
+        "v": "100 kW – 20 MW",
+        "l": "power range"
+      },
+      {
+        "v": "since 2015",
+        "l": "on the market"
+      },
+      {
+        "v": "±1 °C",
+        "l": "drying temperature control"
+      },
+      {
+        "v": "up to 45%",
+        "l": "fuel moisture, no pre-drying"
+      }
+    ],
+    "techTitle": "“Total combustion” technology",
+    "tech": "The gasification principle burns the raw material almost completely. CO in flue gas is below 0.1 g/m³, against the 0.6 g/m³ allowed for natural gas.",
+    "officeTitle": "Office in Poland",
+    "officeText": "Kraksten, Warsaw. Consulting, quotes and customer support in Poland, Germany and the EU."
+  },
+  "boilers": {
+    "title": "PUT heat generators",
+    "lead": "A solid-fuel furnace with an air heat exchanger for drying grain, vegetables, fruit, herbs and timber.",
+    "model": "Model",
+    "power": "Power, kW",
+    "type": "Chamber type",
+    "burner": "Burner, kW",
+    "types": {
+      "mobile": "mobile",
+      "stationary": "stationary"
+    },
+    "fuel": "Main fuel: wood chips, corn cobs.",
+    "includesTitle": "Included",
+    "includes": [
+      "Heat generator burner",
+      "Temperature stabiliser lined with fireclay brick",
+      "Hot cyclone for burning out carbon residue",
+      "Heat exchanger with heat-resistant tubes",
+      "100 mm basalt wool insulation",
+      "Control cabinet, frequency converter, electrics",
+      "Stainless cyclone dust collector and spark arrestor",
+      "Stainless flue, stairs and railings"
+    ],
+    "optionsTitle": "Options on request",
+    "options": [
+      "Automatic power control",
+      "Integration with the plant control system, remote monitoring"
+    ],
+    "request": "Request a quote"
+  },
+  "projects": {
+    "title": "Projects",
+    "lead": "Selected installations on grain dryers.",
+    "power": "Power",
+    "fuel": "Fuel",
+    "dryer": "Dryer",
+    "capacity": "Capacity",
+    "perDay": "t/day",
+    "chips": "wood chips",
+    "moist": "wet wood chips",
+    "featured": "5 MW heat generator upgrade for the “Ukraina-50” dryer",
+    "featuredText": "A new high-output burner, an automatic fuel feed and integration with the existing generator without replacing the heat exchanger. Operation became steadier and servicing simpler and safer.",
+    "items": {
+      "shostka": "Sumy region, Ukraine",
+      "pereselenske": "Kyiv region, Ukraine",
+      "skrebyshi": "Kyiv region, Ukraine",
+      "buzovytsia": "Chernivtsi region, Ukraine",
+      "katowice": "Katowice, Poland",
+      "iziaslav": "Khmelnytskyi region, Ukraine"
+    }
+  },
+  "contact": {
+    "title": "Contact",
+    "lead": "Leave your details and we will get back to you with the best solution.",
+    "name": "Full name",
+    "phone": "Phone or e-mail",
+    "message": "Message (optional)",
+    "send": "Send request",
+    "sending": "Sending…",
+    "ok": "Thank you! We will reply within one business day.",
+    "error": "Could not send. Please try again or call us.",
+    "calcNote": "We will attach your calculator results:",
+    "address": "Address",
+    "email": "E-mail"
   }
 }

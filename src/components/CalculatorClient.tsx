@@ -71,6 +71,10 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
   const winner = result.results.find((r) => r.fuel === result.cheapest);
   const winnerSaves = winner && winner.fuel !== "gas" && winner.savingsVsGas > 0;
 
+  const calcSummary = winnerSaves
+    ? `${dict.crops[crop]}, ${tonnes} ${dict.tonnes} ${dict.period[period]}, ${dict.fuels[winner.fuel]}: ${money.format(winner.savingsVsGas)}`
+    : "";
+
   const field = "w-full rounded-md border border-line px-3 py-2 text-base focus:border-brand-green focus:outline-none";
   const label = "mb-1 block text-sm font-semibold";
 
@@ -201,7 +205,7 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
         </figure>
 
         <p className="mt-4 text-xs text-muted">{dict.disclaimer}</p>
-        <Link href={`/${lang}/contact`} className="mt-4 inline-block rounded-md bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark">
+        <Link href={`/${lang}/contact${calcSummary ? `?calc=${encodeURIComponent(calcSummary)}` : ""}`} className="mt-4 inline-block rounded-md bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark">
           {dict.cta}
         </Link>
       </div>

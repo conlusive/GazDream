@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { hasLocale } from "@/i18n/config";
@@ -10,8 +11,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
 
   return (
     <>
-      <section className="bg-brand-green-dark text-white">
-        <div className="mx-auto max-w-6xl px-4 py-20 sm:py-28">
+      <section className="relative overflow-hidden bg-brand-green-dark text-white">
+        <Image src="/photos/hero.jpg" alt="" fill priority sizes="100vw" className="object-cover opacity-30" />
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:py-28">
           <p className="mb-4 inline-block rounded border border-white/40 px-3 py-1 text-xs font-semibold uppercase tracking-wide">
             {dict.hero.badge}
           </p>

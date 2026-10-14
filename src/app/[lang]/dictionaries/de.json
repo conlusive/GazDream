@@ -49,8 +49,8 @@
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten",
-    "legalName": "[Firmenname]",
-    "address": "[Produktionsadresse]"
+    "legalName": "Kraksten",
+    "address": "ul. Chłodna 51, Warschau"
   },
   "calc": {
     "title": "Trocknungs-Ersparnisrechner",
@@ -95,5 +95,96 @@
     "disclaimer": "Richtwerte; ein genaues Angebot erstellt unser Manager.",
     "cta": "Kesselangebot erhalten",
     "chart": "Trocknungskosten pro Tonne"
+  },
+  "about": {
+    "title": "Über uns",
+    "lead": "GazDream stellt Festbrennstoff-Wärmeerzeuger (PUT) von 100 kW bis 20 MW her, die mit Holz sowie landwirtschaftlichen und Haushaltsabfällen ohne Brennstoffaufbereitung laufen.",
+    "stats": [
+      {
+        "v": "100 kW – 20 MW",
+        "l": "Leistungsbereich"
+      },
+      {
+        "v": "seit 2015",
+        "l": "am Markt"
+      },
+      {
+        "v": "±1 °C",
+        "l": "Temperaturregelung beim Trocknen"
+      },
+      {
+        "v": "bis 45 %",
+        "l": "Brennstofffeuchte ohne Vortrocknung"
+      }
+    ],
+    "techTitle": "Technologie der „vollständigen Verbrennung“",
+    "tech": "Das Vergasungsprinzip verbrennt den Rohstoff nahezu vollständig. Der CO-Gehalt im Abgas liegt unter 0,1 g/m³, zulässig sind bei Erdgas 0,6 g/m³.",
+    "officeTitle": "Büro in Polen",
+    "officeText": "Kraksten, Warschau. Beratung, Angebote und Kundenbetreuung in Polen, Deutschland und der EU."
+  },
+  "boilers": {
+    "title": "PUT-Wärmeerzeuger",
+    "lead": "Festbrennstoffofen mit Luft-Wärmetauscher zum Trocknen von Getreide, Gemüse, Obst, Kräutern und Holz.",
+    "model": "Modell",
+    "power": "Leistung, kW",
+    "type": "Kammertyp",
+    "burner": "Brenner, kW",
+    "types": {
+      "mobile": "mobil",
+      "stationary": "stationär"
+    },
+    "fuel": "Hauptbrennstoff: Hackschnitzel, Maiskolben.",
+    "includesTitle": "Lieferumfang",
+    "includes": [
+      "Brenner des Wärmeerzeugers",
+      "Temperaturstabilisator mit Schamottauskleidung",
+      "Heißzyklon zum Ausbrand von Kohlenstoffresten",
+      "Wärmetauscher mit hitzebeständigen Rohren",
+      "100 mm Basaltwolle-Isolierung",
+      "Schaltschrank, Frequenzumrichter, Elektrik",
+      "Zyklon-Entstauber und Funkenfänger aus Edelstahl",
+      "Edelstahlkamin, Treppen und Geländer"
+    ],
+    "optionsTitle": "Optionen auf Anfrage",
+    "options": [
+      "Automatische Leistungsregelung",
+      "Anbindung an die Betriebssteuerung, Fernüberwachung"
+    ],
+    "request": "Angebot anfragen"
+  },
+  "projects": {
+    "title": "Referenzen",
+    "lead": "Ausgewählte Anlagen an Getreidetrocknern.",
+    "power": "Leistung",
+    "fuel": "Brennstoff",
+    "dryer": "Trockner",
+    "capacity": "Leistung",
+    "perDay": "t/Tag",
+    "chips": "Hackschnitzel",
+    "moist": "feuchte Hackschnitzel",
+    "featured": "Modernisierung eines 5-MW-Wärmeerzeugers für den Trockner „Ukraina-50“",
+    "featuredText": "Neuer Hochleistungsbrenner, automatische Brennstoffzufuhr und Einbindung in den vorhandenen Wärmeerzeuger ohne Tausch des Wärmetauschers. Der Betrieb wurde stabiler, die Wartung einfacher und sicherer.",
+    "items": {
+      "shostka": "Region Sumy, Ukraine",
+      "pereselenske": "Region Kiew, Ukraine",
+      "skrebyshi": "Region Kiew, Ukraine",
+      "buzovytsia": "Region Czernowitz, Ukraine",
+      "katowice": "Kattowitz, Polen",
+      "iziaslav": "Region Chmelnyzkyj, Ukraine"
+    }
+  },
+  "contact": {
+    "title": "Kontakt",
+    "lead": "Hinterlassen Sie Ihre Daten, wir melden uns mit der passenden Lösung.",
+    "name": "Name",
+    "phone": "Telefon oder E-Mail",
+    "message": "Nachricht (optional)",
+    "send": "Anfrage senden",
+    "sending": "Wird gesendet …",
+    "ok": "Danke! Wir antworten innerhalb eines Werktags.",
+    "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen.",
+    "calcNote": "Wir hängen Ihre Rechnerergebnisse an:",
+    "address": "Adresse",
+    "email": "E-Mail"
   }
 }
