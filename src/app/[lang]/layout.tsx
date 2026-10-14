@@ -6,6 +6,7 @@ import { hasLocale, locales } from "@/i18n/config";
 import { getDictionary } from "./dictionaries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { CONTACT } from "@/lib/content";
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin", "latin-ext"] });
 
@@ -31,10 +32,16 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
 
   return (
     <html lang={lang} className={inter.variable}>
-      <body className="flex min-h-screen flex-col antialiased">
+      <body className="flex min-h-screen flex-col pb-16 antialiased lg:pb-0">
         <Header lang={lang} nav={dict.nav} cta={dict.cta} />
         <main className="flex-1">{children}</main>
         <Footer lang={lang} dict={dict} />
+        <a
+          href={CONTACT.phoneHref}
+          className="fixed inset-x-0 bottom-0 z-50 bg-brand-green py-4 text-center text-base font-semibold text-white lg:hidden"
+        >
+          {dict.cta.call}: {CONTACT.phone}
+        </a>
       </body>
     </html>
   );

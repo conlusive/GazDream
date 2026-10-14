@@ -36,11 +36,11 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
   const [withVat, setWithVat] = useState(false);
 
   const money = useMemo(
-    () => new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0 }),
+    () => new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0, useGrouping: "always" }),
     [lang, currency],
   );
   const money2 = useMemo(
-    () => new Intl.NumberFormat(lang, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2 }),
+    () => new Intl.NumberFormat(lang, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" }),
     [lang, currency],
   );
 
@@ -75,12 +75,12 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
     ? `${dict.crops[crop]}, ${tonnes} ${dict.tonnes} ${dict.period[period]}, ${dict.fuels[winner.fuel]}: ${money.format(winner.savingsVsGas)}`
     : "";
 
-  const field = "w-full rounded-md border border-line px-3 py-2 text-base focus:border-brand-green focus:outline-none";
+  const field = "w-full min-w-0 rounded-md border border-line px-3 py-2 text-base focus:border-brand-green focus:outline-none";
   const label = "mb-1 block text-sm font-semibold";
 
   return (
-    <div className="grid gap-8 lg:grid-cols-2">
-      <div className="space-y-6">
+    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+      <div className="min-w-0 space-y-6">
         <fieldset>
           <legend className={label}>{dict.crop}</legend>
           <div className="grid grid-cols-3 gap-2">
@@ -131,9 +131,9 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
           <div className="space-y-2">
             {FUEL_ORDER.map((f) => (
               <div key={f} className="flex items-center gap-2">
-                <label htmlFor={`p-${f}`} className="w-28 text-sm">{dict.fuels[f]}</label>
+                <label htmlFor={`p-${f}`} className="w-24 shrink-0 text-sm">{dict.fuels[f]}</label>
                 <input id={`p-${f}`} inputMode="decimal" value={prices[f]} onChange={(e) => setPrices({ ...prices, [f]: e.target.value })} className={field} />
-                <span className="w-24 text-xs text-muted">{currency} {dict.units[f]}</span>
+                <span className="w-20 shrink-0 text-xs text-muted">{currency} {dict.units[f]}</span>
               </div>
             ))}
           </div>
@@ -145,9 +145,32 @@ export default function CalculatorClient({ lang, dict }: { lang: Locale; dict: D
         </div>
       </div>
 
-      <div className="rounded-xl border border-line bg-soft p-5" aria-live="polite">
+      <div className="min-w-0 rounded-xl border border-line bg-soft p-5" aria-live="polite">
         <h2 className="mb-4 text-xl font-bold">{dict.result}</h2>
-        <div className="overflow-x-auto">
+        <ul className="space-y-2 sm:hidden">
+          {result.results.map((r) => {
+            const best = r.fuel === result.cheapest;
+            return (
+              <li key={r.fuel} className={`rounded-lg border p-3 ${best ? "border-brand-green bg-green-100" : "border-line bg-white"}`}>
+                <div className="flex items-center justify-between font-semibold">
+                  <span>{dict.fuels[r.fuel]}</span>
+                  {best && <span className="rounded bg-brand-green px-2 py-0.5 text-xs text-white">{dict.best}</span>}
+                </div>
+                <dl className="mt-2 grid grid-cols-2 gap-x-3 gap-y-1 text-sm">
+                  <dt className="text-muted">{dict.perTonne}</dt><dd className="text-right font-semibold">{money2.format(r.costPerTonne)}</dd>
+                  <dt className="text-muted">{dict.total}</dt><dd className="text-right font-semibold">{money.format(r.totalCost)}</dd>
+                  {r.fuel !== "gas" && (
+                    <>
+                      <dt className="text-muted">{dict.saving}</dt>
+                      <dd className="text-right font-semibold">{money.format(r.savingsVsGas)} ({r.savingsPercent.toFixed(0)}%)</dd>
+                    </>
+                  )}
+                </dl>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="hidden overflow-x-auto sm:block">
           <table className="w-full text-left text-sm">
             <thead className="text-muted">
               <tr>
