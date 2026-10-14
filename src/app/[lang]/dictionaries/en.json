@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Eco Straßmayr Energy – biomass heat generators | Grain drying",
-    "description": "Biomass heat generators from 100 kW to 20 MW for grain drying and industrial heating. Offer and support in Poland: Strasslider sp. z o.o."
+    "description": "Biomass heat generators from 100 kW to 20 MW for grain drying and industrial heating. Offer and support in Poland: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Home",
@@ -20,20 +20,20 @@
   },
   "hero": {
     "title": "Dry grain cheaper than with gas",
-    "subtitle": "Wood chip and pellet heat generators from 100 kW to 20 MW for grain dryers.",
+    "subtitle": "Eco Straßmayr Energy heat generators from 100 kW to 20 MW replace gas with a cheaper fuel. See your savings in 30 seconds.",
     "badge": "Eco Straßmayr Energy",
-    "titleLead": "Dry grain",
-    "titleHighlight": "cheaper than with gas"
+    "titleLead": "Gas in your dryer too expensive?",
+    "titleHighlight": "Switch to wood chips and pellets"
   },
   "benefits": {
-    "title": "Why Eco Straßmayr Energy",
+    "title": "Why *Eco Straßmayr Energy*",
     "items": [
       {
         "title": "Lower drying cost",
         "text": "Wood chips and pellets instead of gas: savings counted in euro per tonne."
       },
       {
-        "title": "Up to 20 MW",
+        "title": "Up to 20 MW",
         "text": "Solutions for large farms and grain elevators."
       },
       {
@@ -47,7 +47,7 @@
     ]
   },
   "calcTeaser": {
-    "title": "See how much you save",
+    "title": "See how much you *save*",
     "text": "Enter crop, moisture and tonnage. Result in half a minute."
   },
   "footer": {
@@ -56,7 +56,7 @@
     "address": "Sielecka 7, 37-700 Przemyśl, Poland"
   },
   "calc": {
-    "title": "Drying savings calculator",
+    "title": "Drying savings *calculator*",
     "lead": "Enter your data — the result updates instantly. You can change prices.",
     "crop": "Crop",
     "crops": {
@@ -82,7 +82,7 @@
       "pellets": "Pellets"
     },
     "units": {
-      "gas": "per 1000 m³",
+      "gas": "per 1000 m³",
       "chips": "per tonne",
       "pellets": "per tonne"
     },
@@ -147,19 +147,19 @@
     "perUnit": ""
   },
   "about": {
-    "title": "About us",
-    "lead": "Eco Straßmayr Energy makes solid-fuel heat generators from 100 kW to 20 MW. They run on wood, agricultural and household waste with no fuel preparation.",
+    "title": "About *us*",
+    "lead": "Eco Straßmayr Energy makes solid-fuel heat generators from 100 kW to 20 MW. They run on wood, agricultural and household waste with no fuel preparation.",
     "stats": [
       {
-        "v": "100 kW – 20 MW",
+        "v": "100 kW – 20 MW",
         "l": "power range"
       },
       {
-        "v": "30–120 °C",
+        "v": "30–120 °C",
         "l": "drying temperature range"
       },
       {
-        "v": "±1 °C",
+        "v": "±1 °C",
         "l": "temperature control accuracy"
       },
       {
@@ -173,7 +173,7 @@
     "officeText": "Strasslider sp. z o.o., Przemyśl. Consulting and quotes for customers in Poland and the EU."
   },
   "boilers": {
-    "title": "PUT heat generators",
+    "title": "*PUT* heat generators",
     "lead": "A solid-fuel furnace with an air heat exchanger for drying grain, vegetables, fruit, herbs and timber.",
     "model": "Model",
     "power": "Power, kW",
@@ -203,7 +203,7 @@
     "request": "Request a quote"
   },
   "projects": {
-    "title": "Projects",
+    "title": "*Projects*",
     "lead": "A completed project and selected installations on grain dryers.",
     "power": "Power",
     "fuel": "Fuel",
@@ -212,7 +212,7 @@
     "perDay": "t/day",
     "chips": "wood chips",
     "moist": "wet wood chips",
-    "featured": "5 MW heat generator upgrade for the “Ukraina-50” dryer",
+    "featured": "5 MW heat generator upgrade for the “Ukraina-50” dryer",
     "featuredText": "A new high-output burner, an automatic fuel feed and integration with the existing generator without replacing the heat exchanger. Operation became steadier and servicing simpler and safer.",
     "items": {
       "shostka": "Sumy region, Ukraine",
@@ -222,10 +222,15 @@
       "katowice": "Katowice, Poland",
       "iziaslav": "Khmelnytskyi region, Ukraine"
     },
-    "other": "Other installations"
+    "other": "Other installations",
+    "summary": {
+      "objects": "installations listed",
+      "power": "power range",
+      "capacity": "capacity up to"
+    }
   },
   "contact": {
-    "title": "Contact",
+    "title": "*Contact*",
     "lead": "Leave your details and we will get back to you with the best solution.",
     "name": "Full name",
     "phone": "Phone or e-mail",
@@ -238,10 +243,27 @@
     "address": "Address",
     "email": "E-mail",
     "sales": "Sales",
-    "office": "Office"
+    "office": "Office",
+    "steps": {
+      "title": "What happens next?",
+      "items": [
+        {
+          "t": "Reply",
+          "x": "We get back to you within one business day."
+        },
+        {
+          "t": "Details",
+          "x": "We agree on crop, volume, dryer and fuel."
+        },
+        {
+          "t": "Quote",
+          "x": "We prepare a quote for the heat generator."
+        }
+      ]
+    }
   },
   "faq": {
-    "title": "Frequently asked questions",
+    "title": "Frequently asked *questions*",
     "lead": "Answers to what farmers and grain elevators ask us most.",
     "all": "All questions",
     "items": [
@@ -251,7 +273,7 @@
       },
       {
         "q": "Is drying grain safe from fire?",
-        "a": "Yes. The generator has a heat exchanger and a temperature stabilisation system that stops sparks from reaching the dryer, so the grain does not ignite. Drying temperature is adjustable from 30 to 120 (140) °C within ±1 °C."
+        "a": "Yes. The generator has a heat exchanger and a temperature stabilisation system that stops sparks from reaching the dryer, so the grain does not ignite. Drying temperature is adjustable from 30 to 120 (140) °C within ±1 °C."
       },
       {
         "q": "Will it fit my dryer?",
@@ -263,7 +285,7 @@
       },
       {
         "q": "How much electricity does it use?",
-        "a": "A 1–6 MW furnace uses 3 to 15 kWh of electricity."
+        "a": "A 1–6 MW furnace uses 3 to 15 kWh of electricity."
       },
       {
         "q": "How do I work out savings and boiler payback?",
@@ -280,13 +302,21 @@
     "caseMore": "See projects",
     "illustrative": "Illustrative photo: a GazDream installation",
     "modelsEyebrow": "Range",
-    "modelsTitle": "PUT heat generators",
+    "modelsTitle": "*PUT* heat generators",
     "modelsAll": "All models",
     "exampleEyebrow": "Calculation example",
-    "exampleText": "Corn 20% → 14%, 1000 t, wood chips instead of gas",
+    "exampleText": "Corn 20% → 14%, 1000 t, wood chips instead of gas",
     "exampleNote": "Indicative figures based on the calculator prices.",
     "unitKw": "kW",
-    "scroll": "Scroll"
+    "scroll": "Scroll",
+    "exampleCta": "Check your numbers",
+    "proofEyebrow": "Technology",
+    "proofTitle": "Technology in *numbers*",
+    "proofLead": "Key parameters of solid-fuel heat generators.",
+    "worksWith": "Installations on dryers",
+    "ctaTitle": "Let's talk about *your dryer*",
+    "ctaText": "Write or call: we will select the model, work out the costs and prepare a quote.",
+    "ctaCall": "Call the sales team"
   },
   "testimonials": {
     "title": "Customer reviews",
@@ -312,7 +342,7 @@
   },
   "installation": {
     "eyebrow": "Completed project",
-    "title": "Straßmayr biomass heat generator",
+    "title": "*Straßmayr* biomass heat generator",
     "lead": "A finished installation in a hall: burner, fuel hopper, heat exchanger container with control cabinets and a dust collector.",
     "captions": [
       "General view of the installation",
@@ -334,6 +364,187 @@
     "more": "See projects",
     "close": "Close",
     "prev": "Previous photo",
-    "next": "Next photo"
+    "next": "Next photo",
+    "sound": "Turn sound on or off"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "From fuel to *hot air*",
+    "hint": "Click a stage to see the details",
+    "steps": [
+      {
+        "t": "Fuel",
+        "x": "Wood chips, firewood, agricultural waste or corn cobs go into the hopper and are fed to the furnace by a screw. The fuel needs no sorting or drying and its moisture can reach 45% or more. Loading is manual or automatic, every 6–12 hours."
+      },
+      {
+        "t": "Combustion",
+        "x": "The gasifier principle burns the raw material almost completely. A high-temperature ceramic lining protects the steel parts from overheating, and once running the furnace burns without smoke."
+      },
+      {
+        "t": "Heat exchange",
+        "x": "Flue gas passes through a heat exchanger cooled by a fan. The heated air never mixes with the flue gas, and temperature stabilisation holds ±1 °C within 30–120 (140) °C."
+      },
+      {
+        "t": "Hot air",
+        "x": "Clean hot air flows through ducts to the dryer. A cyclone dust collector and spark arrestor stop sparks, so the grain does not ignite. A control cabinet with an alarm unit runs the whole system."
+      }
+    ]
+  },
+  "savings": {
+    "eyebrow": "Drying cost",
+    "title": "The same tonne, *a different bill*",
+    "text": "The cost of drying one tonne of corn (20% → 14%) at example fuel prices. Enter your own prices in the calculator and see your result.",
+    "cta": "Calculate for your farm",
+    "note": "Indicative figures based on the calculator prices."
+  },
+  "apps": {
+    "eyebrow": "Applications",
+    "title": "One technology, *many tasks*",
+    "cta": "Ask about a solution",
+    "tabs": [
+      {
+        "id": "agro",
+        "label": "Agriculture",
+        "items": [
+          "Drying grain, herbs, fruit and vegetables",
+          "Heating greenhouse complexes",
+          "Upgrading and re-equipping old dryers",
+          "Disposal of organic matter and agricultural waste"
+        ]
+      },
+      {
+        "id": "industry",
+        "label": "Industry",
+        "items": [
+          "Heating production halls, workshops and warehouses",
+          "Heat for production processes",
+          "Disposal of production waste"
+        ]
+      },
+      {
+        "id": "materials",
+        "label": "Building materials",
+        "items": [
+          "Drying timber without stress or cracks",
+          "High-temperature chambers 100–1400 °C (ceramics, bricks, reinforced concrete)",
+          "Drying ceramics, paints and varnishes"
+        ]
+      },
+      {
+        "id": "public",
+        "label": "Public sector",
+        "items": [
+          "Heating housing estates, schools and kindergartens",
+          "Shopping centres, offices, sports facilities and pools",
+          "Hot water for any building",
+          "Converting boiler houses to alternative fuels"
+        ]
+      }
+    ]
+  },
+  "adv": {
+    "title": "Why this technology",
+    "items": [
+      {
+        "t": "Low-cost heat",
+        "x": "Energy-saving technology and a significant fuel saving compared with similar heat generators."
+      },
+      {
+        "t": "Safe drying",
+        "x": "A heat exchanger and temperature stabilisation keep sparks out of the dryer, so the grain does not ignite."
+      },
+      {
+        "t": "Precise control",
+        "x": "Drying of seed and commercial grain from 30 to 120 (140) °C with ±1 °C temperature control."
+      },
+      {
+        "t": "Low emissions",
+        "x": "Emissions close to natural gas, so the generators can also be installed in urban areas."
+      },
+      {
+        "t": "No post-season downtime",
+        "x": "After the season the furnace needs no extra maintenance, just a few hours of work."
+      },
+      {
+        "t": "Low power use",
+        "x": "A 1–6 MW furnace uses little electricity."
+      },
+      {
+        "t": "Fuel without preparation",
+        "x": "The fuel is unsorted and its moisture can reach 45% or more."
+      },
+      {
+        "t": "Cleaning while running",
+        "x": "Soot and tar do not build up on the heat exchanger tubes, and the exchanger and furnace can be cleaned during operation."
+      },
+      {
+        "t": "Fits your dryer",
+        "x": "We adapt the furnace and heat exchanger to any drying chamber without damaging existing equipment."
+      }
+    ]
+  },
+  "fuelsInfo": {
+    "title": "Fuel types",
+    "main": "Main",
+    "aux": "Auxiliary",
+    "mainItems": [
+      "Wood chips of all kinds",
+      "Firewood",
+      "Sawdust and shavings",
+      "Corn cobs",
+      "Sunflower husks"
+    ],
+    "auxItems": [
+      "Leaves and bark",
+      "Paper and cardboard",
+      "Household waste",
+      "Food waste"
+    ]
+  },
+  "selector": {
+    "title": "Find your model",
+    "label": "Heat output needed",
+    "unit": "kW",
+    "result": "Matching model",
+    "small": "Smaller outputs from 100 kW: ask for a quote.",
+    "big": "Above 6000 kW: custom solutions up to 20 MW. Ask for a quote.",
+    "hint": "Indicative only, the sales team confirms the final selection."
+  },
+  "spec": {
+    "title": "Model comparison",
+    "power": "Heat exchange chamber power, kW",
+    "type": "Chamber type",
+    "burner": "Burner power, kW",
+    "chimney": "Chimney height",
+    "chimneyVal": "3.5 m",
+    "fuel": "Main fuel",
+    "fuelVal": "wood chips, corn cobs"
+  },
+  "faqSearch": {
+    "placeholder": "Search the questions…",
+    "none": "Nothing found. Write to us and we will answer."
+  },
+  "anatomy": {
+    "eyebrow": "Installation anatomy",
+    "title": "What the *generator* is made of",
+    "hint": "Click a marker on the photo or an item in the list",
+    "items": [
+      {
+        "t": "Fuel hopper",
+        "x": "The fuel goes in here: wood chips, firewood, agricultural waste. It needs no sorting or drying and its moisture can reach 45% or more."
+      },
+      {
+        "t": "Screw feeder",
+        "x": "Feeds the fuel into the furnace. Loading is manual or automatic, every 6–12 hours."
+      },
+      {
+        "t": "Burner on a frame",
+        "x": "Gasifier-type combustion with a high-temperature ceramic lining. Once running, the furnace burns without smoke."
+      },
+      {
+        "t": "Heat exchanger container",
+        "x": "A heat exchanger with high-temperature tubes, 100 mm basalt wool insulation and control cabinets with an alarm unit."
+      }
+    ]
   }
 }

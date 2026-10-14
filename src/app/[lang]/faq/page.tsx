@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import Faq from "@/components/Faq";
+import FaqList from "@/components/FaqList";
 import PageHero from "@/components/PageHero";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
@@ -22,10 +22,10 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
 
   return (
     <>
-      <PageHero eyebrow="FAQ" title={dict.faq.title} lead={dict.faq.lead} />
+      <PageHero eyebrow="FAQ" title={dict.faq.title} lead={dict.faq.lead} image="/photos/install-container.jpg" />
       <section className="section">
         <div className="container-x max-w-3xl">
-          <Faq items={dict.faq.items} />
+          <FaqList items={dict.faq.items} placeholder={dict.faqSearch.placeholder} none={dict.faqSearch.none} />
           <div className="mt-12 flex flex-wrap gap-3">
             <ButtonLink href={`/${lang}/calculator`}>{dict.cta.calculate}</ButtonLink>
             <ButtonLink href={`/${lang}/contact`} variant="outline">{dict.cta.request}</ButtonLink>

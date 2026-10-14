@@ -54,7 +54,7 @@ export default function ContactForm({ lang, dict }: { lang: Locale; dict: Dictio
       </div>
       <div>
         <label htmlFor="message" className="mb-1.5 block text-sm font-bold">{dict.message}</label>
-        <textarea id="message" name="message" rows={4} maxLength={2000} className={field} />
+        <textarea id="message" name="message" rows={5} maxLength={2000} className={`${field} resize-none`} />
       </div>
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <button

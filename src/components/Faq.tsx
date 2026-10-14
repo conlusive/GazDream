@@ -5,8 +5,8 @@ export default function Faq({ items }: { items: readonly Item[] }) {
   return (
     <div className="divide-y divide-line border-y border-line">
       {items.map((item) => (
-        <details key={item.q} className="group py-5">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-6 text-lg font-bold tracking-tight transition-colors hover:text-brand-green [&::-webkit-details-marker]:hidden">
+        <details key={item.q} className="group">
+          <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-6 py-4 text-lg font-bold tracking-tight transition-colors hover:text-brand-green [&::-webkit-details-marker]:hidden">
             {item.q}
             <span
               aria-hidden="true"
@@ -15,7 +15,7 @@ export default function Faq({ items }: { items: readonly Item[] }) {
               +
             </span>
           </summary>
-          <p className="max-w-2xl pt-3 text-muted">{item.a}</p>
+          <p className="max-w-2xl pb-5 text-muted">{item.a}</p>
         </details>
       ))}
     </div>

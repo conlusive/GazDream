@@ -13,7 +13,7 @@ export default async function CalculatorPage({ params }: PageProps<"/[lang]/calc
   return (
     <>
       <div className="print:hidden">
-        <PageHero eyebrow={dict.nav.calculator} title={dict.calc.title} lead={dict.calc.lead} />
+        <PageHero eyebrow={dict.nav.calculator} title={dict.calc.title} lead={dict.calc.lead} image="/photos/install-wide.jpg" />
       </div>
       <div className="container-x py-12 sm:py-16 print:p-0">
         <CalculatorClient lang={lang} dict={dict.calc} defaultPrices={prices.table} pricesDate={prices.updatedAt} />

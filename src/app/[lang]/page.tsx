@@ -1,17 +1,24 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Applications from "@/components/Applications";
+import AutoVideo from "@/components/AutoVideo";
 import CountUp from "@/components/CountUp";
 import Faq from "@/components/Faq";
+import HowItWorks from "@/components/HowItWorks";
 import Installation from "@/components/Installation";
+import Marquee from "@/components/Marquee";
 import RevealHeading from "@/components/RevealHeading";
 import Testimonials from "@/components/Testimonials";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
-import { calculateBatches } from "@/lib/calculator";
-import { MODELS } from "@/lib/content";
+import { calculateBatches, type Fuel } from "@/lib/calculator";
+import { CONTACT, MODELS } from "@/lib/content";
 import { getPrices } from "@/lib/prices";
+import { plain, rich } from "@/lib/rich";
 import { getDictionary } from "./dictionaries";
+
+const FUELS: Fuel[] = ["gas", "chips", "pellets"];
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -25,153 +32,204 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
     prices: prices.table[currency],
   });
   const chips = example.results.find((r) => r.fuel === "chips")!;
+  const maxCost = Math.max(...example.results.map((r) => r.costPerTonne));
   const money = new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0, useGrouping: "always" });
+  const money2 = new Intl.NumberFormat(lang, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" });
+  const labels = { close: dict.installation.close, prev: dict.installation.prev, next: dict.installation.next };
 
   return (
     <>
-      <section className="relative isolate flex min-h-[calc(100svh-68px)] flex-col overflow-hidden bg-forest text-white">
-        <Image src="/photos/install-wide.jpg" alt="" fill priority sizes="100vw" className="kenburns -z-20 object-cover" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/80 to-forest/25" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest/80 via-transparent to-transparent" />
+      {/* ---------- hero ---------- */}
+      <section className="relative isolate flex min-h-svh flex-col overflow-hidden bg-forest pt-24 text-white">
+        <div className="absolute inset-0 -z-20">
+          <AutoVideo src="/video/hero-loop.mp4" poster="/photos/install-wide.jpg" className="h-full w-full object-cover" />
+        </div>
+        <div className="absolute inset-x-0 top-0 -z-10 h-44 bg-gradient-to-b from-forest/85 to-transparent" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/80 to-forest/20" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest/90 via-transparent to-transparent" />
 
-        <div className="container-x flex flex-1 flex-col justify-center py-20">
-          <p className="rise mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-white/25 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.18em] backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand-orange" />
-            {dict.hero.badge}
-          </p>
-          <RevealHeading lead={dict.hero.titleLead} highlight={dict.hero.titleHighlight} className="display max-w-3xl text-5xl sm:text-7xl" />
-          <p className="rise mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl" style={{ animationDelay: "180ms" }}>{dict.hero.subtitle}</p>
-          <div className="rise mt-10 flex flex-wrap gap-3" style={{ animationDelay: "270ms" }}>
-            <ButtonLink href={`/${lang}/calculator`}>{dict.cta.calculate}</ButtonLink>
-            <ButtonLink href={`/${lang}/contact`} variant="light">{dict.cta.request}</ButtonLink>
+        <div className="container-x flex flex-1 flex-col justify-center gap-10 py-12 lg:flex-row lg:items-center lg:gap-14">
+          <div className="lg:flex-1">
+            <RevealHeading lead={dict.hero.titleLead} highlight={dict.hero.titleHighlight} className="display max-w-3xl text-5xl sm:text-6xl lg:text-7xl" />
+            <p className="rise mt-6 max-w-xl text-lg leading-relaxed text-white/85 sm:text-xl" style={{ animationDelay: "180ms" }}>{dict.hero.subtitle}</p>
+            <div className="rise mt-10 flex flex-wrap gap-3" style={{ animationDelay: "270ms" }}>
+              <ButtonLink href={`/${lang}/calculator`}>{dict.cta.calculate}</ButtonLink>
+              <ButtonLink href={`/${lang}/contact`} variant="light">{dict.cta.request}</ButtonLink>
+            </div>
           </div>
+
+          <aside className="rise w-full rounded-3xl border border-white/20 bg-forest/70 p-7 sm:p-8 lg:w-[22rem] lg:shrink-0" style={{ animationDelay: "420ms" }}>
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{dict.home.exampleEyebrow}</p>
+            <p className="numeral mt-3 text-7xl text-white sm:text-8xl">
+              <CountUp to={chips.savingsPercent} prefix="−" suffix="%" />
+            </p>
+            <p className="tabular mt-2 text-xl font-bold text-leaf">{money.format(chips.savingsVsGas)}</p>
+            <p className="mt-3 text-sm text-white/75">{dict.home.exampleText}</p>
+            <Link href={`/${lang}/calculator`} className="group mt-4 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-orange">
+              {dict.home.exampleCta}
+              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+          </aside>
         </div>
 
-        <dl className="rise container-x grid grid-cols-2 gap-x-6 gap-y-5 border-t border-white/15 py-7 lg:grid-cols-4" style={{ animationDelay: "380ms" }}>
-          {dict.about.stats.map((s) => (
-            <div key={s.l} className="min-w-0">
-              <dt className="text-xl font-extrabold tracking-tight sm:text-2xl">{s.v}</dt>
-              <dd className="mt-1 text-xs text-white/70 [overflow-wrap:anywhere] sm:text-sm">{s.l}</dd>
-            </div>
-          ))}
-        </dl>
+        <div className="rise border-t border-white/15" style={{ animationDelay: "500ms" }}>
+          <p className="container-x flex flex-wrap items-center gap-x-6 gap-y-2 py-5 text-sm text-white/70">
+            <span className="text-xs font-bold uppercase tracking-[0.18em] text-white/50">{dict.home.worksWith}</span>
+            {["Comil", "GSI", "Sukup"].map((n) => (
+              <span key={n} className="numeral text-2xl text-white/90">{n}</span>
+            ))}
+          </p>
+        </div>
       </section>
 
+      {/* ---------- key figures ticker ---------- */}
+      <Marquee items={dict.about.stats} label={plain(dict.home.proofTitle)} />
+
+      {/* ---------- how it works ---------- */}
+      <section className="section">
+        <div className="container-x reveal">
+          <HowItWorks eyebrow={dict.how.eyebrow} title={dict.how.title} hint={dict.how.hint} steps={dict.how.steps} />
+        </div>
+      </section>
+
+      {/* ---------- savings ---------- */}
+      <section className="bg-soft section">
+        <div className="container-x grid items-center gap-12 lg:grid-cols-[1fr_1.1fr]">
+          <div className="reveal">
+            <p className="eyebrow mb-4">{dict.savings.eyebrow}</p>
+            <h2 className="display text-3xl sm:text-5xl">{rich(dict.savings.title)}</h2>
+            <p className="lead mt-5 max-w-md">{dict.savings.text}</p>
+            <div className="mt-8"><ButtonLink href={`/${lang}/calculator`}>{dict.savings.cta}</ButtonLink></div>
+          </div>
+          <div className="reveal card p-7 sm:p-10">
+            <div className="space-y-7">
+              {FUELS.map((f) => {
+                const r = example.results.find((x) => x.fuel === f)!;
+                const best = f === example.cheapest;
+                return (
+                  <div key={f}>
+                    <div className="flex items-baseline justify-between gap-3">
+                      <span className="font-extrabold">{dict.calc.fuels[f]}</span>
+                      <span className="tabular text-lg font-extrabold">{money2.format(r.costPerTonne)} <span className="text-sm font-semibold text-muted">/ t</span></span>
+                    </div>
+                    <div className="mt-2 h-4 overflow-hidden rounded-full bg-line">
+                      <div className={`grow h-full rounded-full ${best ? "bg-brand-green" : f === "gas" ? "bg-brand-orange" : "bg-ink/35"}`} style={{ width: `${(r.costPerTonne / maxCost) * 100}%` }} />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="mt-8 flex items-end justify-between gap-4 border-t border-line pt-6">
+              <div>
+                <p className="numeral text-6xl text-brand-green">−{chips.savingsPercent.toFixed(0)}%</p>
+                <p className="mt-1 text-sm text-muted">{dict.calc.fuels.chips} vs {dict.calc.fuels.gas}</p>
+              </div>
+              <p className="max-w-[14rem] text-right text-xs text-muted">{dict.home.exampleText}<br />{dict.savings.note}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ---------- applications ---------- */}
       <section className="section">
         <div className="container-x">
-          <p className="eyebrow reveal mb-4">{dict.hero.badge}</p>
-          <h2 className="display reveal max-w-3xl text-3xl sm:text-5xl">{dict.benefits.title}</h2>
-          <div className="mt-12 grid gap-5 lg:grid-cols-12">
-            <article className="reveal card-hover flex flex-col justify-between rounded-3xl bg-tint p-8 sm:p-10 lg:col-span-7 lg:min-h-[320px]">
-              <p className="text-sm font-bold text-brand-orange">01</p>
-              <div>
-                <CountUp to={chips.savingsPercent} prefix="−" suffix="%" className="block text-7xl font-extrabold tracking-tight text-brand-green sm:text-8xl" />
-                <h3 className="mt-3 text-2xl font-extrabold tracking-tight">{dict.benefits.items[0].title}</h3>
-                <p className="mt-2 max-w-md text-muted">{dict.benefits.items[0].text}</p>
-              </div>
-            </article>
-
-            <article className="reveal group relative isolate flex min-h-[300px] flex-col justify-end overflow-hidden rounded-3xl p-8 text-white lg:col-span-5">
-              <Image src="/photos/install-hopper.jpg" alt="" fill sizes="(min-width: 1024px) 40vw, 100vw" className="-z-20 object-cover transition-transform duration-[1400ms] ease-out-soft group-hover:scale-105" />
-              <div className="absolute inset-0 -z-10 bg-gradient-to-t from-forest/90 via-forest/30 to-transparent" />
-              <p className="text-sm font-bold text-brand-orange">03</p>
-              <h3 className="mt-1 text-2xl font-extrabold tracking-tight">{dict.benefits.items[2].title}</h3>
-              <p className="mt-2 max-w-sm text-white/80">{dict.benefits.items[2].text}</p>
-            </article>
-
-            <article className="reveal card card-hover flex flex-col justify-between p-8 sm:p-10 lg:col-span-5 lg:min-h-[280px]">
-              <p className="text-sm font-bold text-brand-orange">02</p>
-              <div>
-                <p className="text-7xl font-extrabold tracking-tight text-ink sm:text-8xl">
-                  <CountUp to={20} />
-                  <span className="ml-2 text-3xl font-bold text-brand-green">MW</span>
-                </p>
-                <h3 className="mt-3 text-2xl font-extrabold tracking-tight">{dict.benefits.items[1].title}</h3>
-                <p className="mt-2 max-w-md text-muted">{dict.benefits.items[1].text}</p>
-              </div>
-            </article>
-
-            <article className="reveal card-hover flex flex-col justify-between rounded-3xl bg-forest p-8 text-white sm:p-10 lg:col-span-7 lg:min-h-[280px]">
-              <p className="text-sm font-bold text-brand-orange">04</p>
-              <div>
-                <p className="text-4xl font-extrabold tracking-tight text-leaf sm:text-5xl">Strasslider</p>
-                <h3 className="mt-3 text-2xl font-extrabold tracking-tight">{dict.benefits.items[3].title}</h3>
-                <p className="mt-2 max-w-md text-white/75">{dict.benefits.items[3].text}</p>
-              </div>
-            </article>
+          <p className="eyebrow reveal mb-4">{dict.apps.eyebrow}</p>
+          <h2 className="display reveal mb-12 max-w-3xl text-3xl sm:text-5xl">{rich(dict.apps.title)}</h2>
+          <div className="reveal">
+            <Applications tabs={dict.apps.tabs} cta={dict.apps.cta} href={`/${lang}/contact`} />
           </div>
         </div>
       </section>
 
+      {/* ---------- real project ---------- */}
       <section className="bg-soft section">
         <div className="container-x reveal">
-          <Installation dict={dict.installation} labels={{ close: dict.installation.close, prev: dict.installation.prev, next: dict.installation.next }} />
+          <Installation dict={dict.installation} labels={labels} />
           <div className="mt-12">
             <ButtonLink href={`/${lang}/projects`} variant="outline">{dict.installation.more}</ButtonLink>
           </div>
         </div>
       </section>
 
+      {/* ---------- models: power-range chart; full details live on the Boilers page ---------- */}
       <section className="section">
         <div className="container-x">
-          <div className="flex flex-wrap items-end justify-between gap-4">
-            <div>
-              <p className="eyebrow reveal mb-4">{dict.home.modelsEyebrow}</p>
-              <h2 className="display reveal text-3xl sm:text-5xl">{dict.home.modelsTitle}</h2>
+          <div className="reveal flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <p className="eyebrow mb-4">{dict.home.modelsEyebrow}</p>
+              <h2 className="display text-3xl sm:text-5xl">{rich(dict.home.modelsTitle)}</h2>
             </div>
-            <Link href={`/${lang}/boilers`} className="group reveal inline-flex items-center gap-2 text-sm font-bold text-brand-green">
-              {dict.home.modelsAll}
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
-            </Link>
+            <ButtonLink href={`/${lang}/boilers`} variant="outline">{dict.home.modelsAll}</ButtonLink>
           </div>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {MODELS.map((m) => (
-              <Link key={m.name} href={`/${lang}/boilers`} className="card card-hover reveal group block border-t-4 border-t-transparent p-6 hover:border-t-brand-orange">
-                <p className="text-sm font-semibold text-muted">{dict.boilers.types[m.type]}</p>
-                <h3 className="mt-1 text-3xl font-extrabold tracking-tight transition-colors group-hover:text-brand-green">{m.name}</h3>
-                <p className="mt-6 text-sm text-muted">{dict.boilers.power}</p>
-                <p className="text-lg font-bold">{m.powerKw} {dict.home.unitKw}</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="pb-16 sm:pb-24">
-        <div className="container-x">
-          <div className="reveal grid items-center gap-10 overflow-hidden rounded-3xl bg-forest p-8 text-white sm:p-14 lg:grid-cols-2">
-            <div>
-              <p className="eyebrow !text-leaf mb-4">{dict.calc.title}</p>
-              <h2 className="display text-3xl sm:text-5xl">{dict.calcTeaser.title}</h2>
-              <p className="mt-4 max-w-md text-white/75">{dict.calcTeaser.text}</p>
-              <div className="mt-8">
-                <ButtonLink href={`/${lang}/calculator`}>{dict.cta.calculate}</ButtonLink>
+          <div className="reveal card mt-10 p-5 sm:p-8">
+            {/* axis: 0 - 6000 kW */}
+            <div className="hidden items-center gap-4 sm:flex">
+              <div className="w-32 shrink-0" />
+              <div className="relative h-5 flex-1 text-xs font-semibold text-muted" aria-hidden="true">
+                {[0, 1000, 2000, 3000, 4000, 5000, 6000].map((t) => (
+                  <span key={t} className="tabular absolute top-0 -translate-x-1/2" style={{ left: `${(t / 6000) * 100}%` }}>{t}</span>
+                ))}
               </div>
+              <div className="w-28 shrink-0 text-right text-xs font-semibold text-muted">{dict.home.unitKw}</div>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-7 sm:p-9">
-              <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/60">{dict.home.exampleEyebrow}</p>
-              <p className="tabular mt-4 text-6xl font-extrabold tracking-tight text-leaf sm:text-7xl">−{chips.savingsPercent.toFixed(0)}%</p>
-              <p className="tabular mt-2 text-xl font-bold">{money.format(chips.savingsVsGas)}</p>
-              <p className="mt-4 text-sm text-white/70">{dict.home.exampleText}</p>
-              <p className="mt-1 text-xs text-white/50">{dict.home.exampleNote}</p>
-            </div>
+
+            <ul className="mt-2 space-y-2">
+              {MODELS.map((m) => {
+                const [lo, hi] = m.powerKw.split("–").map(Number);
+                return (
+                  <li key={m.name}>
+                    <Link href={`/${lang}/boilers`} className="group flex flex-col gap-2 rounded-xl px-2 py-3 transition-colors duration-300 hover:bg-tint sm:flex-row sm:items-center sm:gap-4">
+                      <span className="flex items-baseline justify-between gap-3 sm:block sm:w-32 sm:shrink-0">
+                        <span className="block text-xl font-extrabold tracking-tight transition-colors group-hover:text-brand-green">{m.name}</span>
+                        <span className="text-xs text-muted">{dict.boilers.types[m.type]}</span>
+                      </span>
+                      <span
+                        className="relative block h-6 w-full rounded-full bg-line/60 sm:w-auto sm:flex-1"
+                        style={{ backgroundImage: "linear-gradient(to right, rgba(17,32,24,0.07) 1px, transparent 1px)", backgroundSize: "16.6667% 100%" }}
+                        aria-hidden="true"
+                      >
+                        <span
+                          className="grow absolute inset-y-0 rounded-full bg-brand-green transition-colors duration-300 group-hover:bg-brand-green-dark"
+                          style={{ left: `${(lo / 6000) * 100}%`, width: `${((hi - lo) / 6000) * 100}%` }}
+                        />
+                      </span>
+                      <span className="tabular text-base font-bold sm:w-28 sm:shrink-0 sm:text-right">{m.powerKw} <span className="text-sm font-semibold text-muted">{dict.home.unitKw}</span></span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </div>
       </section>
 
       <Testimonials title={dict.testimonials.title} items={dict.testimonials.items} />
 
+      {/* ---------- FAQ ---------- */}
       <section className="bg-soft section">
-        <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.4fr]">
+        <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.5fr]">
           <div className="reveal">
             <p className="eyebrow mb-4">FAQ</p>
-            <h2 className="display text-3xl sm:text-5xl">{dict.faq.title}</h2>
-            <div className="mt-8">
-              <ButtonLink href={`/${lang}/faq`} variant="outline">{dict.faq.all}</ButtonLink>
-            </div>
+            <h2 className="display text-3xl sm:text-5xl">{rich(dict.faq.title)}</h2>
+            <div className="mt-8"><ButtonLink href={`/${lang}/faq`} variant="outline">{dict.faq.all}</ButtonLink></div>
           </div>
-          <div className="reveal">
-            <Faq items={dict.faq.items.slice(0, 4)} />
+          <div className="reveal"><Faq items={dict.faq.items.slice(0, 4)} /></div>
+        </div>
+      </section>
+
+      {/* ---------- final call to action ---------- */}
+      <section className="pb-16 sm:pb-24">
+        <div className="container-x">
+          <div className="reveal relative isolate overflow-hidden rounded-3xl bg-forest p-8 text-white sm:p-14">
+            <Image src="/photos/install-hall.jpg" alt="" fill sizes="100vw" className="-z-20 object-cover opacity-25" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-r from-forest via-forest/90 to-forest/50" />
+            <h2 className="display max-w-2xl text-3xl sm:text-5xl">{rich(dict.home.ctaTitle)}</h2>
+            <p className="mt-4 max-w-xl text-white/75">{dict.home.ctaText}</p>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <ButtonLink href={`/${lang}/contact`}>{dict.cta.request}</ButtonLink>
+              <a href={CONTACT.phoneHref} className="btn btn-light">{dict.home.ctaCall}: {CONTACT.phone}</a>
+            </div>
           </div>
         </div>
       </section>

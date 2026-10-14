@@ -37,11 +37,16 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-brand-orange);
+  outline: 2px solid var(--color-brand-green);
   outline-offset: 3px;
 }
 
 @layer components {
+  /* Accent words inside headings: same font, accent colour. */
+  em.serif {
+    font-style: normal;
+    @apply text-brand-orange;
+  }
   .container-x {
     @apply mx-auto w-full max-w-6xl px-5 sm:px-8;
   }
@@ -79,7 +84,7 @@ body {
   }
 
   .field {
-    @apply w-full min-w-0 rounded-xl border border-line bg-white px-4 py-3 text-base transition duration-200 placeholder:text-muted/60 hover:border-brand-green/40 focus:border-brand-green focus:outline-none focus:ring-4 focus:ring-brand-green/10;
+    @apply w-full min-w-0 rounded-xl border border-line bg-white px-4 py-3 text-base transition duration-200 placeholder:text-muted/60 hover:border-brand-green/40 focus:border-brand-green focus:outline-none focus-visible:outline-none focus:ring-4 focus:ring-brand-green/10;
   }
 
   .link-underline {
@@ -153,6 +158,60 @@ body {
   animation: word-up 0.95s var(--ease-out-soft) both;
 }
 
+@keyframes slide-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Large figures for the key numbers. */
+.numeral {
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+.flow {
+  animation: flow 1.4s linear infinite;
+}
+
+@keyframes grow {
+  from {
+    transform: scaleX(0);
+  }
+}
+@supports (animation-timeline: view()) {
+  .grow {
+    transform-origin: left;
+    animation: grow linear both;
+    animation-timeline: view();
+    animation-range: entry 10% entry 70%;
+  }
+}
+
 /* Smooth accordion where the browser supports animating to auto height. */
 @supports (interpolate-size: allow-keywords) {
   :root {
@@ -180,6 +239,16 @@ body {
 
 input[type="range"] {
   accent-color: var(--color-brand-green);
+  height: 28px;
+}
+
+/* No double-tap-zoom delay on controls. */
+a,
+button,
+summary,
+[role="tab"],
+[role="option"] {
+  touch-action: manipulation;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -190,8 +259,18 @@ input[type="range"] {
   .kenburns,
   .page-in,
   .reveal,
+  .grow,
+  .flow,
   .word-up {
     animation: none !important;
+  }
+  .marquee-track {
+    animation: none;
+    width: auto;
+    flex-wrap: wrap;
+  }
+  .marquee-track > [aria-hidden="true"] {
+    display: none;
   }
   .btn,
   .card {

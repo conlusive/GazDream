@@ -1,9 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState, type ReactNode } from "react";
 import AnimatedNumber from "@/components/AnimatedNumber";
 import CumulativeChart from "@/components/CumulativeChart";
+import Select from "@/components/Select";
+import Logo from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { breakEvenPrice, calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
 import { CONTACT } from "@/lib/content";
@@ -238,7 +239,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                         type="button"
                         onClick={() => updateRow(row.id, { tonnes: String(t) })}
                         aria-pressed={num(row.tonnes) === t}
-                        className={`tabular rounded-full border px-3.5 py-1.5 text-sm font-bold transition duration-200 ${
+                        className={`tabular min-h-11 rounded-full border px-4 py-2 text-sm font-bold transition duration-200 ${
                           num(row.tonnes) === t ? "border-brand-green bg-brand-green text-white" : "border-line hover:border-brand-green/60 hover:bg-tint"
                         }`}
                       >
@@ -276,22 +277,15 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
 
           <div className="card space-y-8 p-6 sm:p-8">
             <div>
-              <label className="mb-2 block text-sm font-bold" htmlFor="period">{dict.periodLabel}</label>
-              <select id="period" value={period} onChange={(e) => setPeriod(e.target.value as Period)} className="field">
-                {(["day", "season", "year"] as Period[]).map((p) => (
-                  <option key={p} value={p}>{dict.period[p]}</option>
-                ))}
-              </select>
+              <span className="mb-2 block text-sm font-bold">{dict.periodLabel}</span>
+              <Select label={dict.periodLabel} value={period} onChange={(v) => setPeriod(v as Period)} options={(["day", "season", "year"] as Period[]).map((p) => ({ value: p, label: dict.period[p] }))} />
               {rows.length > 1 && (
                 <p className="mt-2 text-sm text-muted">{dict.totalVolume}: <strong className="tabular">{result.totalTonnes} {dict.tonnes}</strong></p>
               )}
             </div>
 
             <Step n={4} title={dict.stepPrices} action={
-              <select aria-label={dict.currency} value={currency} onChange={(e) => pickCurrency(e.target.value as Currency)} className="rounded-full border border-line bg-white px-3 py-1.5 text-sm font-bold transition hover:border-brand-green/50">
-                <option value="EUR">EUR</option>
-                <option value="PLN">PLN</option>
-              </select>
+              <Select compact label={dict.currency} value={currency} onChange={(v) => pickCurrency(v as Currency)} options={[{ value: "EUR", label: "EUR" }, { value: "PLN", label: "PLN" }]} className="w-24" />
             }>
               <div className="space-y-6">
                 {FUEL_ORDER.map((f) => {
@@ -304,7 +298,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                       <div className="mb-2 flex items-center justify-between gap-3">
                         <label htmlFor={`p-${f}`} className="text-sm font-bold">{dict.fuels[f]} <span className="font-normal text-muted">· {currency} {dict.units[f]}</span></label>
                         {off && (
-                          <button type="button" onClick={() => setPrice(f, base)} className="text-xs font-bold text-brand-green hover:underline">
+                          <button type="button" onClick={() => setPrice(f, base)} className="py-2 text-xs font-bold text-brand-green hover:underline">
                             {dict.reset}: {base}
                           </button>
                         )}
@@ -344,22 +338,34 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
         </div>
 
         {/* ---------- results ---------- */}
-        <div className="min-w-0 space-y-6">
-          <div className="rounded-3xl bg-forest p-6 text-white sm:p-9 lg:sticky lg:top-24">
+        <div className="min-w-0 lg:sticky lg:top-24 lg:z-10 lg:self-start">
+          <div className="rounded-3xl bg-forest p-6 text-white sm:p-9">
             <p className="sr-only" aria-live="polite">{summary} {paybackText}</p>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-leaf">{dict.result}</p>
             <p className="tabular mt-4 min-h-[6.5rem] text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">{renderSummary("text-brand-orange")}</p>
             {paybackText && <p className="mt-4 inline-block rounded-full bg-white/10 px-4 py-2 text-sm font-bold">{paybackText}</p>}
+            <dl className="tabular mt-6 grid grid-cols-3 gap-3 border-t border-white/15 pt-5 text-sm">
+              {result.results.map((r) => (
+                <div key={r.fuel}>
+                  <dt className="text-white/60">{dict.fuels[r.fuel]}</dt>
+                  <dd className={`mt-1 text-lg font-extrabold ${r.fuel === result.cheapest ? "text-leaf" : ""}`}><AnimatedNumber value={r.costPerTonne} format={money2.format} /></dd>
+                </div>
+              ))}
+            </dl>
             <div className="mt-7 flex flex-wrap gap-3">
               <ButtonLink href={`/${lang}/contact${calcSummary ? `?calc=${encodeURIComponent(calcSummary)}` : ""}`}>{dict.cta}</ButtonLink>
               <button type="button" onClick={printReport} className="btn btn-light">{dict.pdf}</button>
             </div>
             <p className="mt-4 text-xs text-white/55">{dict.disclaimer} {dict.pdfHint}</p>
           </div>
+        </div>
+      </div>
 
+      {/* ---------- details: full width, below the inputs and the sticky summary ---------- */}
+      <div className="mt-10 space-y-6 print:hidden">
           <div className="card p-6 sm:p-8">
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-muted">{dict.fuelCards}</h2>
-            <ul className="mt-5 space-y-4">
+            <ul className="mt-5 grid gap-4 md:grid-cols-3">
               {result.results.map((r) => {
                 const best = r.fuel === result.cheapest;
                 return (
@@ -392,13 +398,15 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
               })}
             </ul>
             <details className="mt-5">
-              <summary className="cursor-pointer text-sm font-bold text-brand-green hover:underline">{dict.details}</summary>
+              <summary className="inline-flex min-h-11 cursor-pointer items-center text-sm font-bold text-brand-green hover:underline">{dict.details}</summary>
               <div className="mt-3 overflow-x-auto">
                 <ResultTable result={result} dict={dict} money={money} money2={money2} />
               </div>
             </details>
           </div>
 
+
+        <div className="grid gap-6 lg:grid-cols-2">
           <div className="card p-6 sm:p-8">
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-muted">{dict.breakTitle}</h2>
             <p className="mt-1 text-sm text-muted">{dict.breakHint}</p>
@@ -428,6 +436,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
             </div>
           </div>
 
+
           <div className="card p-6 sm:p-8">
             <h2 className="text-sm font-bold uppercase tracking-[0.16em] text-muted">{dict.chartTitle}</h2>
             {winnerSaves && periodOk ? (
@@ -446,12 +455,13 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
               <p className="mt-4 rounded-xl bg-soft p-4 text-sm text-muted">{periodOk ? dict.noSaving : dict.chartDay}</p>
             )}
           </div>
+
         </div>
       </div>
 
       {/* Printed report: hidden on screen, this is what "Save as PDF" captures. */}
       <section className="hidden text-sm print:block">
-        <Image src="/brand/logo.jpg" alt="" width={140} height={70} />
+        <Logo className="h-20 w-auto" />
         <h1 className="mt-4 text-2xl font-bold">{dict.reportTitle}</h1>
         <p className="text-muted">{dict.reportDate}: {printedAt}</p>
 

@@ -1,5 +1,7 @@
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import { INSTALLATION } from "@/lib/content";
+import { rich } from "@/lib/rich";
+import AutoVideo from "./AutoVideo";
 import Gallery from "./Gallery";
 
 type Labels = { close: string; prev: string; next: string };
@@ -10,7 +12,7 @@ export default function Installation({ dict, labels }: { dict: Dictionary["insta
     <div>
       <div className="max-w-2xl">
         <p className="eyebrow mb-3">{dict.eyebrow}</p>
-        <h2 className="display text-3xl sm:text-5xl">{dict.title}</h2>
+        <h2 className="display text-3xl sm:text-5xl">{rich(dict.title)}</h2>
         <p className="lead mt-4">{dict.lead}</p>
       </div>
 
@@ -40,9 +42,9 @@ export default function Installation({ dict, labels }: { dict: Dictionary["insta
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
             {INSTALLATION.videos.map((v, i) => (
               <figure key={v.src}>
-                <video controls preload="metadata" playsInline poster={v.poster} className="aspect-video w-full rounded-2xl bg-forest object-cover">
-                  <source src={v.src} type="video/mp4" />
-                </video>
+                <div className="aspect-video overflow-hidden rounded-2xl bg-forest">
+                  <AutoVideo src={v.src} poster={v.poster} className="h-full w-full object-cover" soundLabel={dict.sound} />
+                </div>
                 <figcaption className="mt-2 text-sm text-muted">{dict.videos[i]}</figcaption>
               </figure>
             ))}

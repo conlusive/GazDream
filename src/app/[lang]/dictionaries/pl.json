@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Eco Straßmayr Energy – generatory ciepła na biomasę | Suszenie zboża",
-    "description": "Generatory ciepła na biomasę od 100 kW do 20 MW do suszenia zboża i ogrzewania przemysłowego. Oferta i obsługa w Polsce: Strasslider sp. z o.o."
+    "description": "Generatory ciepła na biomasę od 100 kW do 20 MW do suszenia zboża i ogrzewania przemysłowego. Oferta i obsługa w Polsce: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Strona główna",
@@ -20,20 +20,20 @@
   },
   "hero": {
     "title": "Suszenie zboża taniej niż na gazie",
-    "subtitle": "Generatory ciepła na zrębki i pellet o mocy od 100 kW do 20 MW dla suszarni zboża.",
+    "subtitle": "Generatory ciepła Eco Straßmayr Energy od 100 kW do 20 MW zastępują gaz tańszym paliwem. Policz w 30 sekund, ile zaoszczędzisz.",
     "badge": "Eco Straßmayr Energy",
-    "titleLead": "Suszenie zboża",
-    "titleHighlight": "taniej niż na gazie"
+    "titleLead": "Gaz w suszarni jest za drogi?",
+    "titleHighlight": "Przejdź na zrębki i pellet"
   },
   "benefits": {
-    "title": "Dlaczego Eco Straßmayr Energy",
+    "title": "Dlaczego *Eco Straßmayr Energy*",
     "items": [
       {
         "title": "Niższy koszt suszenia",
         "text": "Zrębki i pellet zamiast gazu: oszczędność liczona w euro na tonie."
       },
       {
-        "title": "Moc do 20 MW",
+        "title": "Moc do 20 MW",
         "text": "Rozwiązania dla dużych gospodarstw i elewatorów."
       },
       {
@@ -47,7 +47,7 @@
     ]
   },
   "calcTeaser": {
-    "title": "Policz, ile zaoszczędzisz",
+    "title": "Policz, ile *zaoszczędzisz*",
     "text": "Podaj kulturę, wilgotność i ilość ton. Wynik w pół minuty."
   },
   "footer": {
@@ -56,7 +56,7 @@
     "address": "Sielecka 7, 37-700 Przemyśl"
   },
   "calc": {
-    "title": "Kalkulator korzyści z suszenia",
+    "title": "Kalkulator korzyści z *suszenia*",
     "lead": "Podaj dane — wynik pojawi się od razu. Ceny możesz zmieniać.",
     "crop": "Kultura",
     "crops": {
@@ -82,14 +82,14 @@
       "pellets": "Pellet"
     },
     "units": {
-      "gas": "za 1000 m³",
+      "gas": "za 1000 m³",
       "chips": "za tonę",
       "pellets": "za tonę"
     },
     "currency": "Waluta",
     "vat": "Ceny z VAT 23%",
     "result": "Wynik",
-    "perTonne": "Koszt suszenia 1 t",
+    "perTonne": "Koszt suszenia 1 t",
     "total": "Koszt całkowity",
     "saving": "Oszczędność vs gaz",
     "best": "Najkorzystniej",
@@ -97,7 +97,7 @@
     "summary": "Na {fuel} zaoszczędzisz {amount} {period} w porównaniu z gazem.",
     "disclaimer": "Obliczenia orientacyjne; dokładną ofertę przygotuje nasz menedżer.",
     "cta": "Otrzymaj ofertę na kocioł",
-    "chart": "Koszt suszenia 1 t",
+    "chart": "Koszt suszenia 1 t",
     "addCrop": "Dodaj kulturę",
     "remove": "Usuń",
     "batch": "Partia",
@@ -147,19 +147,19 @@
     "perUnit": "zł"
   },
   "about": {
-    "title": "O firmie",
-    "lead": "Eco Straßmayr Energy to generatory ciepła na paliwo stałe o mocy od 100 kW do 20 MW. Pracują na drewnie, odpadach rolniczych i bytowych, bez wstępnego przygotowania paliwa.",
+    "title": "O *firmie*",
+    "lead": "Eco Straßmayr Energy to generatory ciepła na paliwo stałe o mocy od 100 kW do 20 MW. Pracują na drewnie, odpadach rolniczych i bytowych, bez wstępnego przygotowania paliwa.",
     "stats": [
       {
-        "v": "100 kW – 20 MW",
+        "v": "100 kW – 20 MW",
         "l": "zakres mocy"
       },
       {
-        "v": "30–120 °C",
+        "v": "30–120 °C",
         "l": "zakres temperatury suszenia"
       },
       {
-        "v": "±1 °C",
+        "v": "±1 °C",
         "l": "dokładność regulacji temperatury"
       },
       {
@@ -173,7 +173,7 @@
     "officeText": "Strasslider sp. z o.o., Przemyśl. Doradztwo i oferty dla klientów w Polsce i UE."
   },
   "boilers": {
-    "title": "Generatory ciepła PUT",
+    "title": "Generatory ciepła *PUT*",
     "lead": "Piec na paliwo stały z powietrznym wymiennikiem ciepła do suszenia zboża, warzyw, owoców, ziół i drewna.",
     "model": "Model",
     "power": "Moc, kW",
@@ -203,7 +203,7 @@
     "request": "Zapytaj o ofertę"
   },
   "projects": {
-    "title": "Realizacje",
+    "title": "*Realizacje*",
     "lead": "Zrealizowany projekt i wybrane instalacje na suszarniach zbożowych.",
     "power": "Moc",
     "fuel": "Paliwo",
@@ -212,7 +212,7 @@
     "perDay": "t/dobę",
     "chips": "zrębki",
     "moist": "wilgotna zrębka",
-    "featured": "Modernizacja generatora ciepła 5 MW dla suszarni „Ukraina-50”",
+    "featured": "Modernizacja generatora ciepła 5 MW dla suszarni „Ukraina-50”",
     "featuredText": "Nowy palnik o wysokiej wydajności, automatyczny system podawania paliwa i integracja z istniejącym generatorem bez wymiany wymiennika ciepła. Praca zespołu stała się stabilniejsza, a obsługa prostsza i bezpieczniejsza.",
     "items": {
       "shostka": "Obwód sumski, Ukraina",
@@ -222,10 +222,15 @@
       "katowice": "Katowice, Polska",
       "iziaslav": "Obwód chmielnicki, Ukraina"
     },
-    "other": "Inne instalacje"
+    "other": "Inne instalacje",
+    "summary": {
+      "objects": "obiektów na liście",
+      "power": "zakres mocy",
+      "capacity": "wydajność do"
+    }
   },
   "contact": {
-    "title": "Kontakt",
+    "title": "*Kontakt*",
     "lead": "Zostaw dane, a skontaktujemy się z Tobą i zaproponujemy najlepsze rozwiązanie.",
     "name": "Imię i nazwisko",
     "phone": "Telefon lub e-mail",
@@ -238,10 +243,27 @@
     "address": "Adres",
     "email": "E-mail",
     "sales": "Dział handlowy",
-    "office": "Sekretariat"
+    "office": "Sekretariat",
+    "steps": {
+      "title": "Co dalej?",
+      "items": [
+        {
+          "t": "Odpowiedź",
+          "x": "Kontaktujemy się w ciągu dnia roboczego."
+        },
+        {
+          "t": "Doprecyzowanie",
+          "x": "Ustalamy kulturę, wolumen, suszarnię i paliwo."
+        },
+        {
+          "t": "Oferta",
+          "x": "Przygotowujemy ofertę na generator ciepła."
+        }
+      ]
+    }
   },
   "faq": {
-    "title": "Najczęstsze pytania",
+    "title": "Najczęstsze *pytania*",
     "lead": "Odpowiedzi na pytania, które zadają nam rolnicy i elewatory.",
     "all": "Wszystkie pytania",
     "items": [
@@ -251,7 +273,7 @@
       },
       {
         "q": "Czy suszenie ziarna jest bezpieczne pożarowo?",
-        "a": "Tak. Generator ma wymiennik ciepła i system stabilizacji temperatury, który zapobiega przedostawaniu się iskier do suszarni, więc ziarno się nie zapala. Temperaturę suszenia można regulować od 30 do 120 (140) °C z dokładnością ±1 °C."
+        "a": "Tak. Generator ma wymiennik ciepła i system stabilizacji temperatury, który zapobiega przedostawaniu się iskier do suszarni, więc ziarno się nie zapala. Temperaturę suszenia można regulować od 30 do 120 (140) °C z dokładnością ±1 °C."
       },
       {
         "q": "Czy generator pasuje do mojej suszarni?",
@@ -263,7 +285,7 @@
       },
       {
         "q": "Ile prądu zużywa piec?",
-        "a": "Piec o mocy 1–6 MW zużywa od 3 do 15 kWh energii elektrycznej."
+        "a": "Piec o mocy 1–6 MW zużywa od 3 do 15 kWh energii elektrycznej."
       },
       {
         "q": "Jak policzyć oszczędność i zwrot kotła?",
@@ -280,13 +302,21 @@
     "caseMore": "Zobacz realizacje",
     "illustrative": "Zdjęcie poglądowe: instalacja GazDream",
     "modelsEyebrow": "Oferta",
-    "modelsTitle": "Generatory ciepła PUT",
+    "modelsTitle": "Generatory ciepła *PUT*",
     "modelsAll": "Wszystkie modele",
     "exampleEyebrow": "Przykład obliczenia",
-    "exampleText": "Kukurydza 20% → 14%, 1000 t, zrębki zamiast gazu",
+    "exampleText": "Kukurydza 20% → 14%, 1000 t, zrębki zamiast gazu",
     "exampleNote": "Dane orientacyjne, według cen z kalkulatora.",
     "unitKw": "kW",
-    "scroll": "Przewiń"
+    "scroll": "Przewiń",
+    "exampleCta": "Sprawdź swoje liczby",
+    "proofEyebrow": "Technologia",
+    "proofTitle": "Technologia w *liczbach*",
+    "proofLead": "Podstawowe parametry generatorów ciepła na paliwo stałe.",
+    "worksWith": "Instalacje na suszarniach",
+    "ctaTitle": "Porozmawiajmy o *Twojej suszarni*",
+    "ctaText": "Napisz lub zadzwoń: dobierzemy model, policzymy koszty i przygotujemy ofertę.",
+    "ctaCall": "Zadzwoń do działu handlowego"
   },
   "testimonials": {
     "title": "Opinie klientów",
@@ -312,7 +342,7 @@
   },
   "installation": {
     "eyebrow": "Zrealizowany projekt",
-    "title": "Generator ciepła na biomasę Straßmayr",
+    "title": "Generator ciepła na biomasę *Straßmayr*",
     "lead": "Gotowa instalacja w hali: palnik, zasobnik paliwa, kontener wymiennika ciepła z szafami sterowniczymi oraz odpylacz.",
     "captions": [
       "Widok ogólny instalacji",
@@ -334,6 +364,187 @@
     "more": "Zobacz realizacje",
     "close": "Zamknij",
     "prev": "Poprzednie zdjęcie",
-    "next": "Następne zdjęcie"
+    "next": "Następne zdjęcie",
+    "sound": "Włącz lub wyłącz dźwięk"
+  },
+  "how": {
+    "eyebrow": "Jak to działa",
+    "title": "Od paliwa do *gorącego powietrza*",
+    "hint": "Kliknij etap, aby zobaczyć szczegóły",
+    "steps": [
+      {
+        "t": "Paliwo",
+        "x": "Zrębki, drewno, odpady rolnicze lub kolby kukurydzy trafiają do zasobnika i podajnikiem do pieca. Paliwo nie wymaga sortowania ani suszenia, jego wilgotność może sięgać 45% i więcej. Załadunek ręczny lub automatyczny, co 6–12 godzin."
+      },
+      {
+        "t": "Spalanie",
+        "x": "Zasada gazogeneratora pozwala spalać surowiec niemal całkowicie. Wysokotemperaturowa wykładzina ceramiczna chroni stalowe elementy przed przegrzaniem, a po wejściu na tryb pracy piec pali się bez dymu."
+      },
+      {
+        "t": "Wymiana ciepła",
+        "x": "Spaliny przechodzą przez wymiennik ciepła, który jest przedmuchiwany wentylatorem. Ogrzane powietrze nie miesza się ze spalinami, a system stabilizacji temperatury utrzymuje ±1 °C w zakresie 30–120 (140) °C."
+      },
+      {
+        "t": "Gorące powietrze",
+        "x": "Czyste, gorące powietrze płynie kanałami do suszarni. Odpylacz cyklonowy i iskrochron zatrzymują iskry, więc ziarno się nie zapala. Całością steruje szafa sterownicza z jednostką alarmową."
+      }
+    ]
+  },
+  "savings": {
+    "eyebrow": "Koszt suszenia",
+    "title": "Ta sama tona, *inny rachunek*",
+    "text": "Porównanie kosztu suszenia jednej tony kukurydzy (20% → 14%) przy przykładowych cenach paliw. Wpisz własne ceny w kalkulatorze i zobacz swój wynik.",
+    "cta": "Policz dla swojego gospodarstwa",
+    "note": "Dane orientacyjne, według cen z kalkulatora."
+  },
+  "apps": {
+    "eyebrow": "Zastosowania",
+    "title": "Jedna technologia, *wiele zadań*",
+    "cta": "Zapytaj o rozwiązanie",
+    "tabs": [
+      {
+        "id": "agro",
+        "label": "Rolnictwo",
+        "items": [
+          "Suszenie zbóż, ziół, owoców i warzyw",
+          "Ogrzewanie kompleksów szklarniowych",
+          "Modernizacja i ponowne wyposażenie starych suszarni",
+          "Utylizacja materii organicznej i odpadów rolniczych"
+        ]
+      },
+      {
+        "id": "industry",
+        "label": "Przemysł",
+        "items": [
+          "Ogrzewanie hal produkcyjnych, warsztatów i magazynów",
+          "Energia cieplna dla procesów produkcyjnych",
+          "Utylizacja odpadów produkcyjnych"
+        ]
+      },
+      {
+        "id": "materials",
+        "label": "Materiały budowlane",
+        "items": [
+          "Suszenie drewna bez naprężeń i pęknięć",
+          "Komory wysokotemperaturowe 100–1400 °C (ceramika, cegły, wyroby żelbetowe)",
+          "Suszenie ceramiki, farb i lakierów"
+        ]
+      },
+      {
+        "id": "public",
+        "label": "Sektor komunalny",
+        "items": [
+          "Ogrzewanie osiedli, szkół i przedszkoli",
+          "Centra handlowe, biurowce, obiekty sportowe i baseny",
+          "Ciepła woda dla dowolnych obiektów",
+          "Przebudowa kotłowni na paliwa alternatywne"
+        ]
+      }
+    ]
+  },
+  "adv": {
+    "title": "Dlaczego ta technologia",
+    "items": [
+      {
+        "t": "Tanie ciepło",
+        "x": "Energooszczędne technologie i znaczna oszczędność paliwa w porównaniu z podobnymi generatorami ciepła."
+      },
+      {
+        "t": "Bezpieczne suszenie",
+        "x": "Wymiennik ciepła i stabilizacja temperatury zapobiegają przedostawaniu się iskier do suszarni, ziarno się nie zapala."
+      },
+      {
+        "t": "Dokładna regulacja",
+        "x": "Suszenie nasion i ziarna handlowego w zakresie od 30 do 120 (140) °C, kontrola temperatury ±1 °C."
+      },
+      {
+        "t": "Niska emisja",
+        "x": "Emisje zbliżone do gazu ziemnego, dlatego generatory ciepła można instalować także w obszarze miejskim."
+      },
+      {
+        "t": "Bez przestojów po sezonie",
+        "x": "Po sezonie piec nie wymaga dodatkowej konserwacji, wystarczy kilka godzin pracy."
+      },
+      {
+        "t": "Niskie zużycie prądu",
+        "x": "Piec o mocy 1–6 MW zużywa niewiele energii elektrycznej."
+      },
+      {
+        "t": "Paliwo bez przygotowania",
+        "x": "Paliwo jest niesortowane, jego wilgotność może sięgać 45% i więcej."
+      },
+      {
+        "t": "Czyszczenie w pracy",
+        "x": "Sadza i smoła nie osadzają się na rurach wymiennika, a wymiennik i piec można czyścić podczas pracy."
+      },
+      {
+        "t": "Pasuje do suszarni",
+        "x": "Piec i wymiennik dopasowujemy do dowolnego typu komory suszenia bez niszczenia istniejącego sprzętu."
+      }
+    ]
+  },
+  "fuelsInfo": {
+    "title": "Rodzaje paliwa",
+    "main": "Główne",
+    "aux": "Pomocnicze",
+    "mainItems": [
+      "Różnego rodzaju zrębki drzewne",
+      "Drewno opałowe",
+      "Trociny i wióry",
+      "Kolby kukurydzy",
+      "Łuski słonecznika"
+    ],
+    "auxItems": [
+      "Liście i kora",
+      "Papier i karton",
+      "Odpady z gospodarstw domowych",
+      "Odpady żywnościowe"
+    ]
+  },
+  "selector": {
+    "title": "Dobierz model",
+    "label": "Potrzebna moc cieplna",
+    "unit": "kW",
+    "result": "Pasujący model",
+    "small": "Mniejsze moce, od 100 kW: zapytaj o ofertę.",
+    "big": "Powyżej 6000 kW: rozwiązania projektowe do 20 MW. Zapytaj o ofertę.",
+    "hint": "Orientacyjnie, ostateczny dobór potwierdzi dział handlowy."
+  },
+  "spec": {
+    "title": "Porównanie modeli",
+    "power": "Moc komory wymiany ciepła, kW",
+    "type": "Typ komory",
+    "burner": "Moc palnika, kW",
+    "chimney": "Wysokość komina",
+    "chimneyVal": "3,5 m",
+    "fuel": "Główne paliwo",
+    "fuelVal": "zrębki, kolby kukurydzy"
+  },
+  "faqSearch": {
+    "placeholder": "Szukaj w pytaniach…",
+    "none": "Nic nie znaleziono. Napisz do nas, a odpowiemy."
+  },
+  "anatomy": {
+    "eyebrow": "Anatomia instalacji",
+    "title": "Z czego składa się *generator*",
+    "hint": "Kliknij znacznik na zdjęciu lub element z listy",
+    "items": [
+      {
+        "t": "Zasobnik paliwa",
+        "x": "Tu trafia paliwo: zrębki, drewno, odpady rolnicze. Nie wymaga sortowania ani suszenia, a jego wilgotność może sięgać 45% i więcej."
+      },
+      {
+        "t": "Podajnik ślimakowy",
+        "x": "Doprowadza paliwo do pieca. Załadunek jest ręczny lub automatyczny, co 6–12 godzin."
+      },
+      {
+        "t": "Palnik na stelażu",
+        "x": "Spalanie na zasadzie gazogeneratora z wysokotemperaturową wykładziną ceramiczną. Po wejściu na tryb pracy piec pali się bez dymu."
+      },
+      {
+        "t": "Kontener wymiennika ciepła",
+        "x": "Wymiennik z rurkami odpornymi na wysoką temperaturę, izolacja 100 mm wełny bazaltowej oraz szafy sterownicze z jednostką alarmową."
+      }
+    ]
   }
 }

@@ -23,7 +23,7 @@ export default function RevealHeading({ lead, highlight, className = "", baseDel
       <span className="sr-only">{`${lead} ${highlight}`}</span>
       <span aria-hidden="true">
         {words(lead)}{" "}
-        <span className="text-brand-orange">{words(highlight)}</span>
+        <em className="serif">{words(highlight)}</em>
       </span>
     </h1>
   );

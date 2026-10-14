@@ -14,7 +14,7 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
 
   return (
     <>
-      <PageHero eyebrow={dict.nav.contact} title={c.title} lead={c.lead} />
+      <PageHero eyebrow={dict.nav.contact} title={c.title} lead={c.lead} image="/photos/install-hall.jpg" />
       <section className="section">
         <div className="container-x grid gap-12 lg:grid-cols-[1.3fr_1fr]">
           <div className="card p-7 sm:p-10">
@@ -25,13 +25,13 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           <aside className="space-y-6 self-start rounded-3xl bg-forest p-8 text-white sm:p-10">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-leaf">{c.sales}</p>
-              <a href={CONTACT.phoneHref} className="mt-2 block text-2xl font-bold tracking-tight">{CONTACT.phone}</a>
-              <a href={`mailto:${CONTACT.email}`} className="mt-1 block break-all font-medium text-white/80 hover:text-white">{CONTACT.email}</a>
+              <a href={CONTACT.phoneHref} className="mt-1 block py-1.5 text-2xl font-bold tracking-tight">{CONTACT.phone}</a>
+              <a href={`mailto:${CONTACT.email}`} className="block break-all py-2 font-medium text-white/80 hover:text-white">{CONTACT.email}</a>
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-leaf">{c.office}</p>
-              <a href={CONTACT.officePhoneHref} className="mt-2 block font-semibold">{CONTACT.officePhone}</a>
-              <a href={`mailto:${CONTACT.officeEmail}`} className="mt-1 block break-all font-medium text-white/80 hover:text-white">{CONTACT.officeEmail}</a>
+              <a href={CONTACT.officePhoneHref} className="mt-1 block py-2 font-semibold">{CONTACT.officePhone}</a>
+              <a href={`mailto:${CONTACT.officeEmail}`} className="block break-all py-2 font-medium text-white/80 hover:text-white">{CONTACT.officeEmail}</a>
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-leaf">{c.address}</p>
@@ -39,6 +39,21 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
               <p className="text-white/75">{dict.footer.address}</p>
             </div>
           </aside>
+        </div>
+      </section>
+
+      <section className="bg-soft section">
+        <div className="container-x">
+          <h2 className="display reveal text-2xl sm:text-4xl">{c.steps.title}</h2>
+          <ol className="mt-10 grid gap-5 sm:grid-cols-3">
+            {c.steps.items.map((step, i) => (
+              <li key={step.t} className="card reveal p-7">
+                <span className="numeral text-5xl text-brand-orange">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-3 text-lg font-extrabold">{step.t}</h3>
+                <p className="mt-2 text-muted">{step.x}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
     </>

@@ -49,7 +49,7 @@ export default function CumulativeChart({ perPeriod, boilerPrice, formatMoney, l
           </span>
         )}
       </p>
-      <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 w-full touch-none select-none" role="img" aria-label={`${readout}: ${formatMoney(perPeriod * active)}`}>
+      <svg viewBox={`0 0 ${W} ${H}`} className="mt-3 w-full touch-pan-y select-none" role="img" aria-label={`${readout}: ${formatMoney(perPeriod * active)}`}>
         <defs>
           <linearGradient id="cum-fill" x1="0" x2="0" y1="0" y2="1">
             <stop offset="0%" stopColor="var(--color-brand-green)" stopOpacity="0.28" />

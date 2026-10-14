@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Eco Straßmayr Energy – Biomasse-Wärmeerzeuger | Getreidetrocknung",
-    "description": "Biomasse-Wärmeerzeuger von 100 kW bis 20 MW für Getreidetrocknung und Industrieheizung. Angebot und Betreuung in Polen: Strasslider sp. z o.o."
+    "description": "Biomasse-Wärmeerzeuger von 100 kW bis 20 MW für Getreidetrocknung und Industrieheizung. Angebot und Betreuung in Polen: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Startseite",
@@ -20,20 +20,20 @@
   },
   "hero": {
     "title": "Getreide günstiger trocknen als mit Gas",
-    "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets von 100 kW bis 20 MW für Getreidetrockner.",
+    "subtitle": "Wärmeerzeuger von Eco Straßmayr Energy mit 100 kW bis 20 MW ersetzen Gas durch einen günstigeren Brennstoff. Ihre Ersparnis in 30 Sekunden.",
     "badge": "Eco Straßmayr Energy",
-    "titleLead": "Getreide trocknen",
-    "titleHighlight": "günstiger als mit Gas"
+    "titleLead": "Gas im Trockner zu teuer?",
+    "titleHighlight": "Wechseln Sie zu Hackschnitzeln und Pellets"
   },
   "benefits": {
-    "title": "Warum Eco Straßmayr Energy",
+    "title": "Warum *Eco Straßmayr Energy*",
     "items": [
       {
         "title": "Geringere Trocknungskosten",
         "text": "Hackschnitzel und Pellets statt Gas: Ersparnis in Euro pro Tonne."
       },
       {
-        "title": "Bis 20 MW",
+        "title": "Bis 20 MW",
         "text": "Lösungen für Großbetriebe und Getreidelager."
       },
       {
@@ -47,7 +47,7 @@
     ]
   },
   "calcTeaser": {
-    "title": "Berechnen Sie Ihre Ersparnis",
+    "title": "Berechnen Sie Ihre *Ersparnis*",
     "text": "Kultur, Feuchtigkeit und Menge eingeben. Ergebnis in 30 Sekunden."
   },
   "footer": {
@@ -56,7 +56,7 @@
     "address": "Sielecka 7, 37-700 Przemyśl, Polen"
   },
   "calc": {
-    "title": "Trocknungs-Ersparnisrechner",
+    "title": "Trocknungs-Ersparnis*rechner*",
     "lead": "Daten eingeben — das Ergebnis aktualisiert sich sofort. Preise sind änderbar.",
     "crop": "Kultur",
     "crops": {
@@ -82,7 +82,7 @@
       "pellets": "Pellets"
     },
     "units": {
-      "gas": "pro 1000 m³",
+      "gas": "pro 1000 m³",
       "chips": "pro Tonne",
       "pellets": "pro Tonne"
     },
@@ -147,19 +147,19 @@
     "perUnit": ""
   },
   "about": {
-    "title": "Über uns",
-    "lead": "Eco Straßmayr Energy stellt Festbrennstoff-Wärmeerzeuger von 100 kW bis 20 MW her. Sie laufen mit Holz sowie landwirtschaftlichen und Haushaltsabfällen ohne Brennstoffaufbereitung.",
+    "title": "Über *uns*",
+    "lead": "Eco Straßmayr Energy stellt Festbrennstoff-Wärmeerzeuger von 100 kW bis 20 MW her. Sie laufen mit Holz sowie landwirtschaftlichen und Haushaltsabfällen ohne Brennstoffaufbereitung.",
     "stats": [
       {
-        "v": "100 kW – 20 MW",
+        "v": "100 kW – 20 MW",
         "l": "Leistungsbereich"
       },
       {
-        "v": "30–120 °C",
+        "v": "30–120 °C",
         "l": "Trocknungstemperaturbereich"
       },
       {
-        "v": "±1 °C",
+        "v": "±1 °C",
         "l": "Genauigkeit der Temperaturregelung"
       },
       {
@@ -173,7 +173,7 @@
     "officeText": "Strasslider sp. z o.o., Przemyśl. Beratung und Angebote für Kunden in Polen und der EU."
   },
   "boilers": {
-    "title": "PUT-Wärmeerzeuger",
+    "title": "*PUT*-Wärmeerzeuger",
     "lead": "Festbrennstoffofen mit Luft-Wärmetauscher zum Trocknen von Getreide, Gemüse, Obst, Kräutern und Holz.",
     "model": "Modell",
     "power": "Leistung, kW",
@@ -203,7 +203,7 @@
     "request": "Angebot anfragen"
   },
   "projects": {
-    "title": "Referenzen",
+    "title": "*Referenzen*",
     "lead": "Ein realisiertes Projekt und ausgewählte Anlagen an Getreidetrocknern.",
     "power": "Leistung",
     "fuel": "Brennstoff",
@@ -222,10 +222,15 @@
       "katowice": "Kattowitz, Polen",
       "iziaslav": "Region Chmelnyzkyj, Ukraine"
     },
-    "other": "Weitere Anlagen"
+    "other": "Weitere Anlagen",
+    "summary": {
+      "objects": "aufgeführte Anlagen",
+      "power": "Leistungsbereich",
+      "capacity": "Leistung bis"
+    }
   },
   "contact": {
-    "title": "Kontakt",
+    "title": "*Kontakt*",
     "lead": "Hinterlassen Sie Ihre Daten, wir melden uns mit der passenden Lösung.",
     "name": "Name",
     "phone": "Telefon oder E-Mail",
@@ -238,10 +243,27 @@
     "address": "Adresse",
     "email": "E-Mail",
     "sales": "Vertrieb",
-    "office": "Sekretariat"
+    "office": "Sekretariat",
+    "steps": {
+      "title": "Wie geht es weiter?",
+      "items": [
+        {
+          "t": "Antwort",
+          "x": "Wir melden uns innerhalb eines Werktags."
+        },
+        {
+          "t": "Klärung",
+          "x": "Wir klären Kultur, Menge, Trockner und Brennstoff."
+        },
+        {
+          "t": "Angebot",
+          "x": "Wir erstellen ein Angebot für den Wärmeerzeuger."
+        }
+      ]
+    }
   },
   "faq": {
-    "title": "Häufige Fragen",
+    "title": "Häufige *Fragen*",
     "lead": "Antworten auf die Fragen, die Landwirte und Getreidelager am häufigsten stellen.",
     "all": "Alle Fragen",
     "items": [
@@ -251,7 +273,7 @@
       },
       {
         "q": "Ist das Trocknen von Getreide brandsicher?",
-        "a": "Ja. Der Wärmeerzeuger hat einen Wärmetauscher und eine Temperaturstabilisierung, die verhindert, dass Funken in den Trockner gelangen, sodass sich das Getreide nicht entzündet. Die Trocknungstemperatur ist von 30 bis 120 (140) °C auf ±1 °C genau regelbar."
+        "a": "Ja. Der Wärmeerzeuger hat einen Wärmetauscher und eine Temperaturstabilisierung, die verhindert, dass Funken in den Trockner gelangen, sodass sich das Getreide nicht entzündet. Die Trocknungstemperatur ist von 30 bis 120 (140) °C auf ±1 °C genau regelbar."
       },
       {
         "q": "Passt der Wärmeerzeuger zu meinem Trockner?",
@@ -263,7 +285,7 @@
       },
       {
         "q": "Wie viel Strom verbraucht er?",
-        "a": "Ein Ofen mit 1–6 MW verbraucht 3 bis 15 kWh Strom."
+        "a": "Ein Ofen mit 1–6 MW verbraucht 3 bis 15 kWh Strom."
       },
       {
         "q": "Wie berechne ich Ersparnis und Amortisation des Kessels?",
@@ -280,13 +302,21 @@
     "caseMore": "Referenzen ansehen",
     "illustrative": "Symbolfoto: eine GazDream-Anlage",
     "modelsEyebrow": "Programm",
-    "modelsTitle": "PUT-Wärmeerzeuger",
+    "modelsTitle": "*PUT*-Wärmeerzeuger",
     "modelsAll": "Alle Modelle",
     "exampleEyebrow": "Rechenbeispiel",
-    "exampleText": "Mais 20 % → 14 %, 1000 t, Hackschnitzel statt Gas",
+    "exampleText": "Mais 20 % → 14 %, 1000 t, Hackschnitzel statt Gas",
     "exampleNote": "Richtwerte auf Basis der Rechnerpreise.",
     "unitKw": "kW",
-    "scroll": "Scrollen"
+    "scroll": "Scrollen",
+    "exampleCta": "Eigene Zahlen prüfen",
+    "proofEyebrow": "Technologie",
+    "proofTitle": "Technologie in *Zahlen*",
+    "proofLead": "Eckdaten der Festbrennstoff-Wärmeerzeuger.",
+    "worksWith": "Anlagen an Trocknern",
+    "ctaTitle": "Sprechen wir über *Ihren Trockner*",
+    "ctaText": "Schreiben oder rufen Sie an: Wir wählen das Modell, berechnen die Kosten und erstellen ein Angebot.",
+    "ctaCall": "Vertrieb anrufen"
   },
   "testimonials": {
     "title": "Kundenstimmen",
@@ -312,7 +342,7 @@
   },
   "installation": {
     "eyebrow": "Realisiertes Projekt",
-    "title": "Straßmayr Biomasse-Wärmeerzeuger",
+    "title": "*Straßmayr* Biomasse-Wärmeerzeuger",
     "lead": "Eine fertige Anlage in der Halle: Brenner, Brennstoffbehälter, Wärmetauscher-Container mit Schaltschränken und Entstauber.",
     "captions": [
       "Gesamtansicht der Anlage",
@@ -334,6 +364,187 @@
     "more": "Referenzen ansehen",
     "close": "Schließen",
     "prev": "Vorheriges Foto",
-    "next": "Nächstes Foto"
+    "next": "Nächstes Foto",
+    "sound": "Ton ein- oder ausschalten"
+  },
+  "how": {
+    "eyebrow": "So funktioniert es",
+    "title": "Vom Brennstoff zur *Heißluft*",
+    "hint": "Etappe anklicken, um Details zu sehen",
+    "steps": [
+      {
+        "t": "Brennstoff",
+        "x": "Hackschnitzel, Brennholz, landwirtschaftliche Abfälle oder Maiskolben gelangen in den Behälter und per Schnecke in den Ofen. Der Brennstoff muss weder sortiert noch getrocknet werden, seine Feuchte darf 45 % und mehr erreichen. Beschickung manuell oder automatisch, alle 6–12 Stunden."
+      },
+      {
+        "t": "Verbrennung",
+        "x": "Das Vergasungsprinzip verbrennt den Rohstoff nahezu vollständig. Eine hochtemperaturfeste Keramikauskleidung schützt die Stahlteile vor Überhitzung, und im Betrieb brennt der Ofen rauchfrei."
+      },
+      {
+        "t": "Wärmetausch",
+        "x": "Das Abgas strömt durch einen Wärmetauscher, der von einem Ventilator angeblasen wird. Die erwärmte Luft vermischt sich nicht mit dem Abgas, und die Temperaturstabilisierung hält ±1 °C im Bereich 30–120 (140) °C."
+      },
+      {
+        "t": "Heißluft",
+        "x": "Saubere Heißluft strömt über Kanäle zum Trockner. Zyklon-Entstauber und Funkenfänger halten Funken zurück, sodass sich das Getreide nicht entzündet. Ein Schaltschrank mit Alarmeinheit steuert die gesamte Anlage."
+      }
+    ]
+  },
+  "savings": {
+    "eyebrow": "Trocknungskosten",
+    "title": "Dieselbe Tonne, *eine andere Rechnung*",
+    "text": "Kosten für das Trocknen einer Tonne Mais (20 % → 14 %) bei beispielhaften Brennstoffpreisen. Geben Sie im Rechner Ihre eigenen Preise ein.",
+    "cta": "Für Ihren Betrieb berechnen",
+    "note": "Richtwerte auf Basis der Rechnerpreise."
+  },
+  "apps": {
+    "eyebrow": "Anwendungen",
+    "title": "Eine Technologie, *viele Aufgaben*",
+    "cta": "Lösung anfragen",
+    "tabs": [
+      {
+        "id": "agro",
+        "label": "Landwirtschaft",
+        "items": [
+          "Trocknen von Getreide, Kräutern, Obst und Gemüse",
+          "Beheizung von Gewächshausanlagen",
+          "Modernisierung und Umrüstung alter Trockner",
+          "Entsorgung organischer Stoffe und landwirtschaftlicher Abfälle"
+        ]
+      },
+      {
+        "id": "industry",
+        "label": "Industrie",
+        "items": [
+          "Beheizung von Produktionshallen, Werkstätten und Lagern",
+          "Prozesswärme für die Produktion",
+          "Entsorgung von Produktionsabfällen"
+        ]
+      },
+      {
+        "id": "materials",
+        "label": "Baustoffe",
+        "items": [
+          "Holztrocknung ohne Spannungen und Risse",
+          "Hochtemperaturkammern 100–1400 °C (Keramik, Ziegel, Stahlbeton)",
+          "Trocknen von Keramik, Farben und Lacken"
+        ]
+      },
+      {
+        "id": "public",
+        "label": "Kommunal",
+        "items": [
+          "Beheizung von Wohnsiedlungen, Schulen und Kindergärten",
+          "Einkaufszentren, Büros, Sportanlagen und Schwimmbäder",
+          "Warmwasser für beliebige Gebäude",
+          "Umbau von Heizhäusern auf alternative Brennstoffe"
+        ]
+      }
+    ]
+  },
+  "adv": {
+    "title": "Warum diese Technologie",
+    "items": [
+      {
+        "t": "Günstige Wärme",
+        "x": "Energiesparende Technologie und deutliche Brennstoffersparnis gegenüber ähnlichen Wärmeerzeugern."
+      },
+      {
+        "t": "Sicheres Trocknen",
+        "x": "Wärmetauscher und Temperaturstabilisierung halten Funken vom Trockner fern, das Getreide entzündet sich nicht."
+      },
+      {
+        "t": "Präzise Regelung",
+        "x": "Trocknen von Saat- und Handelsgetreide von 30 bis 120 (140) °C bei ±1 °C Temperaturregelung."
+      },
+      {
+        "t": "Geringe Emissionen",
+        "x": "Emissionen nahe an Erdgas, daher sind die Wärmeerzeuger auch im Stadtgebiet einsetzbar."
+      },
+      {
+        "t": "Kein Stillstandsaufwand",
+        "x": "Nach der Saison braucht der Ofen keine zusätzliche Wartung, nur einige Stunden Betrieb."
+      },
+      {
+        "t": "Geringer Stromverbrauch",
+        "x": "Ein Ofen mit 1–6 MW verbraucht wenig Strom."
+      },
+      {
+        "t": "Brennstoff ohne Aufbereitung",
+        "x": "Der Brennstoff ist unsortiert, seine Feuchte darf 45 % und mehr erreichen."
+      },
+      {
+        "t": "Reinigung im Betrieb",
+        "x": "Ruß und Teer setzen sich nicht an den Wärmetauscherrohren ab, Wärmetauscher und Ofen lassen sich im Betrieb reinigen."
+      },
+      {
+        "t": "Passt zu Ihrem Trockner",
+        "x": "Wir passen Ofen und Wärmetauscher an jede Trocknungskammer an, ohne vorhandene Technik zu beschädigen."
+      }
+    ]
+  },
+  "fuelsInfo": {
+    "title": "Brennstoffarten",
+    "main": "Haupt",
+    "aux": "Zusatz",
+    "mainItems": [
+      "Hackschnitzel aller Art",
+      "Brennholz",
+      "Sägemehl und Späne",
+      "Maiskolben",
+      "Sonnenblumenschalen"
+    ],
+    "auxItems": [
+      "Laub und Rinde",
+      "Papier und Pappe",
+      "Haushaltsabfälle",
+      "Speiseabfälle"
+    ]
+  },
+  "selector": {
+    "title": "Modell finden",
+    "label": "Benötigte Wärmeleistung",
+    "unit": "kW",
+    "result": "Passendes Modell",
+    "small": "Kleinere Leistungen ab 100 kW: Angebot anfragen.",
+    "big": "Über 6000 kW: projektbezogene Lösungen bis 20 MW. Angebot anfragen.",
+    "hint": "Nur zur Orientierung, die endgültige Auswahl bestätigt der Vertrieb."
+  },
+  "spec": {
+    "title": "Modellvergleich",
+    "power": "Leistung der Wärmetauscherkammer, kW",
+    "type": "Kammertyp",
+    "burner": "Brennerleistung, kW",
+    "chimney": "Kaminhöhe",
+    "chimneyVal": "3,5 m",
+    "fuel": "Hauptbrennstoff",
+    "fuelVal": "Hackschnitzel, Maiskolben"
+  },
+  "faqSearch": {
+    "placeholder": "In den Fragen suchen …",
+    "none": "Nichts gefunden. Schreiben Sie uns, wir antworten."
+  },
+  "anatomy": {
+    "eyebrow": "Aufbau der Anlage",
+    "title": "Woraus der *Wärmeerzeuger* besteht",
+    "hint": "Marker im Foto oder Eintrag in der Liste anklicken",
+    "items": [
+      {
+        "t": "Brennstoffbehälter",
+        "x": "Hier wird der Brennstoff eingefüllt: Hackschnitzel, Brennholz, landwirtschaftliche Abfälle. Er braucht keine Sortierung oder Trocknung, seine Feuchte darf 45 % und mehr erreichen."
+      },
+      {
+        "t": "Förderschnecke",
+        "x": "Fördert den Brennstoff in den Ofen. Beschickung manuell oder automatisch, alle 6–12 Stunden."
+      },
+      {
+        "t": "Brenner auf Gestell",
+        "x": "Verbrennung nach dem Vergaserprinzip mit hochtemperaturfester Keramikauskleidung. Im Betrieb brennt der Ofen rauchfrei."
+      },
+      {
+        "t": "Wärmetauscher-Container",
+        "x": "Wärmetauscher mit hitzebeständigen Rohren, 100 mm Basaltwolle-Isolierung und Schaltschränke mit Alarmeinheit."
+      }
+    ]
   }
 }

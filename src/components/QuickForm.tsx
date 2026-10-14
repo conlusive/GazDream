@@ -6,6 +6,7 @@ import { useState, type FormEvent } from "react";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/i18n/config";
 import { postLead } from "@/lib/lead-client";
+import Select from "./Select";
 
 type Status = "idle" | "sending" | "ok" | "error";
 
@@ -57,10 +58,8 @@ export default function QuickForm({ lang, dict, calcLabel }: { lang: Locale; dic
                 <input id="qf-phone" name="phone" type="tel" required maxLength={160} autoComplete="tel" className="field" />
               </div>
               <div className="sm:col-span-2">
-                <label htmlFor="qf-interest" className="mb-1.5 block text-sm font-bold">{dict.interest}</label>
-                <select id="qf-interest" name="interest" className="field">
-                  {dict.options.map((o) => <option key={o}>{o}</option>)}
-                </select>
+                <span className="mb-1.5 block text-sm font-bold">{dict.interest}</span>
+                <Select name="interest" label={dict.interest} options={dict.options.map((o) => ({ value: o, label: o }))} />
               </div>
               <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
               <div className="sm:col-span-2">

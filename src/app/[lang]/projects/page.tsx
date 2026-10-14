@@ -13,7 +13,15 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/projec
 
   return (
     <>
-      <PageHero eyebrow={dict.nav.projects} title={p.title} lead={p.lead} />
+      <PageHero eyebrow={dict.nav.projects} title={p.title} lead={p.lead} image="/photos/install-hall.jpg" />
+
+      <section className="border-b border-line">
+        <dl className="container-x grid grid-cols-3 gap-6 py-10">
+          <div><dt className="numeral text-5xl text-brand-green sm:text-6xl">{PROJECTS.length}</dt><dd className="mt-2 text-sm text-muted">{p.summary.objects}</dd></div>
+          <div><dt className="numeral text-5xl text-brand-green sm:text-6xl">2,5–6,0</dt><dd className="mt-2 text-sm text-muted">{p.summary.power} (MW)</dd></div>
+          <div><dt className="numeral text-5xl text-brand-green sm:text-6xl">600</dt><dd className="mt-2 text-sm text-muted">{p.summary.capacity} {p.perDay}</dd></div>
+        </dl>
+      </section>
 
       <section className="section">
         <div className="container-x">
