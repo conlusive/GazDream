@@ -7,7 +7,8 @@ import { getDictionary } from "../dictionaries";
 export default async function ProjectsPage({ params }: PageProps<"/[lang]/projects">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const { projects: p } = await getDictionary(lang);
+  const dict = await getDictionary(lang);
+  const p = dict.projects;
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
@@ -15,7 +16,10 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/projec
       <p className="mt-3 text-lg text-muted">{p.lead}</p>
 
       <section className="my-8 grid items-center gap-6 rounded-xl bg-soft p-5 lg:grid-cols-2">
-        <Image src="/photos/hero.jpg" alt="" width={1272} height={900} className="rounded-lg" />
+        <figure>
+          <Image src="/photos/hero.jpg" alt="" width={1272} height={900} className="rounded-lg" />
+          <figcaption className="mt-2 text-xs text-muted">{dict.home.illustrative}</figcaption>
+        </figure>
         <div>
           <h2 className="text-2xl font-bold">{p.featured}</h2>
           <p className="mt-3 text-muted">{p.featuredText}</p>

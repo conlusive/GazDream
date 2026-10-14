@@ -10,7 +10,8 @@
     "projects": "Realizacje",
     "calculator": "Kalkulator",
     "contact": "Kontakt",
-    "menu": "Menu"
+    "menu": "Menu",
+    "faq": "FAQ"
   },
   "cta": {
     "calculate": "Oblicz korzyść",
@@ -209,5 +210,49 @@
     "calcNote": "Dołączymy wyniki z kalkulatora:",
     "address": "Adres",
     "email": "E-mail"
+  },
+  "faq": {
+    "title": "Najczęstsze pytania",
+    "lead": "Odpowiedzi na pytania, które zadają nam rolnicy i elewatory.",
+    "all": "Wszystkie pytania",
+    "items": [
+      {
+        "q": "Jakie paliwa można stosować?",
+        "a": "Zrębki drzewne, drewno opałowe, trociny i wióry, kolby kukurydzy, łuski słonecznika oraz inne odpady rolnicze i drzewne. Paliwo nie wymaga sortowania ani przygotowania, a jego wilgotność może sięgać 45% i więcej."
+      },
+      {
+        "q": "Czy suszenie ziarna jest bezpieczne pożarowo?",
+        "a": "Tak. Generator ma wymiennik ciepła i system stabilizacji temperatury, który zapobiega przedostawaniu się iskier do suszarni, więc ziarno się nie zapala. Temperaturę suszenia można regulować od 30 do 120 (140) °C z dokładnością ±1 °C."
+      },
+      {
+        "q": "Czy generator pasuje do mojej suszarni?",
+        "a": "Piec i wymiennik ciepła dopasowujemy do dowolnego typu komory suszenia bez niszczenia istniejącego sprzętu. Instalacje pracują m.in. na suszarniach Comil, GSI i Sukup."
+      },
+      {
+        "q": "Ile obsługi wymaga piec?",
+        "a": "Paliwo podaje się ręcznie lub automatycznie, a załadunek następuje co 6–12 godzin. Po sezonie piec nie wymaga dodatkowej konserwacji, wystarczy kilka godzin pracy. Wymiennik ciepła i piec można czyścić podczas pracy."
+      },
+      {
+        "q": "Ile prądu zużywa piec?",
+        "a": "Piec o mocy 1–6 MW zużywa od 3 do 15 kWh energii elektrycznej."
+      },
+      {
+        "q": "Jak policzyć oszczędność i zwrot kotła?",
+        "a": "Skorzystaj z kalkulatora: podaj kulturę, wilgotność, ilość ton i ceny paliw, a opcjonalnie cenę kotła. Wynik jest orientacyjny; dokładną ofertę przygotuje nasz menedżer."
+      },
+      {
+        "q": "Jak szybko dostanę ofertę?",
+        "a": "Odpowiadamy w ciągu dnia roboczego."
+      }
+    ]
+  },
+  "home": {
+    "caseTitle": "Z obiektu",
+    "caseMore": "Zobacz realizacje",
+    "illustrative": "Zdjęcie poglądowe: instalacja GazDream"
+  },
+  "testimonials": {
+    "title": "Opinie klientów",
+    "items": []
   }
 }

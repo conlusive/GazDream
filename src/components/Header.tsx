@@ -13,6 +13,7 @@ export default function Header({ lang, nav, cta }: Props) {
     { href: `/${lang}/boilers`, label: nav.boilers },
     { href: `/${lang}/projects`, label: nav.projects },
     { href: `/${lang}/calculator`, label: nav.calculator },
+    { href: `/${lang}/faq`, label: nav.faq },
     { href: `/${lang}/contact`, label: nav.contact },
   ];
 

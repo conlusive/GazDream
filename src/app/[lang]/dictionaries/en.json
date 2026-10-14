@@ -10,7 +10,8 @@
     "projects": "Projects",
     "calculator": "Calculator",
     "contact": "Contact",
-    "menu": "Menu"
+    "menu": "Menu",
+    "faq": "FAQ"
   },
   "cta": {
     "calculate": "Calculate savings",
@@ -209,5 +210,49 @@
     "calcNote": "We will attach your calculator results:",
     "address": "Address",
     "email": "E-mail"
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "lead": "Answers to what farmers and grain elevators ask us most.",
+    "all": "All questions",
+    "items": [
+      {
+        "q": "Which fuels can I use?",
+        "a": "Wood chips, firewood, sawdust and shavings, corn cobs, sunflower husks and other agricultural and wood waste. The fuel needs no sorting or preparation, and its moisture can reach 45% or more."
+      },
+      {
+        "q": "Is drying grain safe from fire?",
+        "a": "Yes. The generator has a heat exchanger and a temperature stabilisation system that stops sparks from reaching the dryer, so the grain does not ignite. Drying temperature is adjustable from 30 to 120 (140) °C within ±1 °C."
+      },
+      {
+        "q": "Will it fit my dryer?",
+        "a": "We adapt the furnace and heat exchanger to any type of drying chamber without damaging the existing equipment. Installations run on dryers including Comil, GSI and Sukup."
+      },
+      {
+        "q": "How much attention does the furnace need?",
+        "a": "Fuel is fed manually or automatically, with loading every 6–12 hours. After the season the furnace needs no extra maintenance, just a few hours of work. The heat exchanger and furnace can be cleaned while running."
+      },
+      {
+        "q": "How much electricity does it use?",
+        "a": "A 1–6 MW furnace uses 3 to 15 kWh of electricity."
+      },
+      {
+        "q": "How do I work out savings and boiler payback?",
+        "a": "Use the calculator: enter crop, moisture, tonnage and fuel prices, and optionally the boiler price. The result is an estimate; our manager will prepare an exact quote."
+      },
+      {
+        "q": "How fast will I get a quote?",
+        "a": "We reply within one business day."
+      }
+    ]
+  },
+  "home": {
+    "caseTitle": "From the field",
+    "caseMore": "See projects",
+    "illustrative": "Illustrative photo: a GazDream installation"
+  },
+  "testimonials": {
+    "title": "Customer reviews",
+    "items": []
   }
 }

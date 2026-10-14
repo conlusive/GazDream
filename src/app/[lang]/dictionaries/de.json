@@ -10,7 +10,8 @@
     "projects": "Referenzen",
     "calculator": "Rechner",
     "contact": "Kontakt",
-    "menu": "Menü"
+    "menu": "Menü",
+    "faq": "FAQ"
   },
   "cta": {
     "calculate": "Ersparnis berechnen",
@@ -209,5 +210,49 @@
     "calcNote": "Wir hängen Ihre Rechnerergebnisse an:",
     "address": "Adresse",
     "email": "E-Mail"
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "lead": "Antworten auf die Fragen, die Landwirte und Getreidelager am häufigsten stellen.",
+    "all": "Alle Fragen",
+    "items": [
+      {
+        "q": "Welche Brennstoffe sind geeignet?",
+        "a": "Hackschnitzel, Brennholz, Sägemehl und Späne, Maiskolben, Sonnenblumenschalen und andere land- und holzwirtschaftliche Abfälle. Der Brennstoff muss weder sortiert noch aufbereitet werden, seine Feuchte darf 45 % und mehr erreichen."
+      },
+      {
+        "q": "Ist das Trocknen von Getreide brandsicher?",
+        "a": "Ja. Der Wärmeerzeuger hat einen Wärmetauscher und eine Temperaturstabilisierung, die verhindert, dass Funken in den Trockner gelangen, sodass sich das Getreide nicht entzündet. Die Trocknungstemperatur ist von 30 bis 120 (140) °C auf ±1 °C genau regelbar."
+      },
+      {
+        "q": "Passt der Wärmeerzeuger zu meinem Trockner?",
+        "a": "Wir passen Ofen und Wärmetauscher an jeden Trocknungskammertyp an, ohne die vorhandene Technik zu beschädigen. Anlagen laufen u. a. an Trocknern von Comil, GSI und Sukup."
+      },
+      {
+        "q": "Wie viel Bedienung braucht der Ofen?",
+        "a": "Der Brennstoff wird manuell oder automatisch zugeführt, beschickt wird alle 6–12 Stunden. Nach der Saison braucht der Ofen keine zusätzliche Wartung, nur einige Stunden Betrieb. Wärmetauscher und Ofen lassen sich im Betrieb reinigen."
+      },
+      {
+        "q": "Wie viel Strom verbraucht er?",
+        "a": "Ein Ofen mit 1–6 MW verbraucht 3 bis 15 kWh Strom."
+      },
+      {
+        "q": "Wie berechne ich Ersparnis und Amortisation des Kessels?",
+        "a": "Nutzen Sie den Rechner: Kultur, Feuchtigkeit, Menge und Brennstoffpreise eingeben, optional den Kesselpreis. Das Ergebnis ist eine Schätzung; ein genaues Angebot erstellt unser Manager."
+      },
+      {
+        "q": "Wie schnell erhalte ich ein Angebot?",
+        "a": "Wir antworten innerhalb eines Werktags."
+      }
+    ]
+  },
+  "home": {
+    "caseTitle": "Aus der Praxis",
+    "caseMore": "Referenzen ansehen",
+    "illustrative": "Symbolfoto: eine GazDream-Anlage"
+  },
+  "testimonials": {
+    "title": "Kundenstimmen",
+    "items": []
   }
 }
