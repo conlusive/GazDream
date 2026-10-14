@@ -21,15 +21,15 @@ export default function Header({ lang, nav, cta }: Props) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line/70 bg-white/85 backdrop-blur-xl print:hidden">
-      <div className="container-x flex h-[68px] items-center justify-between gap-4">
-        <Link href={`/${lang}`} aria-label="GazDream" className="shrink-0 transition-opacity hover:opacity-80">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur print:hidden">
+      <div className="container-x flex h-16 items-center justify-between gap-4">
+        <Link href={`/${lang}`} aria-label="Eco Straßmayr Energy" className="shrink-0">
           <Image src="/brand/logo.jpg" alt="Eco Straßmayr Energy" width={104} height={52} priority />
         </Link>
         <DesktopNav links={links} />
         <div className="flex items-center gap-2 sm:gap-3">
           <LangSwitcher current={lang} />
-          <ButtonLink href={`/${lang}/calculator`} className="hidden !px-5 !py-2.5 sm:inline-flex">
+          <ButtonLink href={`/${lang}/calculator`} className="hidden !px-4 !py-2 sm:inline-flex">
             {cta.calculate}
           </ButtonLink>
           <MobileMenu label={nav.menu} links={links} />

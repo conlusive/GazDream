@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 
 export const metadata: Metadata = {
-  title: "GazDream — адмінка",
+  title: "Eco Straßmayr Energy — адмінка",
   robots: { index: false, follow: false },
 };
 

@@ -40,7 +40,7 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <Footer lang={lang} dict={dict} />
         <a
           href={CONTACT.phoneHref}
-          className="fixed inset-x-3 bottom-3 z-50 rounded-full bg-brand-green py-3.5 text-center text-sm font-bold text-white shadow-[0_12px_30px_-8px_rgba(11,42,22,0.6)] transition active:scale-[0.98] print:hidden lg:hidden"
+          className="fixed inset-x-3 bottom-3 z-50 rounded-md bg-brand-green py-3.5 text-center text-sm font-bold text-white transition active:scale-[0.98] print:hidden lg:hidden"
         >
           {dict.cta.call}: {CONTACT.phone}
         </a>

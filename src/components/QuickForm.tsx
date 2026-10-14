@@ -34,18 +34,17 @@ export default function QuickForm({ lang, dict, calcLabel }: { lang: Locale; dic
   return (
     <section className="section print:hidden" aria-labelledby="quick-title">
       <div className="container-x">
-        <div className="reveal grid gap-10 rounded-3xl border border-line bg-white p-7 shadow-[0_30px_60px_-40px_rgba(11,42,22,0.35)] sm:p-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
+        <div className="reveal grid gap-10 border-y border-line py-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
           <div>
             <p className="eyebrow mb-3">{dict.title}</p>
             <h2 id="quick-title" className="display text-3xl sm:text-4xl">{dict.lead}</h2>
-            <Link href={`/${lang}/calculator`} className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-green">
+            <Link href={`/${lang}/calculator`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-green hover:underline">
               {dict.calc} → {calcLabel}
-              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
             </Link>
           </div>
 
           {status === "ok" ? (
-            <p role="status" className="rounded-2xl bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>
+            <p role="status" className="rounded-lg bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>
           ) : (
             <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
               <div>

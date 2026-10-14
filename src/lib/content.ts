@@ -1,7 +1,25 @@
+// Source: strasslider.com/kontakty. Sales is the main contact for product enquiries.
 export const CONTACT = {
-  phone: "+48 576 887 271",
-  phoneHref: "tel:+48576887271",
-  email: "gazdream.info@gmail.com",
+  phone: "+48 601 073 119",
+  phoneHref: "tel:+48601073119",
+  email: "sales@strasslider.com",
+  officePhone: "+48 661 626 609",
+  officePhoneHref: "tel:+48661626609",
+  officeEmail: "office@strasslider.com",
+} as const;
+
+// Real photos and videos of a completed Straßmayr biomass heat generator installation.
+export const INSTALLATION = {
+  photos: [
+    "/photos/install-wide.jpg",
+    "/photos/install-container.jpg",
+    "/photos/install-hopper.jpg",
+    "/photos/install-hall.jpg",
+  ],
+  videos: [
+    { src: "/video/install-walkaround.mp4", poster: "/video/install-walkaround.jpg" },
+    { src: "/video/install-exterior.mp4", poster: "/video/install-exterior.jpg" },
+  ],
 } as const;
 
 // Source: current gazdream.com product table (PUT line).

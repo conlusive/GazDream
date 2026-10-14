@@ -29,15 +29,15 @@ export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers
             {MODELS.map((m) => (
               <article key={m.name} className="card card-hover reveal flex flex-col p-7">
                 <p className="text-sm font-semibold text-muted">{b.types[m.type]}</p>
-                <h2 className="mt-1 text-4xl font-extrabold tracking-tight text-brand-green">{m.name}</h2>
+                <h2 className="mt-1 text-4xl font-bold tracking-tight text-brand-green">{m.name}</h2>
                 <dl className="mt-6 space-y-4 text-sm">
                   <div className="border-t border-line pt-3">
                     <dt className="text-muted">{b.power}</dt>
-                    <dd className="mt-0.5 text-lg font-extrabold">{m.powerKw}</dd>
+                    <dd className="mt-0.5 text-lg font-bold">{m.powerKw}</dd>
                   </div>
                   <div className="border-t border-line pt-3">
                     <dt className="text-muted">{b.burner}</dt>
-                    <dd className="mt-0.5 text-lg font-extrabold">{m.burnerKw}</dd>
+                    <dd className="mt-0.5 text-lg font-bold">{m.burnerKw}</dd>
                   </div>
                 </dl>
                 <div className="mt-7">
@@ -68,8 +68,8 @@ export default async function BoilersPage({ params }: PageProps<"/[lang]/boilers
               ))}
             </ul>
           </div>
-          <div className="reveal overflow-hidden rounded-3xl self-start">
-            <Image src="/photos/site-1.jpg" alt="" width={851} height={1280} className="max-h-[640px] w-full object-cover transition-transform duration-700 ease-out-soft hover:scale-105" />
+          <div className="reveal overflow-hidden rounded-lg self-start">
+            <Image src="/photos/install-hopper.jpg" alt="" width={1280} height={960} className="max-h-[640px] w-full object-cover " />
           </div>
         </div>
       </section>

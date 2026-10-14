@@ -9,22 +9,22 @@ export default function LangSwitcher({ current }: { current: Locale }) {
   const rest = pathname.replace(/^\/(pl|en|de)(?=\/|$)/, "");
 
   return (
-    <div className="flex items-center rounded-full bg-soft p-1 text-xs font-bold" role="group" aria-label="Language">
-      {locales.map((locale) => (
-        <Link
-          key={locale}
-          href={`/${locale}${rest}`}
-          hrefLang={locale}
-          aria-current={locale === current ? "true" : undefined}
-          onClick={() => {
-            document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
-          }}
-          className={`rounded-full px-3 py-2 transition duration-300 ${
-            locale === current ? "bg-brand-green text-white shadow-sm" : "text-muted hover:text-brand-green"
-          }`}
-        >
-          {locale.toUpperCase()}
-        </Link>
+    <div className="flex items-center text-xs font-semibold" role="group" aria-label="Language">
+      {locales.map((locale, i) => (
+        <span key={locale} className="flex items-center">
+          {i > 0 && <span aria-hidden="true" className="text-line">/</span>}
+          <Link
+            href={`/${locale}${rest}`}
+            hrefLang={locale}
+            aria-current={locale === current ? "true" : undefined}
+            onClick={() => {
+              document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
+            }}
+            className={`px-2 py-2 transition-colors ${locale === current ? "text-ink underline decoration-brand-green decoration-2 underline-offset-[6px]" : "text-muted hover:text-ink"}`}
+          >
+            {locale.toUpperCase()}
+          </Link>
+        </span>
       ))}
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "GazDream – przemysłowe generatory ciepła na biomasę | Suszenie zboża",
-    "description": "Polski producent przemysłowych generatorów ciepła na biomasę do 20 MW: suszenie zboża, ogrzewanie przemysłowe, zastąpienie gazu ziemnego."
+    "title": "Eco Straßmayr Energy – generatory ciepła na biomasę | Suszenie zboża",
+    "description": "Generatory ciepła na biomasę od 100 kW do 20 MW do suszenia zboża i ogrzewania przemysłowego. Oferta i obsługa w Polsce: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Strona główna",
@@ -20,13 +20,11 @@
   },
   "hero": {
     "title": "Suszenie zboża taniej niż na gazie",
-    "subtitle": "Generatory ciepła na zrębki i pellet o mocy do 20 MW. Wyprodukowano w Polsce.",
-    "badge": "Made in Poland",
-    "titleLead": "Suszenie zboża",
-    "titleHighlight": "taniej niż na gazie"
+    "subtitle": "Generatory ciepła na zrębki i pellet o mocy od 100 kW do 20 MW dla suszarni zboża.",
+    "badge": "Eco Straßmayr Energy"
   },
   "benefits": {
-    "title": "Dlaczego GazDream",
+    "title": "Dlaczego Eco Straßmayr Energy",
     "items": [
       {
         "title": "Niższy koszt suszenia",
@@ -41,8 +39,8 @@
         "text": "Montaż na suszarniach znanych marek."
       },
       {
-        "title": "Wyprodukowano w Polsce",
-        "text": "Własna produkcja, serwis i dokumentacja CE."
+        "title": "Doradztwo i obsługa w Polsce",
+        "text": "Oferta i kontakt z działem handlowym w Polsce."
       }
     ]
   },
@@ -52,8 +50,8 @@
   },
   "footer": {
     "rights": "Wszelkie prawa zastrzeżone",
-    "legalName": "Kraksten",
-    "address": "ul. Chłodna 51, Warszawa"
+    "legalName": "Strasslider sp. z o.o.",
+    "address": "Sielecka 7, 37-700 Przemyśl"
   },
   "calc": {
     "title": "Kalkulator korzyści z suszenia",
@@ -125,19 +123,19 @@
   },
   "about": {
     "title": "O firmie",
-    "lead": "GazDream to generatory ciepła na paliwo stałe (PUT) o mocy od 100 kW do 20 MW, które pracują na drewnie, odpadach rolniczych i bytowych bez wstępnego przygotowania paliwa.",
+    "lead": "Eco Straßmayr Energy to generatory ciepła na paliwo stałe o mocy od 100 kW do 20 MW. Pracują na drewnie, odpadach rolniczych i bytowych, bez wstępnego przygotowania paliwa.",
     "stats": [
       {
         "v": "100 kW – 20 MW",
         "l": "zakres mocy"
       },
       {
-        "v": "od 2015",
-        "l": "na rynku"
+        "v": "30–120 °C",
+        "l": "zakres temperatury suszenia"
       },
       {
         "v": "±1 °C",
-        "l": "kontrola temperatury suszenia"
+        "l": "dokładność regulacji temperatury"
       },
       {
         "v": "do 45%",
@@ -146,8 +144,8 @@
     ],
     "techTitle": "Technologia „całkowitego spalania”",
     "tech": "Zasada zgazowania pozwala spalać surowiec niemal w 100%. Emisja CO w spalinach jest niższa niż 0,1 g/m³, przy dopuszczalnych 0,6 g/m³ dla gazu ziemnego.",
-    "officeTitle": "Biuro w Polsce",
-    "officeText": "Kraksten, Warszawa. Doradztwo, oferty i obsługa klientów w Polsce, Niemczech i UE."
+    "officeTitle": "Oferta i obsługa w Polsce",
+    "officeText": "Strasslider sp. z o.o., Przemyśl. Doradztwo i oferty dla klientów w Polsce i UE."
   },
   "boilers": {
     "title": "Generatory ciepła PUT",
@@ -181,7 +179,7 @@
   },
   "projects": {
     "title": "Realizacje",
-    "lead": "Wybrane instalacje na suszarniach zbożowych.",
+    "lead": "Zrealizowany projekt i wybrane instalacje na suszarniach zbożowych.",
     "power": "Moc",
     "fuel": "Paliwo",
     "dryer": "Suszarnia",
@@ -198,7 +196,8 @@
       "buzovytsia": "Obwód czerniowiecki, Ukraina",
       "katowice": "Katowice, Polska",
       "iziaslav": "Obwód chmielnicki, Ukraina"
-    }
+    },
+    "other": "Inne instalacje"
   },
   "contact": {
     "title": "Kontakt",
@@ -212,7 +211,9 @@
     "error": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń.",
     "calcNote": "Dołączymy wyniki z kalkulatora:",
     "address": "Adres",
-    "email": "E-mail"
+    "email": "E-mail",
+    "sales": "Dział handlowy",
+    "office": "Sekretariat"
   },
   "faq": {
     "title": "Najczęstsze pytania",
@@ -284,13 +285,27 @@
     "error": "Nie udało się wysłać. Spróbuj ponownie lub zadzwoń.",
     "calc": "Najpierw policz oszczędność"
   },
-  "marquee": [
-    "Zrębki drzewne",
-    "Kolby kukurydzy",
-    "Łuski słonecznika",
-    "Pellet",
-    "Moc 100 kW – 20 MW",
-    "Suszenie zboża",
-    "Kontrola temperatury ±1 °C"
-  ]
+  "installation": {
+    "eyebrow": "Zrealizowany projekt",
+    "title": "Generator ciepła na biomasę Straßmayr",
+    "lead": "Gotowa instalacja w hali: palnik, zasobnik paliwa, kontener wymiennika ciepła z szafami sterowniczymi oraz odpylacz.",
+    "captions": [
+      "Widok ogólny instalacji",
+      "Kontener wymiennika ciepła z szafami sterowniczymi",
+      "Palnik, zasobnik paliwa i podajnik ślimakowy",
+      "Instalacja w hali, widok od strony zasobnika"
+    ],
+    "elementsTitle": "Widoczne elementy",
+    "elements": [
+      "Palnik na stelażu z zasobnikiem paliwa i podajnikiem ślimakowym",
+      "Kontener z wymiennikiem ciepła i szafami sterowniczymi",
+      "Odpylacz cyklonowy i wentylator"
+    ],
+    "videoTitle": "Film z instalacji",
+    "videos": [
+      "Kontener i szafy sterownicze",
+      "Widok z zewnątrz: odpylacz i wentylator"
+    ],
+    "more": "Zobacz realizacje"
+  }
 }

@@ -122,7 +122,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
     : "";
 
   const label = "mb-2 flex items-center justify-between gap-3 text-sm font-bold";
-  const pill = "tabular rounded-full bg-soft px-3 py-0.5 text-sm font-extrabold text-brand-green";
+  const pill = "tabular rounded-md bg-soft px-3 py-0.5 text-sm font-bold text-brand-green";
 
   return (
     <>
@@ -148,9 +148,9 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                       type="button"
                       onClick={() => pickCrop(row.id, c)}
                       aria-pressed={row.crop === c}
-                      className={`rounded-xl border-2 px-2 py-3.5 text-sm font-bold transition duration-300 ease-out-soft active:scale-[0.98] ${
+                      className={`rounded-md border-2 px-2 py-3.5 text-sm font-bold active:scale-[0.98] ${
                         row.crop === c
-                          ? "border-brand-green bg-brand-green text-white shadow-[0_10px_24px_-12px_rgba(27,122,30,0.8)]"
+                          ? "border-brand-green bg-brand-green text-white"
                           : "border-line hover:border-brand-green/60 hover:bg-soft"
                       }`}
                     >
@@ -164,7 +164,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                   <input id={`from-${row.id}`} type="range" min={5} max={40} value={row.from} onChange={(e) => updateRow(row.id, { from: Number(e.target.value) })} className="w-full" />
                   <label className={`${label} mt-5`} htmlFor={`to-${row.id}`}><span>{dict.moistureTarget}</span><span className={pill}>{row.to}%</span></label>
                   <input id={`to-${row.id}`} type="range" min={5} max={25} value={row.to} onChange={(e) => updateRow(row.id, { to: Number(e.target.value) })} className="w-full" />
-                  <p className="mt-4 flex items-center justify-between rounded-xl bg-soft px-4 py-3 text-sm">
+                  <p className="mt-4 flex items-center justify-between rounded-md bg-soft px-4 py-3 text-sm">
                     <span className="text-muted">{dict.removed}</span>
                     <strong className="tabular text-base">{removed}%</strong>
                   </p>
@@ -179,7 +179,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           })}
 
           {rows.length < MAX_ROWS && (
-            <button type="button" onClick={addRow} className="w-full rounded-2xl border-2 border-dashed border-brand-green/50 px-4 py-4 text-sm font-bold text-brand-green transition duration-300 hover:border-brand-green hover:bg-white">
+            <button type="button" onClick={addRow} className="w-full rounded-lg border-2 border-dashed border-brand-green/50 px-4 py-4 text-sm font-bold text-brand-green hover:border-brand-green hover:bg-white">
               + {dict.addCrop}
             </button>
           )}
@@ -200,7 +200,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
             <div>
               <div className="mb-3 flex items-center justify-between">
                 <span className="text-sm font-bold">{dict.prices}</span>
-                <select aria-label={dict.currency} value={currency} onChange={(e) => pickCurrency(e.target.value as Currency)} className="rounded-full border border-line bg-white px-3 py-1.5 text-sm font-bold transition hover:border-brand-green/50">
+                <select aria-label={dict.currency} value={currency} onChange={(e) => pickCurrency(e.target.value as Currency)} className="rounded-md border border-line bg-white px-3 py-1.5 text-sm font-bold transition hover:border-brand-green/50">
                   <option value="EUR">EUR</option>
                   <option value="PLN">PLN</option>
                 </select>
@@ -229,12 +229,12 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           </div>
         </div>
 
-        <div className="min-w-0 rounded-3xl bg-forest p-6 text-white shadow-[0_40px_80px_-40px_rgba(11,42,22,0.7)] sm:p-9 lg:sticky lg:top-24">
+        <div className="min-w-0 rounded-lg bg-forest p-6 text-white sm:p-9 lg:sticky lg:top-24">
           <p className="sr-only" aria-live="polite">{summary} {paybackText}</p>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-leaf">{dict.result}</p>
-          <p className="tabular mt-4 min-h-[6.5rem] text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl">{summaryDark}</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-white/60">{dict.result}</p>
+          <p className="tabular mt-4 min-h-[6.5rem] text-3xl font-bold leading-tight tracking-tight sm:text-4xl">{summaryDark}</p>
           {paybackText && (
-            <p className="mt-4 inline-block rounded-full bg-white/10 px-4 py-2 text-sm font-bold text-white">{paybackText}</p>
+            <p className="mt-4 inline-block rounded-md bg-white/10 px-4 py-2 text-sm font-bold text-white">{paybackText}</p>
           )}
 
           <div className="mt-8">
@@ -242,10 +242,10 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
               {result.results.map((r) => {
                 const best = r.fuel === result.cheapest;
                 return (
-                  <li key={r.fuel} className={`rounded-2xl border p-4 transition-colors duration-300 ${best ? "border-leaf/60 bg-white/10" : "border-white/10 bg-white/5"}`}>
+                  <li key={r.fuel} className={`rounded-lg border p-4 transition-colors duration-300 ${best ? "border-leaf/60 bg-white/10" : "border-white/10 bg-white/5"}`}>
                     <div className="flex items-center justify-between font-bold">
                       <span>{dict.fuels[r.fuel]}</span>
-                      {best && <span className="rounded-full bg-leaf px-2.5 py-0.5 text-xs text-forest">{dict.best}</span>}
+                      {best && <span className="rounded bg-leaf px-2 py-0.5 text-xs font-semibold text-forest">{dict.best}</span>}
                     </div>
                     <dl className="tabular mt-3 grid grid-cols-2 gap-x-3 gap-y-1.5 text-sm">
                       <dt className="text-white/60">{dict.perTonne}</dt><dd className="text-right font-bold"><AnimatedNumber value={r.costPerTonne} format={money2.format} /></dd>
@@ -342,7 +342,7 @@ function ResultTable({ result, dict, money, money2, tone }: SharedProps & { mone
             <tr key={r.fuel} className={row}>
               <td className="py-3 pr-3">
                 {dict.fuels[r.fuel]}
-                {best && <span className={`ml-2 rounded-full px-2.5 py-0.5 text-xs ${dark ? "bg-leaf text-forest" : "bg-brand-green text-white"}`}>{dict.best}</span>}
+                {best && <span className={`ml-2 rounded-md px-2.5 py-0.5 text-xs ${dark ? "bg-leaf text-forest" : "bg-brand-green text-white"}`}>{dict.best}</span>}
               </td>
               <td className="py-3 pr-3"><AnimatedNumber value={r.costPerTonne} format={money2.format} /></td>
               <td className="py-3 pr-3"><AnimatedNumber value={r.totalCost} format={money.format} /></td>
@@ -362,10 +362,10 @@ function Bars({ result, dict, maxCost, tone }: SharedProps & { maxCost: number; 
       {result.results.map((r) => (
         <div key={r.fuel} className="flex items-center gap-3 text-xs">
           <span className={`w-24 shrink-0 font-semibold ${dark ? "text-white/80" : ""}`}>{dict.fuels[r.fuel]}</span>
-          <div className={`h-3 flex-1 overflow-hidden rounded-full ${dark ? "bg-white/10" : "bg-soft print:border print:border-line"}`}>
+          <div className={`h-3 flex-1 overflow-hidden rounded-md ${dark ? "bg-white/10" : "bg-soft print:border print:border-line"}`}>
             <div
-              className={`h-3 rounded-full transition-[width] duration-700 ease-out-soft print:[print-color-adjust:exact] ${
-                r.fuel === result.cheapest ? (dark ? "bg-leaf" : "bg-brand-green") : "bg-brand-orange"
+              className={`h-3 rounded-md transition-[width] duration-700 ease-out-soft print:[print-color-adjust:exact] ${
+                r.fuel === result.cheapest ? (dark ? "bg-leaf" : "bg-brand-green") : dark ? "bg-white/35" : "bg-ink/30"
               }`}
               style={{ width: `${(r.costPerTonne / maxCost) * 100}%` }}
             />

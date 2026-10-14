@@ -55,7 +55,7 @@ export async function POST(request: Request) {
   await archiveLead(lead, result);
 
   if (result.configured.length === 0) {
-    console.error("No lead delivery channel is configured (see .env.example); lead was not delivered");
+    console.error("Lead e-mail delivery is not configured (see .env.example); lead was not delivered");
     return NextResponse.json({ ok: false }, { status: 503 });
   }
   if (result.delivered.length === 0) return NextResponse.json({ ok: false }, { status: 502 });

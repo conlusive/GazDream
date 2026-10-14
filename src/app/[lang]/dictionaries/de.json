@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "GazDream – industrielle Biomasse-Wärmeerzeuger | Getreidetrocknung",
-    "description": "Polnischer Hersteller industrieller Biomasse-Wärmeerzeuger bis 20 MW für Getreidetrocknung, Industrieheizung und den Ersatz von Erdgas."
+    "title": "Eco Straßmayr Energy – Biomasse-Wärmeerzeuger | Getreidetrocknung",
+    "description": "Biomasse-Wärmeerzeuger von 100 kW bis 20 MW für Getreidetrocknung und Industrieheizung. Angebot und Betreuung in Polen: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Startseite",
@@ -20,13 +20,11 @@
   },
   "hero": {
     "title": "Getreide günstiger trocknen als mit Gas",
-    "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets bis 20 MW. Made in Poland.",
-    "badge": "Made in Poland",
-    "titleLead": "Getreide trocknen",
-    "titleHighlight": "günstiger als mit Gas"
+    "subtitle": "Wärmeerzeuger für Hackschnitzel und Pellets von 100 kW bis 20 MW für Getreidetrockner.",
+    "badge": "Eco Straßmayr Energy"
   },
   "benefits": {
-    "title": "Warum GazDream",
+    "title": "Warum Eco Straßmayr Energy",
     "items": [
       {
         "title": "Geringere Trocknungskosten",
@@ -41,8 +39,8 @@
         "text": "Einsatz an Trocknern bekannter Marken."
       },
       {
-        "title": "Made in Poland",
-        "text": "Eigene Fertigung, Service und CE-Dokumentation."
+        "title": "Beratung und Betreuung in Polen",
+        "text": "Angebot und Vertrieb in Polen."
       }
     ]
   },
@@ -52,8 +50,8 @@
   },
   "footer": {
     "rights": "Alle Rechte vorbehalten",
-    "legalName": "Kraksten",
-    "address": "ul. Chłodna 51, Warschau"
+    "legalName": "Strasslider sp. z o.o.",
+    "address": "Sielecka 7, 37-700 Przemyśl, Polen"
   },
   "calc": {
     "title": "Trocknungs-Ersparnisrechner",
@@ -125,19 +123,19 @@
   },
   "about": {
     "title": "Über uns",
-    "lead": "GazDream stellt Festbrennstoff-Wärmeerzeuger (PUT) von 100 kW bis 20 MW her, die mit Holz sowie landwirtschaftlichen und Haushaltsabfällen ohne Brennstoffaufbereitung laufen.",
+    "lead": "Eco Straßmayr Energy stellt Festbrennstoff-Wärmeerzeuger von 100 kW bis 20 MW her. Sie laufen mit Holz sowie landwirtschaftlichen und Haushaltsabfällen ohne Brennstoffaufbereitung.",
     "stats": [
       {
         "v": "100 kW – 20 MW",
         "l": "Leistungsbereich"
       },
       {
-        "v": "seit 2015",
-        "l": "am Markt"
+        "v": "30–120 °C",
+        "l": "Trocknungstemperaturbereich"
       },
       {
         "v": "±1 °C",
-        "l": "Temperaturregelung beim Trocknen"
+        "l": "Genauigkeit der Temperaturregelung"
       },
       {
         "v": "bis 45 %",
@@ -146,8 +144,8 @@
     ],
     "techTitle": "Technologie der „vollständigen Verbrennung“",
     "tech": "Das Vergasungsprinzip verbrennt den Rohstoff nahezu vollständig. Der CO-Gehalt im Abgas liegt unter 0,1 g/m³, zulässig sind bei Erdgas 0,6 g/m³.",
-    "officeTitle": "Büro in Polen",
-    "officeText": "Kraksten, Warschau. Beratung, Angebote und Kundenbetreuung in Polen, Deutschland und der EU."
+    "officeTitle": "Angebot und Betreuung in Polen",
+    "officeText": "Strasslider sp. z o.o., Przemyśl. Beratung und Angebote für Kunden in Polen und der EU."
   },
   "boilers": {
     "title": "PUT-Wärmeerzeuger",
@@ -181,7 +179,7 @@
   },
   "projects": {
     "title": "Referenzen",
-    "lead": "Ausgewählte Anlagen an Getreidetrocknern.",
+    "lead": "Ein realisiertes Projekt und ausgewählte Anlagen an Getreidetrocknern.",
     "power": "Leistung",
     "fuel": "Brennstoff",
     "dryer": "Trockner",
@@ -198,7 +196,8 @@
       "buzovytsia": "Region Czernowitz, Ukraine",
       "katowice": "Kattowitz, Polen",
       "iziaslav": "Region Chmelnyzkyj, Ukraine"
-    }
+    },
+    "other": "Weitere Anlagen"
   },
   "contact": {
     "title": "Kontakt",
@@ -212,7 +211,9 @@
     "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen.",
     "calcNote": "Wir hängen Ihre Rechnerergebnisse an:",
     "address": "Adresse",
-    "email": "E-Mail"
+    "email": "E-Mail",
+    "sales": "Vertrieb",
+    "office": "Sekretariat"
   },
   "faq": {
     "title": "Häufige Fragen",
@@ -284,13 +285,27 @@
     "error": "Senden fehlgeschlagen. Bitte erneut versuchen oder anrufen.",
     "calc": "Zuerst Ersparnis berechnen"
   },
-  "marquee": [
-    "Hackschnitzel",
-    "Maiskolben",
-    "Sonnenblumenschalen",
-    "Pellets",
-    "100 kW – 20 MW",
-    "Getreidetrocknung",
-    "Temperaturregelung ±1 °C"
-  ]
+  "installation": {
+    "eyebrow": "Realisiertes Projekt",
+    "title": "Straßmayr Biomasse-Wärmeerzeuger",
+    "lead": "Eine fertige Anlage in der Halle: Brenner, Brennstoffbehälter, Wärmetauscher-Container mit Schaltschränken und Entstauber.",
+    "captions": [
+      "Gesamtansicht der Anlage",
+      "Wärmetauscher-Container mit Schaltschränken",
+      "Brenner, Brennstoffbehälter und Förderschnecke",
+      "Anlage in der Halle, Ansicht von der Behälterseite"
+    ],
+    "elementsTitle": "Sichtbare Komponenten",
+    "elements": [
+      "Brenner auf Gestell mit Brennstoffbehälter und Förderschnecke",
+      "Container mit Wärmetauscher und Schaltschränken",
+      "Zyklon-Entstauber und Ventilator"
+    ],
+    "videoTitle": "Video der Anlage",
+    "videos": [
+      "Container und Schaltschränke",
+      "Außenansicht: Entstauber und Ventilator"
+    ],
+    "more": "Referenzen ansehen"
+  }
 }

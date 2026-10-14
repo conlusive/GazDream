@@ -32,14 +32,14 @@ export default function ContactForm({ lang, dict }: { lang: Locale; dict: Dictio
   }
 
   if (status === "ok") {
-    return <p role="status" className="rounded-2xl bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>;
+    return <p role="status" className="rounded-lg bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>;
   }
 
   const field = "field";
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       {calc && (
-        <p className="rounded-xl bg-soft px-4 py-3 text-sm">
+        <p className="rounded-md bg-soft px-4 py-3 text-sm">
           {dict.calcNote} <strong>{calc}</strong>
         </p>
       )}

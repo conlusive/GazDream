@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "GazDream – industrial biomass heat generators | Grain drying",
-    "description": "Polish manufacturer of industrial biomass heat generators up to 20 MW for grain drying, industrial heating and replacing natural gas."
+    "title": "Eco Straßmayr Energy – biomass heat generators | Grain drying",
+    "description": "Biomass heat generators from 100 kW to 20 MW for grain drying and industrial heating. Offer and support in Poland: Strasslider sp. z o.o."
   },
   "nav": {
     "home": "Home",
@@ -20,13 +20,11 @@
   },
   "hero": {
     "title": "Dry grain cheaper than with gas",
-    "subtitle": "Wood chip and pellet heat generators up to 20 MW. Made in Poland.",
-    "badge": "Made in Poland",
-    "titleLead": "Dry grain",
-    "titleHighlight": "cheaper than with gas"
+    "subtitle": "Wood chip and pellet heat generators from 100 kW to 20 MW for grain dryers.",
+    "badge": "Eco Straßmayr Energy"
   },
   "benefits": {
-    "title": "Why GazDream",
+    "title": "Why Eco Straßmayr Energy",
     "items": [
       {
         "title": "Lower drying cost",
@@ -41,8 +39,8 @@
         "text": "Installed on dryers of well-known brands."
       },
       {
-        "title": "Made in Poland",
-        "text": "In-house production, service and CE documentation."
+        "title": "Advice and support in Poland",
+        "text": "Quotes and a sales team in Poland."
       }
     ]
   },
@@ -52,8 +50,8 @@
   },
   "footer": {
     "rights": "All rights reserved",
-    "legalName": "Kraksten",
-    "address": "ul. Chłodna 51, Warsaw"
+    "legalName": "Strasslider sp. z o.o.",
+    "address": "Sielecka 7, 37-700 Przemyśl, Poland"
   },
   "calc": {
     "title": "Drying savings calculator",
@@ -125,19 +123,19 @@
   },
   "about": {
     "title": "About us",
-    "lead": "GazDream makes solid-fuel heat generators (PUT) from 100 kW to 20 MW that run on wood, agricultural and household waste with no fuel preparation.",
+    "lead": "Eco Straßmayr Energy makes solid-fuel heat generators from 100 kW to 20 MW. They run on wood, agricultural and household waste with no fuel preparation.",
     "stats": [
       {
         "v": "100 kW – 20 MW",
         "l": "power range"
       },
       {
-        "v": "since 2015",
-        "l": "on the market"
+        "v": "30–120 °C",
+        "l": "drying temperature range"
       },
       {
         "v": "±1 °C",
-        "l": "drying temperature control"
+        "l": "temperature control accuracy"
       },
       {
         "v": "up to 45%",
@@ -146,8 +144,8 @@
     ],
     "techTitle": "“Total combustion” technology",
     "tech": "The gasification principle burns the raw material almost completely. CO in flue gas is below 0.1 g/m³, against the 0.6 g/m³ allowed for natural gas.",
-    "officeTitle": "Office in Poland",
-    "officeText": "Kraksten, Warsaw. Consulting, quotes and customer support in Poland, Germany and the EU."
+    "officeTitle": "Offer and support in Poland",
+    "officeText": "Strasslider sp. z o.o., Przemyśl. Consulting and quotes for customers in Poland and the EU."
   },
   "boilers": {
     "title": "PUT heat generators",
@@ -181,7 +179,7 @@
   },
   "projects": {
     "title": "Projects",
-    "lead": "Selected installations on grain dryers.",
+    "lead": "A completed project and selected installations on grain dryers.",
     "power": "Power",
     "fuel": "Fuel",
     "dryer": "Dryer",
@@ -198,7 +196,8 @@
       "buzovytsia": "Chernivtsi region, Ukraine",
       "katowice": "Katowice, Poland",
       "iziaslav": "Khmelnytskyi region, Ukraine"
-    }
+    },
+    "other": "Other installations"
   },
   "contact": {
     "title": "Contact",
@@ -212,7 +211,9 @@
     "error": "Could not send. Please try again or call us.",
     "calcNote": "We will attach your calculator results:",
     "address": "Address",
-    "email": "E-mail"
+    "email": "E-mail",
+    "sales": "Sales",
+    "office": "Office"
   },
   "faq": {
     "title": "Frequently asked questions",
@@ -284,13 +285,27 @@
     "error": "Could not send. Please try again or call us.",
     "calc": "Calculate your savings first"
   },
-  "marquee": [
-    "Wood chips",
-    "Corn cobs",
-    "Sunflower husks",
-    "Pellets",
-    "100 kW – 20 MW",
-    "Grain drying",
-    "Temperature control ±1 °C"
-  ]
+  "installation": {
+    "eyebrow": "Completed project",
+    "title": "Straßmayr biomass heat generator",
+    "lead": "A finished installation in a hall: burner, fuel hopper, heat exchanger container with control cabinets and a dust collector.",
+    "captions": [
+      "General view of the installation",
+      "Heat exchanger container with control cabinets",
+      "Burner, fuel hopper and screw feeder",
+      "Installation in the hall, view from the hopper side"
+    ],
+    "elementsTitle": "Visible components",
+    "elements": [
+      "Burner on a frame with fuel hopper and screw feeder",
+      "Container with heat exchanger and control cabinets",
+      "Cyclone dust collector and fan"
+    ],
+    "videoTitle": "Installation video",
+    "videos": [
+      "Container and control cabinets",
+      "Outside view: dust collector and fan"
+    ],
+    "more": "See projects"
+  }
 }
