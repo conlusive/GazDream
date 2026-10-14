@@ -118,7 +118,8 @@
     },
     "paybackNeedPeriod": "Wybierz okres „na sezon” lub „na rok”, aby policzyć zwrot.",
     "paybackNever": "Przy tych cenach kocioł się nie zwraca.",
-    "pricesAsOf": "Ceny orientacyjne z dnia {date}."
+    "pricesAsOf": "Ceny orientacyjne z dnia {date}.",
+    "periodLabel": "Okres"
   },
   "about": {
     "title": "O firmie",

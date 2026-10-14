@@ -173,7 +173,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           )}
 
           <div>
-            <label className={label} htmlFor="period">{dict.volume}</label>
+            <label className={label} htmlFor="period">{dict.periodLabel}</label>
             <select id="period" value={period} onChange={(e) => setPeriod(e.target.value as Period)} className="w-full rounded-md border border-line px-3 py-2">
               {(["day", "season", "year"] as Period[]).map((p) => (
                 <option key={p} value={p}>{dict.period[p]}</option>

@@ -118,7 +118,8 @@
     },
     "paybackNeedPeriod": "Choose “per season” or “per year” to calculate payback.",
     "paybackNever": "At these prices the boiler does not pay back.",
-    "pricesAsOf": "Indicative prices as of {date}."
+    "pricesAsOf": "Indicative prices as of {date}.",
+    "periodLabel": "Period"
   },
   "about": {
     "title": "About us",

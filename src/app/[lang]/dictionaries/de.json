@@ -118,7 +118,8 @@
     },
     "paybackNeedPeriod": "„Pro Saison“ oder „Pro Jahr“ wählen, um die Amortisation zu berechnen.",
     "paybackNever": "Bei diesen Preisen amortisiert sich der Kessel nicht.",
-    "pricesAsOf": "Richtpreise vom {date}."
+    "pricesAsOf": "Richtpreise vom {date}.",
+    "periodLabel": "Zeitraum"
   },
   "about": {
     "title": "Über uns",
