@@ -76,3 +76,44 @@ export function calculate(input: CalculatorInput): CalculatorResult {
 
   return { removedPercent, results, cheapest };
 }
+
+export type Batch = { moistureFrom: number; moistureTo: number; tonnes: number };
+
+export type BatchesInput = {
+  batches: Batch[];
+  prices: FuelPrices;
+  fuelUse?: FuelUse;
+  vatRate?: number;
+};
+
+export type BatchesResult = CalculatorResult & { totalTonnes: number };
+
+/** Sums several crop batches (same prices) into one comparison. */
+export function calculateBatches({ batches, ...rest }: BatchesInput): BatchesResult {
+  const parts = batches.map((b) => calculate({ ...rest, ...b }));
+  const totalTonnes = batches.reduce((sum, b) => sum + b.tonnes, 0);
+
+  const gasTotal = parts.reduce((sum, p) => sum + p.results[0].totalCost, 0);
+  const results = FUELS.map<FuelResult>((fuel, i) => {
+    const totalCost = parts.reduce((sum, p) => sum + p.results[i].totalCost, 0);
+    const savingsVsGas = gasTotal - totalCost;
+    return {
+      fuel,
+      totalCost,
+      costPerTonne: totalTonnes > 0 ? totalCost / totalTonnes : 0,
+      savingsVsGas,
+      savingsPercent: gasTotal > 0 ? (savingsVsGas / gasTotal) * 100 : 0,
+    };
+  });
+
+  const removedPercent =
+    totalTonnes > 0
+      ? batches.reduce((sum, b, i) => sum + parts[i].removedPercent * b.tonnes, 0) / totalTonnes
+      : 0;
+  const cheapest =
+    totalTonnes > 0 && gasTotal > 0
+      ? results.reduce((best, r) => (r.totalCost < best.totalCost ? r : best)).fuel
+      : null;
+
+  return { removedPercent, results, cheapest, totalTonnes };
+}

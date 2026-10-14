@@ -94,7 +94,21 @@
     "summary": "Mit {fuel} sparen Sie {amount} {period} gegenüber Gas.",
     "disclaimer": "Richtwerte; ein genaues Angebot erstellt unser Manager.",
     "cta": "Kesselangebot erhalten",
-    "chart": "Trocknungskosten pro Tonne"
+    "chart": "Trocknungskosten pro Tonne",
+    "addCrop": "Kultur hinzufügen",
+    "remove": "Entfernen",
+    "batch": "Charge",
+    "totalVolume": "Gesamt",
+    "pdf": "PDF herunterladen",
+    "pdfHint": "Der Druckdialog öffnet sich: „Als PDF speichern“ wählen.",
+    "reportTitle": "Bericht: Trocknungsersparnis",
+    "reportDate": "Datum",
+    "reportInputs": "Eingaben",
+    "moistureFromTo": "Feuchte {from} % → {to} %",
+    "priceLine": "Brennstoffpreise",
+    "withVat": "inkl. MwSt.",
+    "withoutVat": "ohne MwSt.",
+    "contactLine": "Kontakt"
   },
   "about": {
     "title": "Über uns",

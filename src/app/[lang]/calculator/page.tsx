@@ -10,8 +10,10 @@ export default async function CalculatorPage({ params }: PageProps<"/[lang]/calc
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold sm:text-4xl">{dict.calc.title}</h1>
-      <p className="mb-8 mt-2 text-muted">{dict.calc.lead}</p>
+      <div className="print:hidden">
+        <h1 className="text-3xl font-bold sm:text-4xl">{dict.calc.title}</h1>
+        <p className="mb-8 mt-2 text-muted">{dict.calc.lead}</p>
+      </div>
       <CalculatorClient lang={lang} dict={dict.calc} />
     </div>
   );

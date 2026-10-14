@@ -94,7 +94,21 @@
     "summary": "With {fuel} you save {amount} {period} compared to gas.",
     "disclaimer": "Estimate only; our manager will prepare an exact quote.",
     "cta": "Get a boiler quote",
-    "chart": "Drying cost per tonne"
+    "chart": "Drying cost per tonne",
+    "addCrop": "Add crop",
+    "remove": "Remove",
+    "batch": "Batch",
+    "totalVolume": "Total",
+    "pdf": "Download PDF",
+    "pdfHint": "The print dialog opens: choose “Save as PDF”.",
+    "reportTitle": "Report: drying savings",
+    "reportDate": "Date",
+    "reportInputs": "Inputs",
+    "moistureFromTo": "moisture {from}% → {to}%",
+    "priceLine": "Fuel prices",
+    "withVat": "incl. VAT",
+    "withoutVat": "excl. VAT",
+    "contactLine": "Contact"
   },
   "about": {
     "title": "About us",

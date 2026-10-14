@@ -17,7 +17,7 @@ export default function Header({ lang, nav, cta }: Props) {
   ];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
+    <header className="print:hidden sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
         <Link href={`/${lang}`} aria-label="GazDream">
           <Image src="/brand/logo.jpg" alt="Eco Straßmayr Energy" width={120} height={60} priority />

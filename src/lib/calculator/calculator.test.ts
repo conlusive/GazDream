@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { calculate } from "./index";
+import { calculate, calculateBatches } from "./index";
 
 const base = {
   moistureFrom: 20,
@@ -50,5 +50,37 @@ describe("calculate", () => {
   it("rejects invalid input", () => {
     expect(() => calculate({ ...base, tonnes: -1 })).toThrow(RangeError);
     expect(() => calculate({ ...base, tonnes: NaN })).toThrow(RangeError);
+  });
+});
+
+describe("calculateBatches", () => {
+  const prices = base.prices;
+  const a = { moistureFrom: 20, moistureTo: 14, tonnes: 1000 };
+  const b = { moistureFrom: 18, moistureTo: 13, tonnes: 500 };
+
+  it("equals the single calculation for one batch", () => {
+    const one = calculate({ ...a, prices });
+    const multi = calculateBatches({ batches: [a], prices });
+    expect(multi.results.map((r) => r.totalCost)).toEqual(one.results.map((r) => r.totalCost));
+    expect(multi.cheapest).toBe(one.cheapest);
+  });
+
+  it("sums totals and savings across crops", () => {
+    const sum = calculateBatches({ batches: [a, b], prices });
+    const ra = calculate({ ...a, prices });
+    const rb = calculate({ ...b, prices });
+    const chips = sum.results.find((r) => r.fuel === "chips")!;
+    expect(chips.totalCost).toBeCloseTo(
+      ra.results[1].totalCost + rb.results[1].totalCost,
+      6,
+    );
+    expect(chips.savingsVsGas).toBeCloseTo(ra.results[1].savingsVsGas + rb.results[1].savingsVsGas, 6);
+    expect(sum.totalTonnes).toBe(1500);
+    expect(sum.removedPercent).toBeCloseTo((6 * 1000 + 5 * 500) / 1500, 6);
+  });
+
+  it("handles an empty list and zero tonnes without a winner", () => {
+    expect(calculateBatches({ batches: [], prices }).cheapest).toBeNull();
+    expect(calculateBatches({ batches: [{ ...a, tonnes: 0 }], prices }).cheapest).toBeNull();
   });
 });

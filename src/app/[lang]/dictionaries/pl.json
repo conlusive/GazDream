@@ -94,7 +94,21 @@
     "summary": "Na {fuel} zaoszczędzisz {amount} {period} w porównaniu z gazem.",
     "disclaimer": "Obliczenia orientacyjne; dokładną ofertę przygotuje nasz menedżer.",
     "cta": "Otrzymaj ofertę na kocioł",
-    "chart": "Koszt suszenia 1 t"
+    "chart": "Koszt suszenia 1 t",
+    "addCrop": "Dodaj kulturę",
+    "remove": "Usuń",
+    "batch": "Partia",
+    "totalVolume": "Razem",
+    "pdf": "Pobierz PDF",
+    "pdfHint": "Otworzy się okno drukowania: wybierz „Zapisz jako PDF”.",
+    "reportTitle": "Raport: korzyść z suszenia",
+    "reportDate": "Data",
+    "reportInputs": "Dane wejściowe",
+    "moistureFromTo": "wilgotność {from}% → {to}%",
+    "priceLine": "Ceny paliw",
+    "withVat": "z VAT",
+    "withoutVat": "bez VAT",
+    "contactLine": "Kontakt"
   },
   "about": {
     "title": "O firmie",

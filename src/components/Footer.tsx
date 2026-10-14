@@ -3,7 +3,7 @@ import type { Dictionary } from "@/app/[lang]/dictionaries";
 
 export default function Footer({ dict }: { lang: Locale; dict: Dictionary }) {
   return (
-    <footer className="border-t border-line bg-soft">
+    <footer className="print:hidden border-t border-line bg-soft">
       <div className="mx-auto max-w-6xl px-4 py-8 text-sm text-muted">
         <p className="font-semibold text-ink">GazDream · {dict.hero.badge}</p>
         <p>{dict.footer.legalName} · {dict.footer.address}</p>
