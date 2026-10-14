@@ -250,7 +250,15 @@
   "home": {
     "caseTitle": "From the field",
     "caseMore": "See projects",
-    "illustrative": "Illustrative photo: a GazDream installation"
+    "illustrative": "Illustrative photo: a GazDream installation",
+    "modelsEyebrow": "Range",
+    "modelsTitle": "PUT heat generators",
+    "modelsAll": "All models",
+    "exampleEyebrow": "Calculation example",
+    "exampleText": "Corn 20% → 14%, 1000 t, wood chips instead of gas",
+    "exampleNote": "Indicative figures based on the calculator prices.",
+    "unitKw": "kW",
+    "scroll": "Scroll"
   },
   "testimonials": {
     "title": "Customer reviews",

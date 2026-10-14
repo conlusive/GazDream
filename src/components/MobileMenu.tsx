@@ -37,13 +37,13 @@ export default function MobileMenu({ label, links }: Props) {
     <details ref={ref} className="relative lg:hidden">
       <summary
         aria-label={label}
-        className="flex h-10 w-10 cursor-pointer list-none items-center justify-center rounded-md border border-line [&::-webkit-details-marker]:hidden"
+        className="flex h-11 w-11 cursor-pointer list-none items-center justify-center rounded-full bg-soft transition hover:bg-line [&::-webkit-details-marker]:hidden"
       >
         <span className="block h-0.5 w-5 bg-ink shadow-[0_-6px_0_0_currentColor,0_6px_0_0_currentColor]" />
       </summary>
-      <nav className="absolute right-0 mt-2 w-60 rounded-lg border border-line bg-white p-2 shadow-lg">
+      <nav className="rise absolute right-0 mt-3 w-64 rounded-2xl border border-line bg-white p-2 shadow-[0_24px_48px_-20px_rgba(11,42,22,0.35)]" style={{ animationDuration: "0.35s" }}>
         {links.map((l) => (
-          <Link key={l.href} href={l.href} className="block rounded px-3 py-3 text-base font-medium hover:bg-soft">
+          <Link key={l.href} href={l.href} className="block rounded-xl px-4 py-3 text-base font-semibold transition hover:bg-soft hover:text-brand-green">
             {l.label}
           </Link>
         ))}

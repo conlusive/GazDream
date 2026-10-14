@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
+import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
 import { CONTACT } from "@/lib/content";
 import { getDictionary } from "../dictionaries";
@@ -12,21 +13,32 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
   const c = dict.contact;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold sm:text-4xl">{c.title}</h1>
-      <p className="mb-8 mt-3 max-w-2xl text-muted">{c.lead}</p>
-      <div className="grid gap-10 lg:grid-cols-2">
-        <Suspense>
-          <ContactForm lang={lang} dict={c} />
-        </Suspense>
-        <div className="space-y-4 text-sm">
-          <div className="hidden gap-3 lg:flex">
-            <a href={CONTACT.phoneHref} className="rounded-md bg-brand-green px-4 py-2 font-semibold text-white">{dict.cta.call}: {CONTACT.phone}</a>
+    <>
+      <PageHero eyebrow={dict.nav.contact} title={c.title} lead={c.lead} />
+      <section className="section">
+        <div className="container-x grid gap-12 lg:grid-cols-[1.3fr_1fr]">
+          <div className="card p-7 sm:p-10">
+            <Suspense>
+              <ContactForm lang={lang} dict={c} />
+            </Suspense>
           </div>
-          <p><span className="text-muted">{c.email}:</span> <a className="font-semibold" href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
-          <p><span className="text-muted">{c.address}:</span> <strong>{dict.footer.legalName}, {dict.footer.address}</strong></p>
+          <aside className="space-y-6 self-start rounded-3xl bg-forest p-8 text-white sm:p-10">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/60">{dict.cta.call}</p>
+              <a href={CONTACT.phoneHref} className="mt-2 block text-3xl font-extrabold tracking-tight transition hover:text-leaf">{CONTACT.phone}</a>
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/60">{c.email}</p>
+              <a href={`mailto:${CONTACT.email}`} className="mt-2 block break-all text-lg font-bold transition hover:text-leaf">{CONTACT.email}</a>
+            </div>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/60">{c.address}</p>
+              <p className="mt-2 font-bold">{dict.footer.legalName}</p>
+              <p className="text-white/75">{dict.footer.address}</p>
+            </div>
+          </aside>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }

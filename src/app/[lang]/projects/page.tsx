@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
 import { PROJECTS } from "@/lib/content";
 import { getDictionary } from "../dictionaries";
@@ -11,34 +12,43 @@ export default async function ProjectsPage({ params }: PageProps<"/[lang]/projec
   const p = dict.projects;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10">
-      <h1 className="text-3xl font-bold sm:text-4xl">{p.title}</h1>
-      <p className="mt-3 text-lg text-muted">{p.lead}</p>
+    <>
+      <PageHero eyebrow={dict.nav.projects} title={p.title} lead={p.lead} />
 
-      <section className="my-8 grid items-center gap-6 rounded-xl bg-soft p-5 lg:grid-cols-2">
-        <figure>
-          <Image src="/photos/hero.jpg" alt="" width={1272} height={900} className="rounded-lg" />
-          <figcaption className="mt-2 text-xs text-muted">{dict.home.illustrative}</figcaption>
-        </figure>
-        <div>
-          <h2 className="text-2xl font-bold">{p.featured}</h2>
-          <p className="mt-3 text-muted">{p.featuredText}</p>
+      <section className="section !pb-10">
+        <div className="container-x">
+          <div className="reveal grid items-stretch overflow-hidden rounded-3xl bg-forest text-white lg:grid-cols-2">
+            <figure className="relative min-h-[260px] overflow-hidden">
+              <Image src="/photos/hero.jpg" alt="" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
+              <figcaption className="sr-only">{dict.home.illustrative}</figcaption>
+            </figure>
+            <div className="p-8 sm:p-12">
+              <p className="eyebrow !text-leaf mb-4">{dict.home.caseTitle}</p>
+              <h2 className="display text-2xl sm:text-4xl">{p.featured}</h2>
+              <p className="mt-5 text-white/75">{p.featuredText}</p>
+              <p className="mt-6 text-xs text-white/50">{dict.home.illustrative}</p>
+            </div>
+          </div>
         </div>
       </section>
 
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {PROJECTS.map((x) => (
-          <article key={x.key} className="rounded-xl border border-line p-5">
-            <h2 className="font-bold text-brand-green">{p.items[x.key]}</h2>
-            <dl className="mt-3 space-y-1 text-sm">
-              <div className="flex justify-between"><dt className="text-muted">{p.power}</dt><dd className="font-semibold">{x.powerMw} MW</dd></div>
-              <div className="flex justify-between"><dt className="text-muted">{p.fuel}</dt><dd className="font-semibold">{x.fuel === "chips" ? p.chips : p.moist}</dd></div>
-              {x.dryer && <div className="flex justify-between"><dt className="text-muted">{p.dryer}</dt><dd className="font-semibold">{x.dryer}</dd></div>}
-              {x.perDay && <div className="flex justify-between"><dt className="text-muted">{p.capacity}</dt><dd className="font-semibold">{x.perDay} {p.perDay}</dd></div>}
-            </dl>
-          </article>
-        ))}
-      </div>
-    </div>
+      <section className="section">
+        <div className="container-x grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.map((x) => (
+            <article key={x.key} className="card card-hover reveal p-7">
+              <p className="text-sm font-semibold text-muted">{p.items[x.key]}</p>
+              <p className="tabular mt-3 text-5xl font-extrabold tracking-tight text-brand-green">
+                {x.powerMw}<span className="ml-1 text-2xl font-bold text-ink">MW</span>
+              </p>
+              <dl className="mt-6 space-y-2 text-sm">
+                <div className="flex justify-between border-t border-line pt-2"><dt className="text-muted">{p.fuel}</dt><dd className="font-bold">{x.fuel === "chips" ? p.chips : p.moist}</dd></div>
+                {x.dryer && <div className="flex justify-between border-t border-line pt-2"><dt className="text-muted">{p.dryer}</dt><dd className="font-bold">{x.dryer}</dd></div>}
+                {x.perDay && <div className="flex justify-between border-t border-line pt-2"><dt className="text-muted">{p.capacity}</dt><dd className="font-bold">{x.perDay} {p.perDay}</dd></div>}
+              </dl>
+            </article>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

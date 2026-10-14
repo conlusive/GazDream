@@ -9,7 +9,7 @@ export default function LangSwitcher({ current }: { current: Locale }) {
   const rest = pathname.replace(/^\/(pl|en|de)(?=\/|$)/, "");
 
   return (
-    <div className="flex items-center gap-1 text-sm font-semibold" role="group" aria-label="Language">
+    <div className="flex items-center rounded-full bg-soft p-1 text-xs font-bold" role="group" aria-label="Language">
       {locales.map((locale) => (
         <Link
           key={locale}
@@ -19,11 +19,9 @@ export default function LangSwitcher({ current }: { current: Locale }) {
           onClick={() => {
             document.cookie = `${LOCALE_COOKIE}=${locale}; path=/; max-age=31536000; samesite=lax`;
           }}
-          className={
-            locale === current
-              ? "rounded px-2.5 py-2 bg-brand-green text-white"
-              : "rounded px-2.5 py-2 text-muted hover:text-brand-green"
-          }
+          className={`rounded-full px-3 py-2 transition duration-300 ${
+            locale === current ? "bg-brand-green text-white shadow-sm" : "text-muted hover:text-brand-green"
+          }`}
         >
           {locale.toUpperCase()}
         </Link>

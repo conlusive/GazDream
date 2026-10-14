@@ -4,18 +4,20 @@ type Testimonial = { quote: string; author: string; role?: string; location?: st
 export default function Testimonials({ title, items }: { title: string; items: readonly Testimonial[] }) {
   if (items.length === 0) return null;
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16">
-      <h2 className="mb-8 text-2xl font-bold sm:text-3xl">{title}</h2>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {items.map((t) => (
-          <figure key={t.author + t.quote} className="rounded-xl border border-line p-6">
-            <blockquote className="text-ink">“{t.quote}”</blockquote>
-            <figcaption className="mt-4 text-sm text-muted">
-              <strong className="text-ink">{t.author}</strong>
-              {[t.role, t.location].filter(Boolean).map((x) => ` · ${x}`)}
-            </figcaption>
-          </figure>
-        ))}
+    <section className="section">
+      <div className="container-x">
+        <h2 className="display reveal mb-12 text-3xl sm:text-5xl">{title}</h2>
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {items.map((t) => (
+            <figure key={t.author + t.quote} className="card reveal p-7">
+              <blockquote className="text-lg leading-relaxed">“{t.quote}”</blockquote>
+              <figcaption className="mt-5 text-sm text-muted">
+                <strong className="text-ink">{t.author}</strong>
+                {[t.role, t.location].filter(Boolean).map((x) => ` · ${x}`)}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
       </div>
     </section>
   );

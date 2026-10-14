@@ -31,50 +31,47 @@ export default function QuickForm({ lang, dict, calcLabel }: { lang: Locale; dic
     setStatus(ok ? "ok" : "error");
   }
 
-  const field = "w-full min-w-0 rounded-md border border-white/30 bg-white px-3 py-2 text-base text-ink focus:outline-none focus:ring-2 focus:ring-brand-orange";
-
   return (
-    <section className="bg-brand-green-dark text-white print:hidden" aria-labelledby="quick-title">
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 lg:grid-cols-[1fr_2fr] lg:items-center">
-        <div>
-          <h2 id="quick-title" className="text-2xl font-bold">{dict.title}</h2>
-          <p className="mt-2 text-white/85">{dict.lead}</p>
-          <Link href={`/${lang}/calculator`} className="mt-3 inline-block text-sm font-semibold underline">
-            {dict.calc} → {calcLabel}
-          </Link>
-        </div>
+    <section className="section print:hidden" aria-labelledby="quick-title">
+      <div className="container-x">
+        <div className="reveal grid gap-10 rounded-3xl border border-line bg-white p-7 shadow-[0_30px_60px_-40px_rgba(11,42,22,0.35)] sm:p-12 lg:grid-cols-[1fr_1.5fr] lg:items-center">
+          <div>
+            <p className="eyebrow mb-3">{dict.title}</p>
+            <h2 id="quick-title" className="display text-3xl sm:text-4xl">{dict.lead}</h2>
+            <Link href={`/${lang}/calculator`} className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-brand-green">
+              {dict.calc} → {calcLabel}
+              <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
 
-        {status === "ok" ? (
-          <p role="status" className="rounded-lg bg-white/10 p-5 font-semibold">{dict.ok}</p>
-        ) : (
-          <form onSubmit={onSubmit} className="grid gap-3 sm:grid-cols-2">
-            <div>
-              <label htmlFor="qf-name" className="mb-1 block text-sm font-semibold">{dict.name}</label>
-              <input id="qf-name" name="name" required maxLength={120} autoComplete="name" className={field} />
-            </div>
-            <div>
-              <label htmlFor="qf-phone" className="mb-1 block text-sm font-semibold">{dict.phone}</label>
-              <input id="qf-phone" name="phone" type="tel" required maxLength={160} autoComplete="tel" className={field} />
-            </div>
-            <div className="sm:col-span-2">
-              <label htmlFor="qf-interest" className="mb-1 block text-sm font-semibold">{dict.interest}</label>
-              <select id="qf-interest" name="interest" className={field}>
-                {dict.options.map((o) => <option key={o}>{o}</option>)}
-              </select>
-            </div>
-            <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
-            <div className="sm:col-span-2">
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="rounded-md bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark disabled:opacity-60"
-              >
-                {status === "sending" ? dict.sending : dict.send}
-              </button>
-              {status === "error" && <p role="alert" className="mt-2 text-sm font-semibold text-orange-200">{dict.error}</p>}
-            </div>
-          </form>
-        )}
+          {status === "ok" ? (
+            <p role="status" className="rounded-2xl bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>
+          ) : (
+            <form onSubmit={onSubmit} className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="qf-name" className="mb-1.5 block text-sm font-bold">{dict.name}</label>
+                <input id="qf-name" name="name" required maxLength={120} autoComplete="name" className="field" />
+              </div>
+              <div>
+                <label htmlFor="qf-phone" className="mb-1.5 block text-sm font-bold">{dict.phone}</label>
+                <input id="qf-phone" name="phone" type="tel" required maxLength={160} autoComplete="tel" className="field" />
+              </div>
+              <div className="sm:col-span-2">
+                <label htmlFor="qf-interest" className="mb-1.5 block text-sm font-bold">{dict.interest}</label>
+                <select id="qf-interest" name="interest" className="field">
+                  {dict.options.map((o) => <option key={o}>{o}</option>)}
+                </select>
+              </div>
+              <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
+              <div className="sm:col-span-2">
+                <button type="submit" disabled={status === "sending"} className="btn btn-primary disabled:opacity-60">
+                  {status === "sending" ? dict.sending : dict.send}
+                </button>
+                {status === "error" && <p role="alert" className="mt-3 text-sm font-bold text-red-700">{dict.error}</p>}
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   );

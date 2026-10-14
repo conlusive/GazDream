@@ -32,35 +32,35 @@ export default function ContactForm({ lang, dict }: { lang: Locale; dict: Dictio
   }
 
   if (status === "ok") {
-    return <p role="status" className="rounded-lg bg-green-100 p-5 font-semibold">{dict.ok}</p>;
+    return <p role="status" className="rounded-2xl bg-soft p-6 text-lg font-bold text-brand-green">{dict.ok}</p>;
   }
 
-  const field = "w-full rounded-md border border-line px-3 py-2 text-base focus:border-brand-green focus:outline-none";
+  const field = "field";
   return (
     <form onSubmit={onSubmit} className="space-y-4">
       {calc && (
-        <p className="rounded bg-soft px-3 py-2 text-sm">
+        <p className="rounded-xl bg-soft px-4 py-3 text-sm">
           {dict.calcNote} <strong>{calc}</strong>
         </p>
       )}
       {model && <p className="text-sm font-semibold">{model}</p>}
       <div>
-        <label htmlFor="name" className="mb-1 block text-sm font-semibold">{dict.name}</label>
+        <label htmlFor="name" className="mb-1.5 block text-sm font-bold">{dict.name}</label>
         <input id="name" name="name" required maxLength={120} autoComplete="name" className={field} />
       </div>
       <div>
-        <label htmlFor="contact" className="mb-1 block text-sm font-semibold">{dict.phone}</label>
+        <label htmlFor="contact" className="mb-1.5 block text-sm font-bold">{dict.phone}</label>
         <input id="contact" name="contact" required maxLength={160} autoComplete="tel" className={field} />
       </div>
       <div>
-        <label htmlFor="message" className="mb-1 block text-sm font-semibold">{dict.message}</label>
+        <label htmlFor="message" className="mb-1.5 block text-sm font-bold">{dict.message}</label>
         <textarea id="message" name="message" rows={4} maxLength={2000} className={field} />
       </div>
       <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hidden" />
       <button
         type="submit"
         disabled={status === "sending"}
-        className="rounded-md bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark disabled:opacity-60"
+        className="btn btn-primary disabled:opacity-60"
       >
         {status === "sending" ? dict.sending : dict.send}
       </button>

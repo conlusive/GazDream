@@ -1,6 +1,7 @@
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import Faq from "@/components/Faq";
+import PageHero from "@/components/PageHero";
+import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale } from "@/i18n/config";
 import { getDictionary } from "../dictionaries";
 
@@ -20,22 +21,21 @@ export default async function FaqPage({ params }: PageProps<"/[lang]/faq">) {
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <h1 className="text-3xl font-bold sm:text-4xl">{dict.faq.title}</h1>
-      <p className="mb-8 mt-3 text-lg text-muted">{dict.faq.lead}</p>
-      <Faq items={dict.faq.items} />
-      <div className="mt-8 flex flex-wrap gap-3">
-        <Link href={`/${lang}/calculator`} className="rounded-md bg-brand-orange px-6 py-3 font-semibold text-white hover:bg-brand-orange-dark">
-          {dict.cta.calculate}
-        </Link>
-        <Link href={`/${lang}/contact`} className="rounded-md border-2 border-brand-green px-6 py-3 font-semibold text-brand-green hover:bg-soft">
-          {dict.cta.request}
-        </Link>
-      </div>
+    <>
+      <PageHero eyebrow="FAQ" title={dict.faq.title} lead={dict.faq.lead} />
+      <section className="section">
+        <div className="container-x max-w-3xl">
+          <Faq items={dict.faq.items} />
+          <div className="mt-12 flex flex-wrap gap-3">
+            <ButtonLink href={`/${lang}/calculator`}>{dict.cta.calculate}</ButtonLink>
+            <ButtonLink href={`/${lang}/contact`} variant="outline">{dict.cta.request}</ButtonLink>
+          </div>
+        </div>
+      </section>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
       />
-    </div>
+    </>
   );
 }

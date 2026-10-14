@@ -250,7 +250,15 @@
   "home": {
     "caseTitle": "Aus der Praxis",
     "caseMore": "Referenzen ansehen",
-    "illustrative": "Symbolfoto: eine GazDream-Anlage"
+    "illustrative": "Symbolfoto: eine GazDream-Anlage",
+    "modelsEyebrow": "Programm",
+    "modelsTitle": "PUT-Wärmeerzeuger",
+    "modelsAll": "Alle Modelle",
+    "exampleEyebrow": "Rechenbeispiel",
+    "exampleText": "Mais 20 % → 14 %, 1000 t, Hackschnitzel statt Gas",
+    "exampleNote": "Richtwerte auf Basis der Rechnerpreise.",
+    "unitKw": "kW",
+    "scroll": "Scrollen"
   },
   "testimonials": {
     "title": "Kundenstimmen",

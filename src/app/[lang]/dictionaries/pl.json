@@ -250,7 +250,15 @@
   "home": {
     "caseTitle": "Z obiektu",
     "caseMore": "Zobacz realizacje",
-    "illustrative": "Zdjęcie poglądowe: instalacja GazDream"
+    "illustrative": "Zdjęcie poglądowe: instalacja GazDream",
+    "modelsEyebrow": "Oferta",
+    "modelsTitle": "Generatory ciepła PUT",
+    "modelsAll": "Wszystkie modele",
+    "exampleEyebrow": "Przykład obliczenia",
+    "exampleText": "Kukurydza 20% → 14%, 1000 t, zrębki zamiast gazu",
+    "exampleNote": "Dane orientacyjne, według cen z kalkulatora.",
+    "unitKw": "kW",
+    "scroll": "Przewiń"
   },
   "testimonials": {
     "title": "Opinie klientów",
