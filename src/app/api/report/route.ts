@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server";
 import { getDictionary } from "@/app/[lang]/dictionaries";
 import { hasLocale } from "@/i18n/config";
-import { CONTACT } from "@/lib/content";
-import { archiveLead, deliverLead, isEmail, sendReportEmail } from "@/lib/lead-delivery";
+import { recordLead } from "@/lib/leads-service";
+import { isEmail, sendReportEmail } from "@/lib/lead-delivery";
 import { buildReport, parseReportInput } from "@/lib/report";
+import { getSettings } from "@/lib/settings";
 
 const MAX_BODY_CHARS = 5_000;
 // Best-effort per-client limit: 3 reports per 10 minutes (stops this from being used to spam strangers).
@@ -37,14 +38,12 @@ export async function POST(request: Request) {
   const client = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (tooMany(client)) return NextResponse.json({ ok: false }, { status: 429 });
 
-  const dict = await getDictionary(lang);
-  const report = buildReport(lang, dict.calc, input, CONTACT);
+  const [dict, settings] = await Promise.all([getDictionary(lang), getSettings()]);
+  const report = buildReport(lang, dict.calc, input, settings);
   const sent = await sendReportEmail({ to: email, subject: dict.calc.reportTitle, text: report.text });
   if (!sent) return NextResponse.json({ ok: false }, { status: 503 });
 
   // The visitor asked for the report and agreed to be contacted: pass it to sales as a lead as well.
-  const lead = { name: email, contact: email, message: "Raport z kalkulatora wysłany klientowi", model: "", calc: report.summary.slice(0, 400), lang, page: "/calculator (report)" };
-  const result = await deliverLead(lead);
-  await archiveLead(lead, result);
+  await recordLead({ name: email, contact: email, message: "Raport z kalkulatora wysłany klientowi", model: "", calc: report.summary.slice(0, 400), lang, page: "/calculator (report)", source: "report" });
   return NextResponse.json({ ok: true });
 }

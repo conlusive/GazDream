@@ -114,3 +114,19 @@ describe("breakEvenPrice", () => {
     expect(breakEvenPrice("chips", NaN)).toBeNull();
   });
 });
+
+describe("per-crop fuel use", () => {
+  it("uses each batch's own consumption", () => {
+    const corn = { gas: 1.2 / 1000, chips: 2.5 / 1000, pellets: 2.5 / 1000 };
+    const soy = { gas: 2.4 / 1000, chips: 5 / 1000, pellets: 5 / 1000 }; // twice as hungry
+    const sum = calculateBatches({
+      batches: [
+        { moistureFrom: 20, moistureTo: 14, tonnes: 1000, fuelUse: corn },
+        { moistureFrom: 20, moistureTo: 14, tonnes: 1000, fuelUse: soy },
+      ],
+      prices: base.prices,
+    });
+    const cornOnly = calculate({ ...base, fuelUse: corn });
+    expect(sum.results[0].totalCost).toBeCloseTo(cornOnly.results[0].totalCost * 3, 6);
+  });
+});

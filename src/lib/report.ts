@@ -1,5 +1,6 @@
 import { calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
-import { CROPS, CURRENCIES, PERIODS, VAT_RATE, type Crop, type Currency, type Period } from "@/lib/calculator/config";
+import { CROPS, CURRENCIES, PERIODS, type Crop, type Currency, type Period } from "@/lib/calculator/config";
+import { fuelUseForCalc, type Settings } from "@/lib/settings-schema";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import type { Locale } from "@/i18n/config";
 
@@ -35,11 +36,12 @@ export function parseReportInput(raw: unknown): ReportInput | null {
 }
 
 /** Plain-text report in the visitor's language. Everything is recomputed here, never taken from the client. */
-export function buildReport(lang: Locale, d: Dictionary["calc"], input: ReportInput, site: { phone: string; email: string }) {
+export function buildReport(lang: Locale, d: Dictionary["calc"], input: ReportInput, settings: Settings) {
+  const site = settings.contacts;
   const result = calculateBatches({
-    batches: input.rows.map((r) => ({ moistureFrom: r.from, moistureTo: r.to, tonnes: r.tonnes })),
+    batches: input.rows.map((r) => ({ moistureFrom: r.from, moistureTo: r.to, tonnes: r.tonnes, fuelUse: fuelUseForCalc(settings.fuelUse[r.crop]) })),
     prices: input.prices,
-    vatRate: input.withVat ? VAT_RATE[lang] : 0,
+    vatRate: input.withVat ? settings.vat[lang] : 0,
   });
   const money = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0, useGrouping: "always" });
   const money2 = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" });

@@ -13,9 +13,10 @@ import Testimonials from "@/components/Testimonials";
 import { ButtonLink } from "@/components/ui/Button";
 import { hasLocale, usesPolishMarket } from "@/i18n/config";
 import { calculateBatches, type Fuel } from "@/lib/calculator";
-import { CONTACT, MODELS } from "@/lib/content";
+import { MODELS } from "@/lib/content";
 import { PHOTOS } from "@/lib/images";
-import { getPrices } from "@/lib/prices";
+import { getSettings, getTestimonials } from "@/lib/settings";
+import { fuelUseForCalc, telHref } from "@/lib/settings-schema";
 import { plain, rich } from "@/lib/rich";
 import { getDictionary } from "./dictionaries";
 
@@ -24,13 +25,17 @@ const FUELS: Fuel[] = ["gas", "chips", "pellets"];
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const [dict, prices] = await Promise.all([getDictionary(lang), getPrices()]);
+  const [dict, settings, testimonials] = await Promise.all([getDictionary(lang), getSettings(), getTestimonials(lang)]);
+  const prices = settings.prices;
+  const contacts = settings.contacts;
+  const cornUse = fuelUseForCalc(settings.fuelUse.corn);
 
   // Example from the same calculation the calculator uses, with the current default prices.
   const currency = usesPolishMarket(lang) ? "PLN" : "EUR";
   const example = calculateBatches({
     batches: [{ moistureFrom: 20, moistureTo: 14, tonnes: 1000 }],
     prices: prices.table[currency],
+    fuelUse: cornUse,
   });
   const chips = example.results.find((r) => r.fuel === "chips")!;
   const maxCost = Math.max(...example.results.map((r) => r.costPerTonne));
@@ -64,6 +69,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             lang={lang}
             currency={currency}
             prices={prices.table[currency]}
+            fuelUse={cornUse}
             tonnesLabel={dict.calc.tonnes}
             gasLabel={dict.calc.fuels.gas}
             chipsLabel={dict.calc.fuels.chips}
@@ -203,7 +209,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
         </div>
       </section>
 
-      <Testimonials title={dict.testimonials.title} items={dict.testimonials.items} />
+      <Testimonials title={dict.testimonials.title} items={testimonials} />
 
       {/* ---------- FAQ ---------- */}
       <section className="bg-soft section">
@@ -227,7 +233,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             <p className="mt-4 max-w-xl text-white/75">{dict.home.ctaText}</p>
             <div className="mt-8 flex flex-wrap items-center gap-3">
               <ButtonLink href={`/${lang}/contact`}>{dict.cta.request}</ButtonLink>
-              <a href={CONTACT.phoneHref} className="btn btn-light">{dict.home.ctaCall}: {CONTACT.phone}</a>
+              <a href={telHref(contacts.phone)} className="btn btn-light">{dict.home.ctaCall}: {contacts.phone}</a>
             </div>
           </div>
         </div>

@@ -8,8 +8,7 @@ import Select from "@/components/Select";
 import Logo from "@/components/Logo";
 import { ButtonLink } from "@/components/ui/Button";
 import { breakEvenPrice, calculateBatches, paybackPeriods, type Fuel } from "@/lib/calculator";
-import { VAT_RATE } from "@/lib/calculator/config";
-import { CONTACT } from "@/lib/content";
+import type { Contacts, CropDefaults } from "@/lib/settings-schema";
 import { TONNES_KEY } from "@/components/HeroCard";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
 import { usesPolishMarket, type Locale } from "@/i18n/config";
@@ -20,15 +19,14 @@ type PriceTable = Record<Currency, Record<Fuel, number>>;
 type Period = "day" | "season" | "year";
 type Row = { id: number; crop: Crop; from: number; to: number; tonnes: string };
 
-const CROP_TARGET: Record<Crop, number> = { corn: 14, soy: 13, rapeseed: 8 };
-const CROP_START: Record<Crop, number> = { corn: 20, soy: 18, rapeseed: 12 };
+const CROPS: Crop[] = ["corn", "soy", "rapeseed"];
 const MAX_ROWS = 5;
 const FUEL_ORDER: Fuel[] = ["gas", "chips", "pellets"];
 const PRESETS = [500, 1000, 5000, 10000, 20000];
 
 // Negative or garbage input is treated as 0 so the calculation never throws.
 const num = (v: string) => Math.max(0, Number(v.replace(",", ".")) || 0);
-const newRow = (id: number, crop: Crop): Row => ({ id, crop, from: CROP_START[crop], to: CROP_TARGET[crop], tonnes: "1000" });
+const newRow = (id: number, crop: Crop, crops: CropDefaults): Row => ({ id, crop, from: crops[crop].start, to: crops[crop].target, tonnes: "1000" });
 
 // Volume slider is logarithmic (10 t .. 100 000 t) so both a small farm and an elevator fit on one control.
 const T_MIN = 10;
@@ -68,11 +66,22 @@ function CropIcon({ crop }: { crop: Crop }) {
   );
 }
 
-type Props = { lang: Locale; dict: Dictionary["calc"]; defaultPrices: PriceTable; pricesDate: string; privacyLabel: string };
+type Props = {
+  lang: Locale;
+  dict: Dictionary["calc"];
+  defaultPrices: PriceTable;
+  pricesDate: string;
+  privacyLabel: string;
+  crops: CropDefaults;
+  /** Consumption per tonne per 1% moisture, in calculator units (gas: 1000 m³, chips/pellets: tonnes). */
+  fuelUse: Record<Crop, Record<Fuel, number>>;
+  vat: Record<Locale, number>;
+  contacts: Contacts;
+};
 
-export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate, privacyLabel }: Props) {
+export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate, privacyLabel, crops, fuelUse, vat, contacts }: Props) {
   const [currency, setCurrency] = useState<Currency>(usesPolishMarket(lang) ? "PLN" : "EUR");
-  const [rows, setRows] = useState<Row[]>([newRow(1, "corn")]);
+  const [rows, setRows] = useState<Row[]>([newRow(1, "corn", crops)]);
   const [nextId, setNextId] = useState(2);
   const [period, setPeriod] = useState<Period>("season");
   const [prices, setPrices] = useState<Record<Fuel, string>>(() => {
@@ -107,27 +116,27 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
     () => new Intl.NumberFormat(lang, { style: "currency", currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" }),
     [lang, currency],
   );
-  const vatLabel = dict.vat.replace(/\d+(?:[.,]\d+)?\s?%/, `${Math.round(VAT_RATE[lang] * 100)}%`);
+  const vatLabel = dict.vat.replace(/\d+(?:[.,]\d+)?\s?%/, `${Math.round(vat[lang] * 100)}%`);
 
   const priceNums = useMemo(() => ({ gas: num(prices.gas), chips: num(prices.chips), pellets: num(prices.pellets) }), [prices]);
   const result = useMemo(
     () =>
       calculateBatches({
-        batches: rows.map((r) => ({ moistureFrom: r.from, moistureTo: r.to, tonnes: num(r.tonnes) })),
+        batches: rows.map((r) => ({ moistureFrom: r.from, moistureTo: r.to, tonnes: num(r.tonnes), fuelUse: fuelUse[r.crop] })),
         prices: priceNums,
-        vatRate: withVat ? VAT_RATE[lang] : 0,
+        vatRate: withVat ? vat[lang] : 0,
       }),
-    [rows, priceNums, withVat, lang],
+    [rows, priceNums, withVat, lang, fuelUse, vat],
   );
 
   const updateRow = (id: number, patch: Partial<Row>) =>
     setRows((rs) => rs.map((r) => (r.id === id ? { ...r, ...patch } : r)));
-  const pickCrop = (id: number, crop: Crop) => updateRow(id, { crop, from: CROP_START[crop], to: CROP_TARGET[crop] });
+  const pickCrop = (id: number, crop: Crop) => updateRow(id, { crop, from: crops[crop].start, to: crops[crop].target });
   const addRow = () => {
     if (rows.length >= MAX_ROWS) return;
     const used = new Set(rows.map((r) => r.crop));
-    const crop = (Object.keys(CROP_TARGET) as Crop[]).find((c) => !used.has(c)) ?? "corn";
-    setRows([...rows, newRow(nextId, crop)]);
+    const crop = CROPS.find((c) => !used.has(c)) ?? "corn";
+    setRows([...rows, newRow(nextId, crop, crops)]);
     setNextId(nextId + 1);
   };
   const pickCurrency = (c: Currency) => {
@@ -141,6 +150,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
     setTimeout(() => window.print(), 50);
   };
 
+  const mainCrop = rows.reduce((best, r) => (num(r.tonnes) > num(best.tonnes) ? r : best), rows[0]).crop;
   const maxCost = Math.max(...result.results.map((r) => r.costPerTonne), 0.0001);
   const winner = result.results.find((r) => r.fuel === result.cheapest);
   const winnerSaves = winner && winner.fuel !== "gas" && winner.savingsVsGas > 0;
@@ -205,7 +215,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
                   ) : null
                 }>
                   <div className="grid grid-cols-3 gap-3">
-                    {(Object.keys(CROP_TARGET) as Crop[]).map((c) => {
+                    {CROPS.map((c) => {
                       const on = row.crop === c;
                       return (
                         <button
@@ -442,7 +452,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
             <p className="mt-1 text-sm text-muted">{dict.breakHint}</p>
             <div className="mt-5 space-y-5">
               {(["chips", "pellets"] as const).map((f) => {
-                const be = breakEvenPrice(f, priceNums.gas);
+                const be = breakEvenPrice(f, priceNums.gas, fuelUse[mainCrop]);
                 if (be === null) return null;
                 const now = priceNums[f];
                 const max = Math.max(be, now) * 1.15;
@@ -517,7 +527,7 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
           <Bars result={result} dict={dict} maxCost={maxCost} />
         </div>
         <p className="mt-6 text-xs">{dict.disclaimer}</p>
-        <p className="mt-2 text-xs">{dict.contactLine}: {CONTACT.phone} · {CONTACT.email}</p>
+        <p className="mt-2 text-xs">{dict.contactLine}: {contacts.phone} · {contacts.email}</p>
       </section>
     </>
   );

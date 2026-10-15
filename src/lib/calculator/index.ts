@@ -77,7 +77,7 @@ export function calculate(input: CalculatorInput): CalculatorResult {
   return { removedPercent, results, cheapest };
 }
 
-export type Batch = { moistureFrom: number; moistureTo: number; tonnes: number };
+export type Batch = { moistureFrom: number; moistureTo: number; tonnes: number; /** Consumption for this crop; falls back to the shared one. */ fuelUse?: FuelUse };
 
 export type BatchesInput = {
   batches: Batch[];
@@ -90,7 +90,7 @@ export type BatchesResult = CalculatorResult & { totalTonnes: number };
 
 /** Sums several crop batches (same prices) into one comparison. */
 export function calculateBatches({ batches, ...rest }: BatchesInput): BatchesResult {
-  const parts = batches.map((b) => calculate({ ...rest, ...b }));
+  const parts = batches.map((b) => calculate({ ...rest, ...b, fuelUse: b.fuelUse ?? rest.fuelUse }));
   const totalTonnes = batches.reduce((sum, b) => sum + b.tonnes, 0);
 
   const gasTotal = parts.reduce((sum, p) => sum + p.results[0].totalCost, 0);

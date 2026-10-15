@@ -1,10 +1,10 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
-import { CONTACT } from "@/lib/content";
+import { telHref, type Contacts } from "@/lib/settings-schema";
 import Logo from "./Logo";
 
-export default function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
+export default function Footer({ lang, dict, contacts: CONTACT }: { lang: Locale; dict: Dictionary; contacts: Contacts }) {
   const links = [
     { href: `/${lang}/about`, label: dict.nav.about },
     { href: `/${lang}/boilers`, label: dict.nav.boilers },
@@ -34,7 +34,7 @@ export default function Footer({ lang, dict }: { lang: Locale; dict: Dictionary 
         <address className="space-y-2 text-sm not-italic">
           <p className="font-bold text-white">{dict.footer.legalName}</p>
           <p>{dict.footer.address}</p>
-          <p><a href={CONTACT.phoneHref} className="inline-block py-3 transition hover:text-white">{CONTACT.phone}</a></p>
+          <p><a href={telHref(CONTACT.phone)} className="inline-block py-3 transition hover:text-white">{CONTACT.phone}</a></p>
           <p><a href={`mailto:${CONTACT.email}`} className="inline-block py-3 transition hover:text-white">{CONTACT.email}</a></p>
         </address>
       </div>

@@ -28,6 +28,7 @@ export default function QuickForm({ lang, dict, calcLabel }: { lang: Locale; dic
       website: String(form.get("website") ?? ""),
       lang,
       page: pathname,
+      source: "quick",
     });
     setStatus(ok ? "ok" : "error");
   }

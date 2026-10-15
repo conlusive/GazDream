@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   // Self-contained server bundle (used by the Docker image).
   output: "standalone",
   poweredByHeader: false,
+  // Database drivers are loaded from node_modules at runtime instead of being bundled (PGlite ships WASM).
+  serverExternalPackages: ["pg", "@electric-sql/pglite"],
   // Runtime data (owner prices, lead log) must never be copied into the build output.
   outputFileTracingExcludes: { "*": ["./data/**"] },
   cacheComponents: true,

@@ -6,6 +6,7 @@ export type LeadPayload = {
   calc?: string;
   lang: string;
   page?: string;
+  source?: "contact" | "quick";
   website?: string; // honeypot, must stay empty
 };
 

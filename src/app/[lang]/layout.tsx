@@ -7,7 +7,8 @@ import { getDictionary } from "./dictionaries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuickForm from "@/components/QuickForm";
-import { CONTACT } from "@/lib/content";
+import { getSettings } from "@/lib/settings";
+import { telHref } from "@/lib/settings-schema";
 import { alternatesFor, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin", "latin-ext", "cyrillic"], display: "swap" });
@@ -33,7 +34,8 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
 export default async function RootLayout({ children, params }: LayoutProps<"/[lang]">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, settings] = await Promise.all([getDictionary(lang), getSettings()]);
+  const CONTACT = settings.contacts;
 
   return (
     <html lang={lang} className={manrope.variable}>
@@ -57,9 +59,9 @@ export default async function RootLayout({ children, params }: LayoutProps<"/[la
         <Header lang={lang} nav={dict.nav} cta={dict.cta} />
         <main className="flex-1">{children}</main>
         <QuickForm lang={lang} dict={dict.quick} calcLabel={dict.nav.calculator} />
-        <Footer lang={lang} dict={dict} />
+        <Footer lang={lang} dict={dict} contacts={CONTACT} />
         <a
-          href={CONTACT.phoneHref}
+          href={telHref(CONTACT.phone)}
           className="fixed inset-x-3 bottom-3 z-50 rounded-md bg-brand-green py-3.5 text-center text-sm font-bold text-white transition active:scale-[0.98] print:hidden lg:hidden"
         >
           {dict.cta.call}: {CONTACT.phone}

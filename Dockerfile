@@ -24,9 +24,9 @@ ENV NODE_ENV=production \
     NEXT_TELEMETRY_DISABLED=1 \
     PORT=3000 \
     HOSTNAME=0.0.0.0 \
-    PRICES_FILE=/data/prices.json \
+    PGLITE_DIR=/data/pglite \
     LEADS_LOG_FILE=/data/leads.jsonl
-# Owner-edited prices and the lead backup log live on a mounted volume.
+# Without DATABASE_URL an embedded database and the lead fallback log live on the mounted volume.
 RUN addgroup -S app && adduser -S app -G app && mkdir -p /data && chown app:app /data
 COPY --from=build --chown=app:app /app/.next/standalone ./
 COPY --from=build --chown=app:app /app/.next/static ./.next/static

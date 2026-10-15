@@ -27,7 +27,10 @@ export default defineConfig({
       SMTP_USER: "bot@strasslider.test",
       LEADS_EMAIL_TO: "sales@strasslider.test",
       LEADS_LOG_FILE: "/tmp/gazdream-e2e-leads.jsonl",
-      PRICES_FILE: "/tmp/gazdream-e2e-prices.json",
+      // Throw-away in-memory database and a known first admin for the admin tests.
+      PGLITE_DIR: "memory",
+      ADMIN_EMAIL: "admin",
+      ADMIN_PASSWORD: "E2e-Admin-Pass-1",
     },
   },
 });

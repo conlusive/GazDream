@@ -5,7 +5,8 @@ import PageHero from "@/components/PageHero";
 import { hasLocale } from "@/i18n/config";
 import { PHOTOS } from "@/lib/images";
 
-import { CONTACT } from "@/lib/content";
+import { getSettings } from "@/lib/settings";
+import { telHref } from "@/lib/settings-schema";
 import type { Metadata } from "next";
 import { pageMetadata } from "@/lib/seo";
 import { getDictionary } from "../dictionaries";
@@ -19,7 +20,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/contact">)
 export default async function ContactPage({ params }: PageProps<"/[lang]/contact">) {
   const { lang } = await params;
   if (!hasLocale(lang)) notFound();
-  const dict = await getDictionary(lang);
+  const [dict, settings] = await Promise.all([getDictionary(lang), getSettings()]);
+  const CONTACT = settings.contacts;
   const c = dict.contact;
 
   return (
@@ -35,12 +37,12 @@ export default async function ContactPage({ params }: PageProps<"/[lang]/contact
           <aside className="space-y-6 self-start rounded-3xl bg-forest p-8 text-white sm:p-10">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-leaf">{c.sales}</p>
-              <a href={CONTACT.phoneHref} className="mt-1 block py-1.5 text-2xl font-bold tracking-tight">{CONTACT.phone}</a>
+              <a href={telHref(CONTACT.phone)} className="mt-1 block py-1.5 text-2xl font-bold tracking-tight">{CONTACT.phone}</a>
               <a href={`mailto:${CONTACT.email}`} className="block break-all py-2 font-medium text-white/80 hover:text-white">{CONTACT.email}</a>
             </div>
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-leaf">{c.office}</p>
-              <a href={CONTACT.officePhoneHref} className="mt-1 block py-2 font-semibold">{CONTACT.officePhone}</a>
+              <a href={telHref(CONTACT.officePhone)} className="mt-1 block py-2 font-semibold">{CONTACT.officePhone}</a>
               <a href={`mailto:${CONTACT.officeEmail}`} className="block break-all py-2 font-medium text-white/80 hover:text-white">{CONTACT.officeEmail}</a>
             </div>
             <div>

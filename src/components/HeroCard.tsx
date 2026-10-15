@@ -10,6 +10,7 @@ type Props = {
   lang: Locale;
   currency: "EUR" | "PLN";
   prices: Record<Fuel, number>;
+  fuelUse: Record<Fuel, number>;
   tonnesLabel: string;
   gasLabel: string;
   chipsLabel: string;
@@ -20,12 +21,12 @@ const VOLUMES = [500, 1000, 5000, 20000];
 export const TONNES_KEY = "gd_tonnes";
 
 /** Hero mini-calculator: pick a volume, see the savings on it, carry the number into the full calculator. */
-export default function HeroCard({ lang, currency, prices, tonnesLabel, gasLabel, chipsLabel, text }: Props) {
+export default function HeroCard({ lang, currency, prices, fuelUse, tonnesLabel, gasLabel, chipsLabel, text }: Props) {
   const [tonnes, setTonnes] = useState(5000);
 
   const result = useMemo(
-    () => calculateBatches({ batches: [{ moistureFrom: 20, moistureTo: 14, tonnes }], prices }),
-    [tonnes, prices],
+    () => calculateBatches({ batches: [{ moistureFrom: 20, moistureTo: 14, tonnes }], prices, fuelUse }),
+    [tonnes, prices, fuelUse],
   );
   const gas = result.results.find((r) => r.fuel === "gas")!;
   const chips = result.results.find((r) => r.fuel === "chips")!;

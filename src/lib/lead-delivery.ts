@@ -1,5 +1,3 @@
-import { appendFile, mkdir } from "node:fs/promises";
-import path from "node:path";
 import nodemailer from "nodemailer";
 
 export type Lead = {
@@ -89,17 +87,5 @@ export async function deliverLead(lead: Lead, env: Env = process.env, deps: Deps
   } catch (err) {
     console.error("Lead e-mail failed:", err instanceof Error ? err.message : err);
     return { configured: ["email"], delivered: [], failed: ["email"] };
-  }
-}
-
-/** Best-effort local backup so a lead is not lost if the mail server is down. Never throws. */
-export async function archiveLead(lead: Lead, result: DeliveryResult, env: Env = process.env): Promise<void> {
-  try {
-    const file = env.LEADS_LOG_FILE ?? path.join(process.cwd(), "data", "leads.jsonl");
-    await mkdir(/*turbopackIgnore: true*/ path.dirname(file), { recursive: true });
-    const line = JSON.stringify({ ...lead, receivedAt: new Date().toISOString(), delivered: result.delivered, failed: result.failed });
-    await appendFile(/*turbopackIgnore: true*/ file, line + "\n", "utf8");
-  } catch (err) {
-    console.error("Could not archive lead", err instanceof Error ? err.message : err);
   }
 }

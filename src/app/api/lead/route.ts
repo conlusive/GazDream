@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { archiveLead, deliverLead, type Lead } from "@/lib/lead-delivery";
+import type { Lead } from "@/lib/lead-delivery";
+import { recordLead } from "@/lib/leads-service";
 
 const MAX = { name: 120, contact: 160, message: 2000, short: 80 } as const;
 const MAX_BODY_CHARS = 20_000;
@@ -51,13 +52,12 @@ export async function POST(request: Request) {
   const client = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (tooMany(client)) return NextResponse.json({ ok: false }, { status: 429 });
 
-  const result = await deliverLead(lead);
-  await archiveLead(lead, result);
-
-  if (result.configured.length === 0) {
-    console.error("Lead e-mail delivery is not configured (see .env.example); lead was not delivered");
+  const source = body.source === "quick" ? "quick" : "contact";
+  const result = await recordLead({ ...lead, source });
+  if (!result.configured) {
+    console.error("Neither e-mail nor the database is available; lead was not delivered");
     return NextResponse.json({ ok: false }, { status: 503 });
   }
-  if (result.delivered.length === 0) return NextResponse.json({ ok: false }, { status: 502 });
+  if (!result.ok) return NextResponse.json({ ok: false }, { status: 502 });
   return NextResponse.json({ ok: true });
 }
