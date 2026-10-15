@@ -1,5 +1,6 @@
 import { removeTestimonial, saveContactsAction, saveTestimonialAction } from "../actions";
 import ActionForm from "@/components/admin/ActionForm";
+import { PageHeader, Section } from "@/components/admin/ui";
 import { requireAdmin } from "@/lib/admin-session";
 import { LANG_LABEL } from "@/lib/admin-format";
 import { readSettings } from "@/lib/db/settings";
@@ -27,7 +28,7 @@ function TestimonialFields({ t }: { t?: Testimonial }) {
       </div>
       <div>
         <label className="mb-1 block text-sm font-bold" htmlFor={`g-${t?.id ?? "new"}`}>Мова відгуку</label>
-        <select id={`g-${t?.id ?? "new"}`} name="lang" defaultValue={t?.lang ?? "all"} className="field">
+        <select id={`g-${t?.id ?? "new"}`} name="lang" defaultValue={t?.lang ?? "all"} className="field select">
           {TESTIMONIAL_LANGS.map((l) => <option key={l} value={l}>{l === "all" ? "Усі мови" : LANG_LABEL[l]}</option>)}
         </select>
       </div>
@@ -48,32 +49,25 @@ export default async function ContentPage() {
   const c = settings.contacts;
 
   return (
-    <div className="space-y-8">
-      <div>
-        <h1 className="text-2xl font-extrabold tracking-tight">Контакти й відгуки</h1>
-        <p className="text-muted">Зміни одразу з&apos;являються на сайті всіма мовами.</p>
-      </div>
+    <div className="space-y-6">
+      <PageHeader title="Контакти й відгуки" subtitle="Зміни одразу з'являються на сайті всіма мовами." />
 
-      <section>
-        <h2 className="mb-3 text-lg font-extrabold">Контакти компанії</h2>
-        <ActionForm action={saveContactsAction} submit="Зберегти контакти" className="card grid gap-4 p-5 sm:grid-cols-2 sm:p-6">
+      <Section title="Контакти компанії" hint={<>Адреса, на яку надходять заявки, задається окремо на сервері (змінна <code>LEADS_EMAIL_TO</code>).</>}>
+        <ActionForm action={saveContactsAction} submit="Зберегти контакти" className="grid gap-4 sm:grid-cols-2 [&>div:last-child]:sm:col-span-2">
           <div><label className="mb-1 block text-sm font-bold" htmlFor="phone">Телефон відділу продажу</label><input id="phone" name="phone" required defaultValue={c.phone} className="field" /></div>
           <div><label className="mb-1 block text-sm font-bold" htmlFor="email">E-mail відділу продажу</label><input id="email" name="email" type="email" required defaultValue={c.email} className="field" /></div>
           <div><label className="mb-1 block text-sm font-bold" htmlFor="officePhone">Телефон секретаріату</label><input id="officePhone" name="officePhone" required defaultValue={c.officePhone} className="field" /></div>
           <div><label className="mb-1 block text-sm font-bold" htmlFor="officeEmail">E-mail секретаріату</label><input id="officeEmail" name="officeEmail" type="email" required defaultValue={c.officeEmail} className="field" /></div>
         </ActionForm>
-        <p className="mt-2 text-xs text-muted">Адреса, на яку надходять заявки, задається окремо на сервері (змінна <code>LEADS_EMAIL_TO</code>).</p>
-      </section>
+      </Section>
 
-      <section>
-        <h2 className="mb-3 text-lg font-extrabold">Відгуки клієнтів</h2>
-        <p className="mb-4 text-sm text-muted">Додавайте лише справжні відгуки з дозволом клієнта. Поки немає жодного видимого відгуку, блок на сайті не показується.</p>
-        <div className="space-y-4">
+      <Section title="Відгуки клієнтів" hint="Додавайте лише справжні відгуки з дозволом клієнта. Поки немає жодного видимого відгуку, блок на сайті не показується.">
+        <div className="space-y-3">
           {testimonials.map((t) => (
-            <details key={t.id} className="card p-5">
+            <details key={t.id} className="rounded-xl border border-line p-4">
               <summary className="cursor-pointer list-none font-bold">
                 {t.author} <span className="font-normal text-muted">· {t.lang === "all" ? "усі мови" : LANG_LABEL[t.lang]} · {t.visible ? "показується" : "приховано"}</span>
-                <span className="mt-1 block text-sm font-normal text-muted line-clamp-1">{t.quote}</span>
+                <span className="mt-1 block line-clamp-1 text-sm font-normal text-muted">{t.quote}</span>
               </summary>
               <div className="mt-4 border-t border-line pt-4">
                 <ActionForm action={saveTestimonialAction} submit="Зберегти" small>
@@ -86,14 +80,16 @@ export default async function ContentPage() {
               </div>
             </details>
           ))}
-          <div className="card p-5 sm:p-6">
-            <h3 className="mb-3 font-extrabold">Додати відгук</h3>
-            <ActionForm action={saveTestimonialAction} submit="Додати відгук" resetOnSuccess>
-              <TestimonialFields />
-            </ActionForm>
-          </div>
+          <details className="rounded-xl border border-dashed border-brand-green/50 p-4" open={testimonials.length === 0}>
+            <summary className="cursor-pointer font-bold text-brand-green">+ Додати відгук</summary>
+            <div className="mt-4">
+              <ActionForm action={saveTestimonialAction} submit="Додати відгук" resetOnSuccess>
+                <TestimonialFields />
+              </ActionForm>
+            </div>
+          </details>
         </div>
-      </section>
+      </Section>
     </div>
   );
 }

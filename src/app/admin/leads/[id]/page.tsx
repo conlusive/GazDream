@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { addLeadNote, changeLeadStatus, removeLead } from "../../actions";
 import ActionForm from "@/components/admin/ActionForm";
 import StatusBadge from "@/components/admin/StatusBadge";
+import { PageHeader, Section } from "@/components/admin/ui";
 import { requireUser } from "@/lib/admin-session";
 import { formatDate, LANG_LABEL, SOURCE_LABEL, STATUS_LABEL } from "@/lib/admin-format";
 import { getLead, STATUSES } from "@/lib/db/leads";
@@ -29,16 +30,10 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
     <div className="space-y-6">
       <Link href="/admin/leads" className="text-sm font-bold text-brand-green hover:underline">← До списку заявок</Link>
 
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div>
-          <h1 className="text-2xl font-extrabold tracking-tight">Заявка №{lead.id}</h1>
-          <p className="text-muted">{formatDate(lead.created_at)}</p>
-        </div>
-        <StatusBadge status={lead.status} />
-      </div>
+      <PageHeader title={`Заявка №${lead.id}`} subtitle={formatDate(lead.created_at)} action={<StatusBadge status={lead.status} />} />
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
-        <section className="card p-5 sm:p-6">
+        <Section>
           <dl>
             <Row label="Ім'я">{lead.name}</Row>
             <Row label="Контакт">
@@ -54,30 +49,28 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
             <Row label="Сторінка">{lead.page || "—"}</Row>
             <Row label="Лист менеджеру">{lead.mailed ? "надіслано" : "не надіслано (заявка збережена тут)"}</Row>
           </dl>
-        </section>
+        </Section>
 
         <div className="space-y-6">
-          <section className="card p-5 sm:p-6">
-            <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-muted">Статус</h2>
-            <div className="mt-4 flex flex-wrap gap-2">
+          <Section title="Статус">
+            <div className="flex flex-wrap gap-2">
               {STATUSES.map((s) => (
                 <form key={s} action={changeLeadStatus}>
                   <input type="hidden" name="id" value={lead.id} />
                   <input type="hidden" name="status" value={s} />
                   <button
                     aria-pressed={lead.status === s}
-                    className={`min-h-10 rounded-full border-2 px-4 text-sm font-bold transition-colors ${lead.status === s ? "border-brand-green bg-brand-green text-white" : "border-line hover:border-brand-green/60"}`}
+                    className={`min-h-10 rounded-full border-2 px-4 text-sm font-bold transition-colors ${lead.status === s ? "border-forest bg-forest text-white" : "border-line hover:border-brand-green/60"}`}
                   >
                     {STATUS_LABEL[s]}
                   </button>
                 </form>
               ))}
             </div>
-          </section>
+          </Section>
 
-          <section className="card p-5 sm:p-6">
-            <h2 className="text-sm font-bold uppercase tracking-[0.14em] text-muted">Нотатки</h2>
-            <ul className="mt-4 space-y-3">
+          <Section title="Нотатки">
+            <ul className="space-y-3">
               {notes.length === 0 && <li className="text-sm text-muted">Нотаток ще немає.</li>}
               {notes.map((n) => (
                 <li key={n.id} className="rounded-xl bg-soft p-3 text-sm">
@@ -91,7 +84,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
               <label className="sr-only" htmlFor="note">Нотатка</label>
               <textarea id="note" name="text" rows={3} maxLength={2000} required placeholder="Наприклад: зателефонували, передзвонить завтра" className="field resize-none" />
             </ActionForm>
-          </section>
+          </Section>
 
           {user.role === "admin" && (
             <form action={removeLead}>

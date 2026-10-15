@@ -1,3 +1,4 @@
+import { PageHeader } from "@/components/admin/ui";
 import { requireAdmin } from "@/lib/admin-session";
 import { formatDate } from "@/lib/admin-format";
 import { listAudit } from "@/lib/db/audit";
@@ -7,10 +8,7 @@ export default async function LogPage() {
   const rows = await listAudit(200);
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-extrabold tracking-tight">Журнал дій</h1>
-        <p className="text-muted">Хто й що змінював (останні 200 записів).</p>
-      </div>
+      <PageHeader title="Журнал дій" subtitle="Хто й що змінював (останні 200 записів)." />
       <div className="card overflow-x-auto">
         <table className="w-full min-w-[40rem] text-left text-sm">
           <thead className="border-b border-line text-muted"><tr><th className="p-3 font-semibold">Коли</th><th className="p-3 font-semibold">Хто</th><th className="p-3 font-semibold">Дія</th><th className="p-3 font-semibold">Деталі</th></tr></thead>

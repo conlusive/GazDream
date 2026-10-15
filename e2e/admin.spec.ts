@@ -1,3 +1,4 @@
+import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
 
 const ADMIN = { email: "admin", password: "E2e-Admin-Pass-1" };
@@ -41,7 +42,7 @@ test("a visitor request lands in the admin and can be handled", async ({ page, r
   await page.getByRole("link", { name: "Заявки", exact: true }).click();
   await expect(page.getByRole("link", { name: "Jan Admin-Test" })).toBeVisible();
   await page.getByLabel("Пошук", { exact: true }).fill("PUT-4");
-  await page.getByRole("button", { name: "Застосувати" }).click();
+  await page.getByRole("button", { name: "Шукати" }).click();
   await expect(page.getByRole("link", { name: "Quick Person" })).toHaveCount(0);
   await page.getByRole("link", { name: "Jan Admin-Test" }).click();
 
@@ -63,10 +64,11 @@ test("a visitor request lands in the admin and can be handled", async ({ page, r
 
 test("prices changed in the admin appear on the public calculator at once", async ({ page, browser }) => {
   await signInOk(page, ADMIN.email, ADMIN.password);
-  await page.goto("/admin/prices");
+  await page.goto("/admin/calculator");
   await page.locator("#EUR_gas").fill("455");
   await page.getByRole("button", { name: "Зберегти ціни" }).click();
   await expect(page.getByRole("status")).toContainText("Ціни збережено");
+  await page.getByText("Історія змін цін").click();
   await expect(page.getByText("455 / 70 / 160")).toBeVisible(); // history row
 
   // Invalid values are rejected and nothing is saved.
@@ -94,7 +96,9 @@ test("calculator parameters and contacts are editable and reach the site", async
   await page.getByRole("button", { name: "Зберегти контакти" }).click();
   await expect(page.getByRole("status").first()).toContainText("Контакти збережено");
 
-  await page.locator("details", { hasText: "Додати відгук" }).count(); // form is always visible
+  // The "add" block is open by default while there are no testimonials, collapsed afterwards.
+  const addBlock = page.locator("details", { hasText: "+ Додати відгук" });
+  if (!(await addBlock.evaluate((el) => (el as HTMLDetailsElement).open))) await addBlock.locator("summary").click();
   await page.locator("#q-new").fill("Piec działa świetnie od dwóch sezonów.");
   await page.locator("#a-new").fill("Jan K., rolnik");
   await page.locator("#g-new").selectOption("pl");
@@ -130,7 +134,7 @@ test("a manager sees only leads, an admin sees everything, and access is enforce
   await expect(m.getByRole("heading", { name: /Вітаємо, Anna Manager/ })).toBeVisible();
   const nav = m.getByRole("navigation", { name: "Розділи адмінки" });
   await expect(nav.getByRole("link", { name: "Заявки" })).toBeVisible();
-  await expect(nav.getByRole("link", { name: "Ціни палива" })).toHaveCount(0);
+  await expect(nav.getByRole("link", { name: "Калькулятор" })).toHaveCount(0);
   await expect(nav.getByRole("link", { name: "Користувачі" })).toHaveCount(0);
 
   // Direct URLs of admin-only pages bounce back to the dashboard.
@@ -163,6 +167,18 @@ test("a manager sees only leads, an admin sees everything, and access is enforce
 
   await ctx.close();
   await anon.close();
+});
+
+test("admin panel pages have no detectable accessibility violations", async ({ page }) => {
+  await signInOk(page, ADMIN.email, ADMIN.password);
+  for (const path of ["/admin", "/admin/leads", "/admin/calculator", "/admin/content", "/admin/users", "/admin/log", "/admin/account"]) {
+    await page.goto(path);
+    await page.waitForLoadState("networkidle");
+    await page.waitForTimeout(800);
+    const results = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze();
+    const summary = results.violations.map((v) => `${path} ${v.id}: ${v.help} (${v.nodes.length}) e.g. ${v.nodes[0]?.target.join(" ")}`);
+    expect(summary).toEqual([]);
+  }
 });
 
 test("brute-force protection locks the login after repeated failures", async ({ browser }) => {

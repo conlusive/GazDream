@@ -88,6 +88,16 @@ body {
     @apply w-full min-w-0 rounded-xl border border-line bg-white px-4 py-3 text-base transition duration-200 placeholder:text-muted/60 hover:border-brand-green/40 focus:border-brand-green focus:outline-none focus-visible:outline-none focus:ring-4 focus:ring-brand-green/10;
   }
 
+  /* Native <select> with the same look as .field (used in the admin panel). */
+  .select {
+    appearance: none;
+    padding-right: 2.5rem;
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    background-size: 1rem;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='%231b7a1e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 8 5 5 5-5'/%3E%3C/svg%3E");
+  }
+
   .link-underline {
     @apply relative;
   }

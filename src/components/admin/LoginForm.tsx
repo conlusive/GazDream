@@ -8,8 +8,8 @@ export default function LoginForm({ firstRun }: { firstRun: boolean }) {
 
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-4 py-10">
-      <h1 className="text-2xl font-extrabold tracking-tight">Eco Straßmayr Energy</h1>
-      <p className="mt-1 text-muted">Адмін-панель. Увійдіть, щоб продовжити.</p>
+      <p className="text-sm font-bold text-brand-green">Eco Straßmayr Energy</p>
+      <h1 className="mt-1 text-2xl font-extrabold tracking-tight">Вхід до адмін-панелі</h1>
       <form action={action} className="card mt-6 space-y-4 p-6">
         <div>
           <label className="mb-1.5 block text-sm font-bold" htmlFor="email">E-mail</label>
