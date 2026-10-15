@@ -4,7 +4,9 @@ import { revalidatePath, updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { clientKey, endSession, requireAdmin, requireUser, startSession } from "@/lib/admin-session";
 import { audit } from "@/lib/db/audit";
-import { addNote, deleteLead, setLeadStatus, STATUSES, type LeadStatus } from "@/lib/db/leads";
+import {
+  addNote, deleteLead, getLead, setLeadAssignee, setLeadFollowup, setLeadResult, setLeadStatus, STATUSES, validateResult, type LeadStatus,
+} from "@/lib/db/leads";
 import { deleteProject, saveProject, validateProject } from "@/lib/db/projects";
 import { writePrices, writeSetting } from "@/lib/db/settings";
 import { deleteTestimonial, saveTestimonial, validateTestimonial } from "@/lib/db/testimonials";
@@ -65,9 +67,42 @@ export async function changeLeadStatus(formData: FormData): Promise<void> {
   const id = Number(str(formData.get("id")));
   const status = str(formData.get("status")) as LeadStatus;
   if (!STATUSES.includes(status) || !Number.isInteger(id)) return;
-  await setLeadStatus(id, status);
+  await setLeadStatus(id, status, user.id);
   await audit(user, "Статус заявки", `#${id} → ${status}`);
   revalidatePath("/admin", "layout");
+}
+
+/** Who handles the lead and when to contact the customer next (one form, both optional). */
+export async function saveLeadHandlingAction(_prev: FormState, form: FormData): Promise<FormState> {
+  const user = await requireUser();
+  try {
+    const id = Number(str(form.get("id")));
+    if (!Number.isInteger(id)) throw new Error("Невірна заявка.");
+    const assigneeRaw = str(form.get("assignee"));
+    const nextRaw = str(form.get("next_contact")).trim();
+    await setLeadAssignee(id, assigneeRaw ? Number(assigneeRaw) : null, user.id);
+    await setLeadFollowup(id, nextRaw || null, user.id);
+    revalidatePath("/admin", "layout");
+    return { ok: "Збережено." };
+  } catch (err) {
+    return fail(err);
+  }
+}
+
+/** Deal amount for a won lead, or the reason for a lost one. */
+export async function saveLeadResultAction(_prev: FormState, form: FormData): Promise<FormState> {
+  const user = await requireUser();
+  try {
+    const id = Number(str(form.get("id")));
+    const data = Number.isInteger(id) ? await getLead(id) : null;
+    if (!data) throw new Error("Заявку не знайдено.");
+    const result = validateResult(data.lead.status, { dealValue: form.get("deal_value"), currency: form.get("currency"), lostReason: form.get("lost_reason") });
+    await setLeadResult(id, result, user.id);
+    revalidatePath("/admin", "layout");
+    return { ok: "Результат збережено." };
+  } catch (err) {
+    return fail(err);
+  }
 }
 
 export async function addLeadNote(_prev: FormState, form: FormData): Promise<FormState> {

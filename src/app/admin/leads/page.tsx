@@ -2,18 +2,18 @@ import Link from "next/link";
 import StatusBadge from "@/components/admin/StatusBadge";
 import { PageHeader } from "@/components/admin/ui";
 import { requireUser } from "@/lib/admin-session";
-import { formatDate, LANG_LABEL, SOURCE_LABEL } from "@/lib/admin-format";
+import { formatDate, formatDateOnly, LANG_LABEL, SOURCE_LABEL, todayLocal } from "@/lib/admin-format";
 import { leadStats, listLeads, SOURCES, STATUSES, type LeadFilter } from "@/lib/db/leads";
 
-const TAB_LABEL = { new: "Нові", in_progress: "В роботі", closed: "Закриті", spam: "Спам" } as const;
+const TAB_LABEL = { new: "Нові", in_progress: "В роботі", won: "Угоди", lost: "Відмови", spam: "Спам" } as const;
 
 type SP = Record<string, string | string[] | undefined>;
 const one = (v: string | string[] | undefined) => (Array.isArray(v) ? v[0] : v) ?? "";
 
 export default async function LeadsPage({ searchParams }: { searchParams: Promise<SP> }) {
-  await requireUser();
+  const me = await requireUser();
   const sp = await searchParams;
-  const filter: LeadFilter = { q: one(sp.q), status: one(sp.status), source: one(sp.source), lang: one(sp.lang), from: one(sp.from), to: one(sp.to) };
+  const filter: LeadFilter = { q: one(sp.q), status: one(sp.status), source: one(sp.source), lang: one(sp.lang), from: one(sp.from), to: one(sp.to), assignee: one(sp.assignee), due: one(sp.due) };
   const page = Number(one(sp.page)) || 1;
   const [{ rows, total, pages }, stats] = await Promise.all([listLeads(filter, page), leadStats()]);
 
@@ -24,7 +24,8 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
   };
   const current = Math.min(Math.max(1, page), pages);
   const moreActive = Boolean(filter.source || filter.lang || filter.from || filter.to);
-  const anyFilter = moreActive || Boolean(filter.q || filter.status);
+  const anyFilter = moreActive || Boolean(filter.q || filter.status || filter.assignee || filter.due);
+  const today = todayLocal();
   const tabs: { value: string; label: string; count: number }[] = [
     { value: "", label: "Усі", count: Object.values(stats.byStatus).reduce((a, b) => a + b, 0) },
     ...STATUSES.map((s) => ({ value: s, label: TAB_LABEL[s], count: stats.byStatus[s] })),
@@ -52,6 +53,21 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
             </Link>
           );
         })}
+        <span aria-hidden="true" className="mx-1 hidden w-px self-stretch bg-line sm:block" />
+        {[
+          { key: "due", label: "На сьогодні", count: stats.due, active: filter.due === "1", href: `/admin/leads?${query({ due: filter.due === "1" ? "" : "1", page: 1 })}` },
+          { key: "mine", label: "Мої", count: null, active: filter.assignee === String(me.id), href: `/admin/leads?${query({ assignee: filter.assignee === String(me.id) ? "" : String(me.id), page: 1 })}` },
+          { key: "free", label: "Без відповідального", count: null, active: filter.assignee === "none", href: `/admin/leads?${query({ assignee: filter.assignee === "none" ? "" : "none", page: 1 })}` },
+        ].map((t) => (
+          <Link
+            key={t.key}
+            href={t.href}
+            aria-current={t.active ? "true" : undefined}
+            className={`min-h-10 rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${t.active ? "border-brand-green bg-brand-green text-white" : "border-line hover:border-brand-green/60"}`}
+          >
+            {t.label} {t.count !== null && <span className={`tabular ${t.active ? "text-white/80" : t.count ? "text-red-700" : "text-muted"}`}>{t.count}</span>}
+          </Link>
+        ))}
       </nav>
 
       <form className="card p-4" role="search">
@@ -88,12 +104,15 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
             </div>
             <div className="min-w-0 text-sm">
               <span className="line-clamp-2">{l.message || l.calc || "—"}</span>
-              {l.model && <span className="mt-1 inline-block rounded bg-tint px-2 py-0.5 text-xs font-bold">{l.model}</span>}
+              {l.model && <span className="mr-2 mt-1 inline-block rounded bg-tint px-2 py-0.5 text-xs font-bold">{l.model}</span>}
+              <span className="mt-1 inline-block text-xs text-muted">{SOURCE_LABEL[l.source] ?? l.source} · {LANG_LABEL[l.lang] ?? (l.lang || "—")}</span>
             </div>
             <p className="tabular text-xs text-muted">
               {formatDate(l.created_at)}
-              <span className="block">{SOURCE_LABEL[l.source] ?? l.source}</span>
-              <span className="block">{LANG_LABEL[l.lang] ?? (l.lang || "—")}</span>
+              <span className="block">{l.assignee_name ?? "Не призначено"}</span>
+              {l.next_contact && (l.status === "new" || l.status === "in_progress") && (
+                <span className={`block font-bold ${l.next_contact <= today ? "text-red-700" : ""}`}>Контакт: {formatDateOnly(l.next_contact)}</span>
+              )}
             </p>
             <div className="md:text-right"><StatusBadge status={l.status} /></div>
           </li>

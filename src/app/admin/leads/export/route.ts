@@ -14,6 +14,8 @@ export async function GET(request: Request) {
     lang: q.get("lang") ?? "",
     from: q.get("from") ?? "",
     to: q.get("to") ?? "",
+    assignee: q.get("assignee") ?? "",
+    due: q.get("due") ?? "",
   });
   await audit(user, "Експорт заявок у CSV", `${rows.length} шт.`);
   const stamp = new Date().toISOString().slice(0, 10);

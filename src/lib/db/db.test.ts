@@ -3,7 +3,8 @@ import { getDb } from "./index";
 import { overLimit } from "./rate-limit";
 import { deleteProject, listAllProjects, listVisibleProjects, saveProject, validateProject } from "./projects";
 import {
-  addNote, allLeadsForExport, deleteLead, getLead, insertLead, leadsToCsv, leadStats, listLeads, setLeadStatus,
+  addNote, allLeadsForExport, deleteLead, getLead, insertLead, leadsToCsv, leadStats, listLeads, setLeadAssignee, setLeadFollowup, setLeadResult,
+  setLeadStatus, validateResult,
 } from "./leads";
 import { readPriceHistory, readSettings, writePrices, writeSetting } from "./settings";
 import { deleteTestimonial, listAllTestimonials, listVisibleTestimonials, saveTestimonial, validateTestimonial } from "./testimonials";
@@ -21,12 +22,12 @@ describe("schema", () => {
   it("applies migrations and enables row level security everywhere", async () => {
     const db = await getDb();
     const rls = await db.query<{ relname: string; relrowsecurity: boolean }>(
-      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts','rate_hits','projects')",
+      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts','rate_hits','projects','lead_events')",
     );
-    expect(rls).toHaveLength(11);
+    expect(rls).toHaveLength(12);
     expect(rls.every((r) => r.relrowsecurity)).toBe(true);
     const applied = await db.query("SELECT id FROM schema_migrations ORDER BY id");
-    expect(applied.length).toBeGreaterThanOrEqual(4);
+    expect(applied.length).toBeGreaterThanOrEqual(5);
   });
 });
 
@@ -221,5 +222,74 @@ describe("projects", () => {
     expect(() => validateProject({ location_pl: "X", power_mw: "abc" })).toThrow(/Потужність/);
     expect(() => validateProject({ location_pl: "X", power_mw: "0" })).toThrow(/Потужність/);
     expect(() => validateProject({ location_pl: "X", power_mw: "5", per_day: "lots" })).toThrow(/Продуктивність/);
+  });
+});
+
+describe("lead handling", () => {
+  it("assigns, schedules the next contact, records the outcome and keeps a history", async () => {
+    const admin = (await listUsers()).find((u) => u.role === "admin")!;
+    const id = await insertLead({ name: "Handling Test", contact: "handling@example.pl", lang: "pl", source: "contact", mailed: true });
+    const before = await leadStats();
+
+    // Assignee: must be an active user; setting the same value again is not a change.
+    await setLeadAssignee(id, admin.id, admin.id);
+    await setLeadAssignee(id, admin.id, admin.id);
+    await expect(setLeadAssignee(id, 999999, admin.id)).rejects.toThrow(/не знайдено/);
+    expect((await listLeads({ assignee: String(admin.id) })).rows.map((r) => r.id)).toContain(id);
+    expect((await listLeads({ assignee: "none" })).rows.map((r) => r.id)).not.toContain(id);
+    expect((await getLead(id))?.lead.assignee_name).toBe(admin.name);
+
+    // Next contact: a past date makes the open lead "due"; a future date does not.
+    await setLeadFollowup(id, "2020-01-01", admin.id);
+    expect((await listLeads({ due: "1" })).rows.map((r) => r.id)).toContain(id);
+    expect((await leadStats()).due).toBe(before.due + 1);
+    expect((await getLead(id))?.lead.next_contact).toBe("2020-01-01");
+    await setLeadFollowup(id, "2999-01-01", admin.id);
+    expect((await listLeads({ due: "1" })).rows.map((r) => r.id)).not.toContain(id);
+    await expect(setLeadFollowup(id, "not-a-date", admin.id)).rejects.toThrow(/дата/);
+    await expect(setLeadFollowup(id, "2026-02-31", admin.id)).rejects.toThrow(/дата/);
+    await setLeadFollowup(id, "2020-01-01", admin.id);
+
+    // Outcome: only for won/lost leads; a finished lead is no longer "due".
+    await expect(setLeadResult(id, validateResult("won", { dealValue: "1" }), admin.id)).rejects.toThrow(/Спершу/);
+    await setLeadStatus(id, "won", admin.id);
+    expect((await listLeads({ due: "1" })).rows.map((r) => r.id)).not.toContain(id);
+    await setLeadResult(id, validateResult("won", { dealValue: "12 500,50", currency: "PLN" }), admin.id);
+    const won = (await getLead(id))!.lead;
+    expect(won.deal_value).toBe(12500.5);
+    expect(won.deal_currency).toBe("PLN");
+    expect((await leadStats()).deals.find((d) => d.currency === "PLN")?.sum).toBeGreaterThanOrEqual(12500.5);
+
+    await setLeadStatus(id, "lost", admin.id);
+    await setLeadResult(id, validateResult("lost", { lostReason: "Дорого" }), admin.id);
+    expect((await getLead(id))!.lead.lost_reason).toBe("Дорого");
+    expect((await leadStats()).lostReasons.find((r) => r.reason === "Дорого")?.n).toBeGreaterThanOrEqual(1);
+
+    // History: who did what, in order, without duplicates for no-op changes.
+    const events = (await getLead(id))!.events.map((e) => `${e.kind}:${e.from_value}>${e.to_value}`);
+    expect(events).toEqual([
+      `assignee:>${admin.name}`,
+      "followup:>2020-01-01",
+      "followup:2020-01-01>2999-01-01",
+      "followup:2999-01-01>2020-01-01",
+      "status:new>won",
+      "result:>12500.5 PLN",
+      "status:won>lost",
+      "result:>Дорого",
+    ]);
+    expect((await getLead(id))!.events[0].author).toBe(admin.name);
+
+    // The export carries the new columns.
+    const csv = leadsToCsv(await allLeadsForExport({ q: "Handling Test" }));
+    expect(csv).toContain("assignee,next_contact,deal_value,deal_currency,lost_reason");
+    expect(csv).toContain("Дорого");
+  });
+
+  it("validates the outcome input", () => {
+    expect(() => validateResult("won", { dealValue: "-5" })).toThrow(/Сума угоди/);
+    expect(() => validateResult("won", { dealValue: "abc" })).toThrow(/Сума угоди/);
+    expect(validateResult("won", { dealValue: "" }).dealValue).toBeNull();
+    expect(() => validateResult("lost", { lostReason: "щось своє" })).toThrow(/зі списку/);
+    expect(() => validateResult("new", {})).toThrow(/лише/);
   });
 });

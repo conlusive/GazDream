@@ -179,4 +179,44 @@ export const MIGRATIONS: { id: number; name: string; sql: string }[] = [
         ('Obwód chmielnicki, Ukraina', 'Khmelnytskyi region, Ukraine', 'Region Chmelnyzkyj, Ukraine', 'Хмельницька область, Україна', '5,0', 'chips', '', '', 60);
     `,
   },
+  {
+    id: 5,
+    name: "lead handling: assignee, next contact, outcome, history",
+    sql: `
+      -- 'closed' is replaced by the two outcomes a closed lead can have.
+      ALTER TABLE leads DROP CONSTRAINT IF EXISTS leads_status_check;
+      UPDATE leads SET status = 'lost' WHERE status = 'closed';
+      ALTER TABLE leads ADD CONSTRAINT leads_status_check CHECK (status IN ('new','in_progress','won','lost','spam'));
+
+      ALTER TABLE leads ADD COLUMN assignee_id   INTEGER REFERENCES users(id) ON DELETE SET NULL;
+      ALTER TABLE leads ADD COLUMN next_contact  DATE;
+      ALTER TABLE leads ADD COLUMN deal_value    NUMERIC(14,2) CHECK (deal_value IS NULL OR deal_value >= 0);
+      ALTER TABLE leads ADD COLUMN deal_currency TEXT NOT NULL DEFAULT 'EUR' CHECK (deal_currency IN ('EUR','PLN'));
+      ALTER TABLE leads ADD COLUMN lost_reason   TEXT NOT NULL DEFAULT '';
+      CREATE INDEX leads_assignee_idx ON leads(assignee_id);
+      CREATE INDEX leads_next_contact_idx ON leads(next_contact) WHERE next_contact IS NOT NULL;
+
+      CREATE TABLE lead_events (
+        id         SERIAL PRIMARY KEY,
+        lead_id    INTEGER NOT NULL REFERENCES leads(id) ON DELETE CASCADE,
+        user_id    INTEGER REFERENCES users(id) ON DELETE SET NULL,
+        kind       TEXT NOT NULL CHECK (kind IN ('status','assignee','followup','result')),
+        from_value TEXT NOT NULL DEFAULT '',
+        to_value   TEXT NOT NULL DEFAULT '',
+        created_at TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX lead_events_lead_idx ON lead_events(lead_id, created_at);
+      ALTER TABLE lead_events ENABLE ROW LEVEL SECURITY;
+      DO $$
+      DECLARE r TEXT;
+      BEGIN
+        FOREACH r IN ARRAY ARRAY['anon','authenticated'] LOOP
+          IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = r) THEN
+            EXECUTE format('REVOKE ALL ON lead_events FROM %I', r);
+            EXECUTE format('REVOKE ALL ON SEQUENCE lead_events_id_seq FROM %I', r);
+          END IF;
+        END LOOP;
+      END $$;
+    `,
+  },
 ];

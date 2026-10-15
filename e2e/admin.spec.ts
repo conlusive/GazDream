@@ -62,6 +62,45 @@ test("a visitor request lands in the admin and can be handled", async ({ page, r
   expect(csv).not.toContain("Quick Person");
 });
 
+test("a lead can be assigned, scheduled, closed with a result and its history is kept", async ({ page }) => {
+  await signInOk(page, ADMIN.email, ADMIN.password);
+  await page.goto("/admin/leads");
+  await page.getByRole("link", { name: "Jan Admin-Test" }).click();
+
+  // Assignee and an overdue next contact: the card warns, the "today" views list it.
+  const yesterday = new Date(Date.now() - 864e5).toLocaleDateString("sv-SE", { timeZone: "Europe/Warsaw" });
+  await page.getByLabel("Відповідальний").selectOption({ label: "Адміністратор" });
+  await page.getByLabel("Наступний контакт").fill(yesterday);
+  await page.getByRole("button", { name: "Зберегти", exact: true }).click();
+  await expect(page.getByRole("status").first()).toContainText("Збережено");
+  await expect(page.getByText("Строк настав")).toBeVisible();
+
+  await page.goto("/admin");
+  await expect(page.getByRole("heading", { name: "Час зв'язатися" })).toBeVisible();
+  await page.goto("/admin/leads?due=1");
+  await expect(page.getByRole("link", { name: "Jan Admin-Test" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Quick Person" })).toHaveCount(0);
+
+  // Close as a won deal with an amount.
+  await page.getByRole("link", { name: "Jan Admin-Test" }).click();
+  await page.getByRole("button", { name: "Угода" }).click();
+  await expect(page.getByRole("button", { name: "Угода" })).toHaveAttribute("aria-pressed", "true");
+  await page.getByLabel("Сума угоди").fill("120000");
+  await page.getByLabel("Валюта").selectOption("PLN");
+  await page.getByRole("button", { name: "Зберегти результат" }).click();
+  await expect(page.getByRole("status").first()).toContainText("Результат збережено");
+  await expect(page.getByText("Строк настав")).toHaveCount(0); // a finished lead is no longer due
+
+  // History records who did what.
+  await expect(page.getByText("Відповідальний: — → Адміністратор")).toBeVisible();
+  await expect(page.getByText("Статус: В роботі → Угода")).toBeVisible();
+  await expect(page.getByText("Результат: 120000 PLN")).toBeVisible();
+
+  // The dashboard counts the deal.
+  await page.goto("/admin");
+  await expect(page.getByText("120 000 PLN")).toBeVisible();
+});
+
 test("prices changed in the admin appear on the public calculator at once", async ({ page, browser }) => {
   await signInOk(page, ADMIN.email, ADMIN.password);
   await page.goto("/admin/calculator");
