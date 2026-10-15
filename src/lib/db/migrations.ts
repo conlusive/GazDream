@@ -120,4 +120,25 @@ export const MIGRATIONS: { id: number; name: string; sql: string }[] = [
       END $$;
     `,
   },
+  {
+    id: 3,
+    name: "rate limit hits",
+    sql: `
+      CREATE TABLE rate_hits (
+        key TEXT NOT NULL,
+        at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      CREATE INDEX rate_hits_key_idx ON rate_hits(key, at);
+      ALTER TABLE rate_hits ENABLE ROW LEVEL SECURITY;
+      DO $$
+      DECLARE r TEXT;
+      BEGIN
+        FOREACH r IN ARRAY ARRAY['anon','authenticated'] LOOP
+          IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = r) THEN
+            EXECUTE format('REVOKE ALL ON rate_hits FROM %I', r);
+          END IF;
+        END LOOP;
+      END $$;
+    `,
+  },
 ];

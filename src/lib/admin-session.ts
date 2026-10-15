@@ -1,11 +1,13 @@
 import "server-only";
 import { cookies, headers } from "next/headers";
+import { connection } from "next/server";
 import { redirect } from "next/navigation";
 import { createSession, destroySession, userForSession, type User } from "@/lib/db/users";
 
 export const ADMIN_COOKIE = "gd_admin";
 
 export async function currentUser(): Promise<User | null> {
+  await connection(); // always request-time: the session lookup must never be prerendered
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!token) return null;
   try {

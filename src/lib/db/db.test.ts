@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { getDb } from "./index";
+import { overLimit } from "./rate-limit";
 import {
   addNote, allLeadsForExport, deleteLead, getLead, insertLead, leadsToCsv, leadStats, listLeads, setLeadStatus,
 } from "./leads";
@@ -19,12 +20,12 @@ describe("schema", () => {
   it("applies migrations and enables row level security everywhere", async () => {
     const db = await getDb();
     const rls = await db.query<{ relname: string; relrowsecurity: boolean }>(
-      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts')",
+      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts','rate_hits')",
     );
-    expect(rls).toHaveLength(9);
+    expect(rls).toHaveLength(10);
     expect(rls.every((r) => r.relrowsecurity)).toBe(true);
     const applied = await db.query("SELECT id FROM schema_migrations ORDER BY id");
-    expect(applied.length).toBeGreaterThanOrEqual(2);
+    expect(applied.length).toBeGreaterThanOrEqual(3);
   });
 });
 
@@ -179,5 +180,14 @@ describe("testimonials", () => {
     expect(all).toHaveLength(3);
     await deleteTestimonial(all[0].id);
     expect(await listAllTestimonials()).toHaveLength(2);
+  });
+});
+
+describe("rate limit", () => {
+  it("allows up to the limit, then blocks, per key", async () => {
+    for (let i = 0; i < 3; i++) expect(await overLimit("lead:1.1.1.1", 3, 10)).toBe(false);
+    expect(await overLimit("lead:1.1.1.1", 3, 10)).toBe(true);
+    expect(await overLimit("lead:2.2.2.2", 3, 10)).toBe(false); // other clients are unaffected
+    expect(await overLimit("report:1.1.1.1", 3, 10)).toBe(false); // other buckets too
   });
 });

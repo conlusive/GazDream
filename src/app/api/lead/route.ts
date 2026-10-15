@@ -1,24 +1,26 @@
 import { NextResponse } from "next/server";
+import { overLimit } from "@/lib/db/rate-limit";
 import type { Lead } from "@/lib/lead-delivery";
 import { recordLead } from "@/lib/leads-service";
 
 const MAX = { name: 120, contact: 160, message: 2000, short: 80 } as const;
 const MAX_BODY_CHARS = 20_000;
 
-// Best-effort flood guard per server instance: 5 leads per 10 minutes per client.
-const WINDOW_MS = 10 * 60 * 1000;
+// Flood guard: 5 requests per 10 minutes per client. Kept in the database so it works on serverless hosting;
+// if the database is unreachable it falls back to a per-process counter.
+const WINDOW_MIN = 10;
 const MAX_PER_WINDOW = 5;
-const hits = new Map<string, number[]>();
+const memory = new Map<string, number[]>();
 
-function tooMany(key: string): boolean {
-  const now = Date.now();
-  const recent = (hits.get(key) ?? []).filter((t) => now - t < WINDOW_MS);
-  if (recent.length >= MAX_PER_WINDOW) {
-    hits.set(key, recent);
-    return true;
+async function tooMany(key: string): Promise<boolean> {
+  try {
+    return await overLimit(`lead:${key}`, MAX_PER_WINDOW, WINDOW_MIN);
+  } catch {
+    const now = Date.now();
+    const recent = (memory.get(key) ?? []).filter((t) => now - t < WINDOW_MIN * 60_000);
+    memory.set(key, recent.length >= MAX_PER_WINDOW ? recent : [...recent, now]);
+    return recent.length >= MAX_PER_WINDOW;
   }
-  hits.set(key, [...recent, now]);
-  return false;
 }
 
 const clean = (v: unknown, max: number) =>
@@ -50,7 +52,7 @@ export async function POST(request: Request) {
   if (!lead.name || !lead.contact) return NextResponse.json({ ok: false }, { status: 422 });
 
   const client = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
-  if (tooMany(client)) return NextResponse.json({ ok: false }, { status: 429 });
+  if (await tooMany(client)) return NextResponse.json({ ok: false }, { status: 429 });
 
   const source = body.source === "quick" ? "quick" : "contact";
   const result = await recordLead({ ...lead, source });
