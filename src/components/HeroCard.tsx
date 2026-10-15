@@ -57,7 +57,7 @@ export default function HeroCard({ lang, currency, prices, fuelUse, tonnesLabel,
             onClick={() => setTonnes(t)}
             aria-pressed={tonnes === t}
             className={`tabular min-h-11 rounded-full border px-1 text-sm font-bold transition-colors duration-200 ${
-              tonnes === t ? "border-brand-orange bg-brand-orange text-white" : "border-white/30 text-white/90 hover:border-white hover:bg-white/10"
+              tonnes === t ? "border-brand-orange bg-brand-orange text-forest" : "border-white/30 text-white/90 hover:border-white hover:bg-white/10"
             }`}
           >
             {t.toLocaleString(lang)}

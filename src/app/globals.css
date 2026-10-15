@@ -6,6 +6,7 @@
   --color-brand-green-dark: #135616;
   --color-brand-orange: #f47c0f;
   --color-brand-orange-dark: #d9680a;
+  --color-brand-orange-light: #ff8e2b;
   --color-forest: #0b2a16;
   --color-forest-soft: #123a1f;
   --color-leaf: #8fd69a;
@@ -67,7 +68,7 @@ body {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-bold transition duration-300 ease-out-soft active:scale-[0.98];
   }
   .btn-primary {
-    @apply bg-brand-orange text-white shadow-[0_8px_24px_-10px_rgba(244,124,15,0.8)] hover:-translate-y-0.5 hover:bg-brand-orange-dark hover:shadow-[0_14px_28px_-10px_rgba(244,124,15,0.85)];
+    @apply bg-brand-orange text-forest shadow-[0_8px_24px_-10px_rgba(244,124,15,0.8)] hover:-translate-y-0.5 hover:bg-brand-orange-light hover:shadow-[0_14px_28px_-10px_rgba(244,124,15,0.85)];
   }
   .btn-outline {
     @apply border-2 border-brand-green/70 text-brand-green hover:-translate-y-0.5 hover:border-brand-green hover:bg-brand-green hover:text-white;
