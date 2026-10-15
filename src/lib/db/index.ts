@@ -1,6 +1,7 @@
 import "server-only";
 import path from "node:path";
 import { MIGRATIONS } from "./migrations";
+import { normalizeDatabaseUrl } from "./url";
 
 export type Row = Record<string, unknown>;
 export type Db = {
@@ -58,7 +59,7 @@ async function connect(): Promise<Db> {
   if (url) {
     const { Pool } = await import("pg");
     const pool = new Pool({
-      connectionString: url,
+      connectionString: normalizeDatabaseUrl(url),
       max: Number(process.env.DATABASE_POOL_MAX ?? 3),
       idleTimeoutMillis: 20_000,
       connectionTimeoutMillis: 10_000,
