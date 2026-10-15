@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { notFound } from "next/navigation";
 import "../globals.css";
-import { hasLocale, locales } from "@/i18n/config";
+import { hasLocale, isHidden, locales } from "@/i18n/config";
 import { getDictionary } from "./dictionaries";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -10,7 +10,7 @@ import QuickForm from "@/components/QuickForm";
 import { CONTACT } from "@/lib/content";
 import { alternatesFor, SITE_NAME, SITE_URL } from "@/lib/site";
 
-const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin", "latin-ext"], display: "swap" });
+const manrope = Manrope({ variable: "--font-manrope", subsets: ["latin", "latin-ext", "cyrillic"], display: "swap" });
 
 export const generateStaticParams = () => locales.map((lang) => ({ lang }));
 
@@ -24,6 +24,7 @@ export async function generateMetadata({ params }: LayoutProps<"/[lang]">): Prom
     description: dict.meta.description,
     applicationName: SITE_NAME,
     alternates: alternatesFor(lang, ""),
+    ...(isHidden(lang) ? { robots: { index: false, follow: false } } : {}),
     openGraph: { siteName: SITE_NAME, title: dict.meta.title, description: dict.meta.description, locale: lang, type: "website", url: `/${lang}` },
     twitter: { card: "summary_large_image" },
   };

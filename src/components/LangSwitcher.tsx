@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LOCALE_COOKIE, locales, type Locale } from "@/i18n/config";
+import { LOCALE_COOKIE, publicLocales, type Locale } from "@/i18n/config";
 
 export default function LangSwitcher({ current, onDark = false }: { current: Locale; onDark?: boolean }) {
   const pathname = usePathname();
-  const rest = pathname.replace(/^\/(pl|en|de)(?=\/|$)/, "");
+  const rest = pathname.replace(/^\/(pl|en|de|uk)(?=\/|$)/, "");
 
   return (
     <div className={`flex items-center rounded-full p-1 text-xs font-bold transition-colors duration-300 ${onDark ? "bg-white/15 backdrop-blur" : "bg-soft"}`} role="group" aria-label="Language">
-      {locales.map((locale) => (
+      {/* The hidden Ukrainian version is shown only while it is the current language. */}
+      {[...publicLocales, ...(current === "uk" ? (["uk"] as const) : [])].map((locale) => (
         <Link
           key={locale}
           href={`/${locale}${rest}`}

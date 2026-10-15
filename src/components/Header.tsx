@@ -50,7 +50,7 @@ export default function Header({ lang, nav, cta }: Props) {
         <DesktopNav links={links} onDark={onDark} />
         <div className="flex items-center gap-2 sm:gap-3">
           <LangSwitcher current={lang} onDark={onDark} />
-          <ButtonLink href={`/${lang}/calculator`} className="hidden !px-5 !py-2.5 sm:inline-flex">
+          <ButtonLink href={`/${lang}/calculator`} className="hidden whitespace-nowrap !px-5 !py-2.5 sm:inline-flex">
             {cta.calculate}
           </ButtonLink>
           <MobileMenu label={nav.menu} links={links} onDark={onDark} />

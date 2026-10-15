@@ -12,7 +12,7 @@ import { VAT_RATE } from "@/lib/calculator/config";
 import { CONTACT } from "@/lib/content";
 import { TONNES_KEY } from "@/components/HeroCard";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
-import type { Locale } from "@/i18n/config";
+import { usesPolishMarket, type Locale } from "@/i18n/config";
 
 type Crop = "corn" | "soy" | "rapeseed";
 type Currency = "EUR" | "PLN";
@@ -71,12 +71,12 @@ function CropIcon({ crop }: { crop: Crop }) {
 type Props = { lang: Locale; dict: Dictionary["calc"]; defaultPrices: PriceTable; pricesDate: string; privacyLabel: string };
 
 export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate, privacyLabel }: Props) {
-  const [currency, setCurrency] = useState<Currency>(lang === "pl" ? "PLN" : "EUR");
+  const [currency, setCurrency] = useState<Currency>(usesPolishMarket(lang) ? "PLN" : "EUR");
   const [rows, setRows] = useState<Row[]>([newRow(1, "corn")]);
   const [nextId, setNextId] = useState(2);
   const [period, setPeriod] = useState<Period>("season");
   const [prices, setPrices] = useState<Record<Fuel, string>>(() => {
-    const p = defaultPrices[lang === "pl" ? "PLN" : "EUR"];
+    const p = defaultPrices[usesPolishMarket(lang) ? "PLN" : "EUR"];
     return { gas: String(p.gas), chips: String(p.chips), pellets: String(p.pellets) };
   });
   const [withVat, setWithVat] = useState(false);
@@ -100,11 +100,11 @@ export default function CalculatorClient({ lang, dict, defaultPrices, pricesDate
 
   const market = defaultPrices[currency];
   const money = useMemo(
-    () => new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0, useGrouping: "always" }),
+    () => new Intl.NumberFormat(lang, { style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0, useGrouping: "always" }),
     [lang, currency],
   );
   const money2 = useMemo(
-    () => new Intl.NumberFormat(lang, { style: "currency", currency, minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" }),
+    () => new Intl.NumberFormat(lang, { style: "currency", currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" }),
     [lang, currency],
   );
   const vatLabel = dict.vat.replace(/\d+(?:[.,]\d+)?\s?%/, `${Math.round(VAT_RATE[lang] * 100)}%`);

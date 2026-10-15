@@ -1,4 +1,4 @@
-import { locales, type Locale } from "@/i18n/config";
+import { isHidden, publicLocales, type Locale } from "@/i18n/config";
 
 export const SITE_NAME = "Eco Straßmayr Energy";
 
@@ -9,8 +9,10 @@ export const PAGES = ["", "/about", "/boilers", "/projects", "/calculator", "/fa
 
 /** Canonical + hreflang alternates for a path such as "/about". */
 export function alternatesFor(lang: Locale, path: string) {
+  // The hidden review language is not linked to the public versions.
+  if (isHidden(lang)) return { canonical: `/${lang}${path}` };
   return {
     canonical: `/${lang}${path}`,
-    languages: { ...Object.fromEntries(locales.map((l) => [l, `/${l}${path}`])), "x-default": `/pl${path}` },
+    languages: { ...Object.fromEntries(publicLocales.map((l) => [l, `/${l}${path}`])), "x-default": `/pl${path}` },
   };
 }

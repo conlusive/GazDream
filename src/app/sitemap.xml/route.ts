@@ -1,4 +1,4 @@
-import { locales } from "@/i18n/config";
+import { publicLocales as locales } from "@/i18n/config";
 import { PAGES } from "@/lib/site";
 
 // Read per request so the public origin can be set at runtime.

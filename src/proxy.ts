@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { defaultLocale, hasLocale, LOCALE_COOKIE, locales, type Locale } from "@/i18n/config";
+import { defaultLocale, hasLocale, LOCALE_COOKIE, locales, publicLocales, type Locale } from "@/i18n/config";
 
 // Order: saved choice -> country (DE -> de, PL -> pl, others -> en) -> Accept-Language -> pl.
 function detectLocale(request: NextRequest): Locale {
@@ -16,7 +16,9 @@ function detectLocale(request: NextRequest): Locale {
   const accept = request.headers.get("accept-language") ?? "";
   for (const part of accept.split(",")) {
     const code = part.trim().slice(0, 2).toLowerCase();
-    if (hasLocale(code)) return code;
+    // Never auto-select the hidden review language, even for Ukrainian browsers.
+    const match = publicLocales.find((l) => l === code);
+    if (match) return match;
   }
   return defaultLocale;
 }

@@ -93,3 +93,26 @@ test("SEO basics: canonical, hreflang, sitemap and robots", async ({ page, reque
   const robots = await (await request.get("/robots.txt")).text();
   expect(robots).toContain("Disallow: /admin");
 });
+
+test("hidden Ukrainian review version: reachable, not advertised, not indexed", async ({ page, request }) => {
+  // Not offered in the public language switcher and never auto-selected.
+  await page.goto("/pl");
+  await expect(page.locator('[role="group"] a[hreflang="uk"]')).toHaveCount(0);
+  const auto = await request.get("/", { headers: { "accept-language": "uk-UA,uk;q=0.9" }, maxRedirects: 0 });
+  expect(auto.headers()["location"] ?? "").toMatch(/\/pl$/);
+
+  // Reachable by URL, shows itself as the active language, no horizontal overflow on a phone.
+  await page.setViewportSize({ width: 390, height: 844 });
+  for (const path of ["", "/about", "/boilers", "/projects", "/calculator", "/faq", "/contact", "/privacy"]) {
+    await page.goto(`/uk${path}`);
+    await expect(page.locator("html")).toHaveAttribute("lang", "uk");
+    await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
+    expect(overflow, `horizontal overflow on /uk${path}`).toBe(false);
+  }
+
+  // Not in the sitemap and no public hreflang pointing to it.
+  expect(await (await request.get("/sitemap.xml")).text()).not.toContain("/uk");
+  await page.goto("/en");
+  await expect(page.locator('link[rel="alternate"][hreflang="uk"]')).toHaveCount(0);
+});

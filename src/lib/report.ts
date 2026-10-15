@@ -41,8 +41,8 @@ export function buildReport(lang: Locale, d: Dictionary["calc"], input: ReportIn
     prices: input.prices,
     vatRate: input.withVat ? VAT_RATE[lang] : 0,
   });
-  const money = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, maximumFractionDigits: 0, useGrouping: "always" });
-  const money2 = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" });
+  const money = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0, useGrouping: "always" });
+  const money2 = new Intl.NumberFormat(lang, { style: "currency", currency: input.currency, currencyDisplay: "narrowSymbol", minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" });
   const winner = result.results.find((r) => r.fuel === result.cheapest);
   const saves = winner && winner.fuel !== "gas" && winner.savingsVsGas > 0;
 

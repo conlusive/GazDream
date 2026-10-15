@@ -11,7 +11,7 @@ import Marquee from "@/components/Marquee";
 import RevealHeading from "@/components/RevealHeading";
 import Testimonials from "@/components/Testimonials";
 import { ButtonLink } from "@/components/ui/Button";
-import { hasLocale } from "@/i18n/config";
+import { hasLocale, usesPolishMarket } from "@/i18n/config";
 import { calculateBatches, type Fuel } from "@/lib/calculator";
 import { CONTACT, MODELS } from "@/lib/content";
 import { PHOTOS } from "@/lib/images";
@@ -27,7 +27,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const [dict, prices] = await Promise.all([getDictionary(lang), getPrices()]);
 
   // Example from the same calculation the calculator uses, with the current default prices.
-  const currency = lang === "pl" ? "PLN" : "EUR";
+  const currency = usesPolishMarket(lang) ? "PLN" : "EUR";
   const example = calculateBatches({
     batches: [{ moistureFrom: 20, moistureTo: 14, tonnes: 1000 }],
     prices: prices.table[currency],

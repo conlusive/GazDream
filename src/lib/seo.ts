@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import type { Dictionary } from "@/app/[lang]/dictionaries";
-import type { Locale } from "@/i18n/config";
+import { isHidden, type Locale } from "@/i18n/config";
 import { alternatesFor } from "./site";
 
 type PageKey = Exclude<keyof Dictionary["seo"], never>;
@@ -12,6 +12,7 @@ export function pageMetadata(lang: Locale, dict: Dictionary, key: PageKey, path:
     title,
     description,
     alternates: alternatesFor(lang, path),
+    ...(isHidden(lang) ? { robots: { index: false, follow: false } } : {}),
     openGraph: { title, description, locale: lang, type: "website", url: `/${lang}${path}` },
   };
 }

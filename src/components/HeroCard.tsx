@@ -30,7 +30,7 @@ export default function HeroCard({ lang, currency, prices, tonnesLabel, gasLabel
   const gas = result.results.find((r) => r.fuel === "gas")!;
   const chips = result.results.find((r) => r.fuel === "chips")!;
   const money = useMemo(
-    () => new Intl.NumberFormat(lang, { style: "currency", currency, maximumFractionDigits: 0, useGrouping: "always" }),
+    () => new Intl.NumberFormat(lang, { style: "currency", currency, currencyDisplay: "narrowSymbol", maximumFractionDigits: 0, useGrouping: "always" }),
     [lang, currency],
   );
   const share = gas.totalCost > 0 ? (chips.totalCost / gas.totalCost) * 100 : 0;
