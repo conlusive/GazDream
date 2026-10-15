@@ -73,14 +73,30 @@ function where(f: LeadFilter) {
 export async function listLeads(f: LeadFilter, page = 1): Promise<{ rows: Lead[]; total: number; pages: number }> {
   const db = await getDb();
   const { sql, params } = where(f);
-  const total = Number((await db.query<{ n: string }>(`SELECT COUNT(*) AS n FROM leads ${sql}`, params))[0].n);
+  const wanted = Math.max(1, Math.floor(page) || 1);
+  // One query returns the page and the total (window count). If the page is past the end the result is empty:
+  // then the total is counted separately and the last page is shown instead.
+  const fetchPage = (p: number) =>
+    db.query<Lead & { total_count: string }>(
+      `SELECT *, COUNT(*) OVER() AS total_count FROM leads ${sql} ORDER BY created_at DESC, id DESC LIMIT ${PAGE_SIZE} OFFSET ${(p - 1) * PAGE_SIZE}`,
+      params,
+    );
+  let rows = await fetchPage(wanted);
+  let total = rows.length ? Number(rows[0].total_count) : 0;
+  if (!rows.length && wanted > 1) {
+    total = Number((await db.query<{ n: string }>(`SELECT COUNT(*) AS n FROM leads ${sql}`, params))[0].n);
+    rows = total ? await fetchPage(Math.ceil(total / PAGE_SIZE)) : [];
+  }
   const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
-  const p = Math.min(Math.max(1, Math.floor(page) || 1), pages);
-  const rows = await db.query<Lead>(
-    `SELECT * FROM leads ${sql} ORDER BY created_at DESC, id DESC LIMIT ${PAGE_SIZE} OFFSET ${(p - 1) * PAGE_SIZE}`,
-    params,
-  );
-  return { rows, total, pages };
+  return {
+    rows: rows.map((r) => {
+      const lead: Partial<typeof r> = { ...r };
+      delete lead.total_count;
+      return lead as Lead;
+    }),
+    total,
+    pages,
+  };
 }
 
 export async function allLeadsForExport(f: LeadFilter): Promise<Lead[]> {
@@ -124,36 +140,26 @@ export async function deleteLead(id: number) {
 export type Stats = {
   byStatus: Record<LeadStatus, number>;
   last7: number;
-  last30: number;
   total: number;
-  bySource: { source: string; n: number }[];
-  byLang: { lang: string; n: number }[];
   perDay: { day: string; n: number }[];
 };
 
+/** All dashboard figures in ONE round trip (each extra query costs a network hop to the hosted database). */
 export async function leadStats(): Promise<Stats> {
   const db = await getDb();
-  const status = await db.query<{ status: LeadStatus; n: string }>("SELECT status, COUNT(*) AS n FROM leads GROUP BY status");
-  const byStatus = { new: 0, in_progress: 0, closed: 0, spam: 0 } as Record<LeadStatus, number>;
-  for (const r of status) byStatus[r.status] = Number(r.n);
-  const counts = (
-    await db.query<{ last7: string; last30: string; total: string }>(
-      `SELECT COUNT(*) FILTER (WHERE created_at > now() - interval '7 days') AS last7,
-              COUNT(*) FILTER (WHERE created_at > now() - interval '30 days') AS last30,
-              COUNT(*) AS total FROM leads WHERE status <> 'spam'`,
-    )
-  )[0];
-  const bySource = (await db.query<{ source: string; n: string }>("SELECT source, COUNT(*) AS n FROM leads WHERE status <> 'spam' GROUP BY source ORDER BY n DESC")).map((r) => ({ source: r.source, n: Number(r.n) }));
-  const byLang = (await db.query<{ lang: string; n: string }>("SELECT lang, COUNT(*) AS n FROM leads WHERE status <> 'spam' GROUP BY lang ORDER BY n DESC")).map((r) => ({ lang: r.lang || "?", n: Number(r.n) }));
-  const perDay = (
-    await db.query<{ day: string; n: string }>(
-      `SELECT to_char(d, 'YYYY-MM-DD') AS day, COUNT(l.id) AS n
-         FROM generate_series(current_date - 13, current_date, interval '1 day') d
-         LEFT JOIN leads l ON l.created_at::date = d::date AND l.status <> 'spam'
-        GROUP BY d ORDER BY d`,
-    )
-  ).map((r) => ({ day: r.day, n: Number(r.n) }));
-  return { byStatus, last7: Number(counts.last7), last30: Number(counts.last30), total: Number(counts.total), bySource, byLang, perDay };
+  const [r] = await db.query<{ by_status: Partial<Record<LeadStatus, number>>; last7: number; total: number; per_day: { day: string; n: number }[] }>(
+    `SELECT
+       (SELECT COALESCE(json_object_agg(status, n), '{}'::json) FROM (SELECT status, COUNT(*)::int AS n FROM leads GROUP BY status) s) AS by_status,
+       (SELECT COUNT(*)::int FROM leads WHERE status <> 'spam' AND created_at > now() - interval '7 days') AS last7,
+       (SELECT COUNT(*)::int FROM leads WHERE status <> 'spam') AS total,
+       (SELECT COALESCE(json_agg(json_build_object('day', day, 'n', n) ORDER BY day), '[]'::json)
+          FROM (SELECT to_char(d, 'YYYY-MM-DD') AS day, COUNT(l.id)::int AS n
+                  FROM generate_series(current_date - 13, current_date, interval '1 day') d
+                  LEFT JOIN leads l ON l.created_at::date = d::date AND l.status <> 'spam'
+                 GROUP BY d) p) AS per_day`,
+  );
+  const byStatus = { new: 0, in_progress: 0, closed: 0, spam: 0, ...r.by_status } as Record<LeadStatus, number>;
+  return { byStatus, last7: Number(r.last7), total: Number(r.total), perDay: r.per_day.map((d) => ({ day: d.day, n: Number(d.n) })) };
 }
 
 /** Spreadsheet-safe CSV: quotes everything and neutralises formula injection (=, +, -, @). */

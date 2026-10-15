@@ -1,4 +1,5 @@
 import "server-only";
+import { cache } from "react";
 import { cookies, headers } from "next/headers";
 import { connection } from "next/server";
 import { redirect } from "next/navigation";
@@ -6,7 +7,8 @@ import { createSession, destroySession, userForSession, type User } from "@/lib/
 
 export const ADMIN_COOKIE = "gd_admin";
 
-export async function currentUser(): Promise<User | null> {
+// React cache: the layout and the page both ask for the user, but the database is asked only once per request.
+export const currentUser = cache(async (): Promise<User | null> => {
   await connection(); // always request-time: the session lookup must never be prerendered
   const token = (await cookies()).get(ADMIN_COOKIE)?.value;
   if (!token) return null;
@@ -16,7 +18,7 @@ export async function currentUser(): Promise<User | null> {
     console.error("Session lookup failed:", err instanceof Error ? err.message : err);
     return null;
   }
-}
+});
 
 /** For pages and actions that need a signed-in user. Pages send the visitor to the login screen. */
 export async function requireUser(): Promise<User> {
