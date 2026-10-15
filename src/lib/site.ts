@@ -1,5 +1,8 @@
 import { isHidden, publicLocales, type Locale } from "@/i18n/config";
 
+/** Set NOINDEX=1 (at build time) on demo/staging deployments to keep them out of search engines. */
+export const NOINDEX = process.env.NOINDEX === "1";
+
 export const SITE_NAME = "Eco Straßmayr Energy";
 
 /** Public origin. Set SITE_URL when building (the Docker image takes it as a build argument). */

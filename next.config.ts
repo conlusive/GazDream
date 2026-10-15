@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
       { key: "Strict-Transport-Security", value: "max-age=31536000; includeSubDomains" },
     ];
     return [
-      { source: "/:path*", headers: security },
+      { source: "/:path*", headers: process.env.NOINDEX === "1" ? [...security, { key: "X-Robots-Tag", value: "noindex, nofollow" }] : security },
       { source: "/video/:path*", headers: longCache },
       { source: "/photos/:path*", headers: longCache },
       { source: "/brand/:path*", headers: longCache },

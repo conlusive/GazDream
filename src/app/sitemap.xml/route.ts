@@ -4,7 +4,8 @@ import { PAGES } from "@/lib/site";
 // Read per request so the public origin can be set at runtime.
 export async function GET() {
   const origin = (process.env.SITE_URL ?? "http://localhost:3000").replace(/\/+$/, "");
-  const entries = locales.flatMap((lang) =>
+  // Demo deployments (NOINDEX=1) publish an empty sitemap.
+  const entries = process.env.NOINDEX === "1" ? [] : locales.flatMap((lang) =>
     PAGES.map((path) => {
       const alternates = locales
         .map((l) => `    <xhtml:link rel="alternate" hreflang="${l}" href="${origin}/${l}${path}"/>`)
