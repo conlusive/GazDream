@@ -88,6 +88,14 @@ body {
     @apply w-full min-w-0 rounded-xl border border-line bg-white px-4 py-3 text-base transition duration-200 placeholder:text-muted/60 hover:border-brand-green/40 focus:border-brand-green focus:outline-none focus-visible:outline-none focus:ring-4 focus:ring-brand-green/10;
   }
 
+  /* Admin panel: calm neutral surfaces, one green accent, plain buttons (the public site keeps the orange). */
+  .admin-theme .btn-primary {
+    @apply bg-brand-green text-white shadow-none hover:translate-y-0 hover:bg-brand-green-dark hover:shadow-none;
+  }
+  .admin-theme .card {
+    @apply border-line shadow-none;
+  }
+
   /* Native <select> with the same look as .field (used in the admin panel). */
   .select {
     appearance: none;

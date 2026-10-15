@@ -7,10 +7,10 @@ import { leadStats, listLeads } from "@/lib/db/leads";
 
 function Stat({ title, value, hint, href }: { title: string; value: number; hint: string; href?: string }) {
   const body = (
-    <div className="card h-full p-5 transition-colors hover:border-brand-green/50">
-      <p className="text-sm font-semibold text-muted">{title}</p>
-      <p className="tabular mt-1 text-4xl font-extrabold tracking-tight">{value}</p>
-      <p className="mt-1 text-xs text-muted">{hint}</p>
+    <div className="card h-full p-3 transition-colors hover:border-brand-green/50 sm:p-5">
+      <p className="text-xs font-semibold text-muted sm:text-sm">{title}</p>
+      <p className="tabular mt-1 text-3xl font-extrabold tracking-tight sm:text-4xl">{value}</p>
+      <p className="mt-1 hidden text-xs text-muted sm:block">{hint}</p>
     </div>
   );
   return href ? <Link href={href}>{body}</Link> : body;
@@ -25,7 +25,7 @@ export default async function Dashboard() {
     <div className="space-y-6">
       <PageHeader title={`Вітаємо, ${user.name}`} subtitle="Що зараз із заявками з сайту." />
 
-      <div className="grid gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-3 gap-3 sm:gap-4">
         <Stat title="Нові заявки" value={stats.byStatus.new} hint="чекають на відповідь" href="/admin/leads?status=new" />
         <Stat title="В роботі" value={stats.byStatus.in_progress} hint="вже обробляються" href="/admin/leads?status=in_progress" />
         <Stat title="За 7 днів" value={stats.last7} hint={`усього заявок: ${stats.total}`} href="/admin/leads" />

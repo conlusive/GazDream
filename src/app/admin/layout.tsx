@@ -52,29 +52,29 @@ async function Shell({ children }: { children: ReactNode }) {
 
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[15rem_1fr]">
-      <aside className="bg-forest px-4 pb-2 pt-4 text-white lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:p-5">
+      <aside className="border-b border-line bg-white px-4 pb-2 pt-4 lg:sticky lg:top-0 lg:flex lg:h-screen lg:flex-col lg:border-b-0 lg:border-r lg:p-5">
         <div className="mb-3 flex items-center justify-between gap-3 lg:mb-8">
           <div>
             <p className="text-lg font-extrabold leading-tight tracking-tight">Eco Straßmayr</p>
-            <p className="text-xs text-white/60">Адмін-панель</p>
+            <p className="text-xs text-muted">Адмін-панель</p>
           </div>
           <div className="flex items-center gap-3 text-sm lg:hidden">
             <Link href="/admin/account" className="font-semibold hover:underline">{user.name}</Link>
-            <form action={logout}><button className="font-bold text-leaf hover:underline">Вийти</button></form>
+            <form action={logout}><button className="font-bold text-brand-green hover:underline">Вийти</button></form>
           </div>
         </div>
         <div className="lg:flex-1 lg:overflow-y-auto"><AdminNav groups={groups} /></div>
-        <div className="hidden border-t border-white/15 pt-4 text-sm lg:block">
-          <Link href="/admin/account" className="block rounded-lg px-1 py-1 hover:bg-white/10">
+        <div className="hidden border-t border-line pt-4 text-sm lg:block">
+          <Link href="/admin/account" className="block rounded-lg px-1 py-1 hover:bg-soft">
             <span className="block font-semibold">{user.name}</span>
-            <span className="block text-xs text-white/60">{roleLabel} · змінити пароль</span>
+            <span className="block text-xs text-muted">{roleLabel} · змінити пароль</span>
           </Link>
-          <form action={logout} className="mt-2 px-1"><button className="text-xs font-bold text-leaf hover:underline">Вийти</button></form>
+          <form action={logout} className="mt-2 px-1"><button className="text-xs font-bold text-brand-green hover:underline">Вийти</button></form>
         </div>
       </aside>
       <main className="min-w-0 p-4 sm:p-8">
         {!storageIsDurable() && (
-          <p role="note" className="mb-6 rounded-xl border border-brand-orange/50 bg-brand-orange/10 px-4 py-3 text-sm">
+          <p role="note" className="mb-6 rounded-xl border border-line bg-white px-4 py-3 text-sm text-muted">
             <strong>Тимчасове сховище.</strong> Не задано <code>DATABASE_URL</code>: заявки, ціни й користувачі можуть зникнути після перезапуску сервера.
           </p>
         )}
@@ -87,7 +87,7 @@ async function Shell({ children }: { children: ReactNode }) {
 export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="uk" className={manrope.variable}>
-      <body className="min-h-screen bg-soft">
+      <body className="admin-theme min-h-screen bg-[#f6f7f6]">
         <Suspense fallback={<p className="p-8 text-muted">Завантаження…</p>}>
           <Shell>{children}</Shell>
         </Suspense>

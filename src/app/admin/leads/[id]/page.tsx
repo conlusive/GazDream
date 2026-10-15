@@ -60,7 +60,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
                   <input type="hidden" name="status" value={s} />
                   <button
                     aria-pressed={lead.status === s}
-                    className={`min-h-10 rounded-full border-2 px-4 text-sm font-bold transition-colors ${lead.status === s ? "border-forest bg-forest text-white" : "border-line hover:border-brand-green/60"}`}
+                    className={`min-h-10 rounded-full border-2 px-4 text-sm font-bold transition-colors ${lead.status === s ? "border-ink bg-ink text-white" : "border-line hover:border-brand-green/60"}`}
                   >
                     {STATUS_LABEL[s]}
                   </button>

@@ -26,7 +26,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
   const moreActive = Boolean(filter.source || filter.lang || filter.from || filter.to);
   const anyFilter = moreActive || Boolean(filter.q || filter.status);
   const tabs: { value: string; label: string; count: number }[] = [
-    { value: "", label: "Усі", count: stats.total },
+    { value: "", label: "Усі", count: Object.values(stats.byStatus).reduce((a, b) => a + b, 0) },
     ...STATUSES.map((s) => ({ value: s, label: TAB_LABEL[s], count: stats.byStatus[s] })),
   ];
 
@@ -46,7 +46,7 @@ export default async function LeadsPage({ searchParams }: { searchParams: Promis
               key={t.value || "all"}
               href={`/admin/leads?${query({ status: t.value, page: 1 })}`}
               aria-current={active ? "page" : undefined}
-              className={`min-h-10 rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${active ? "border-forest bg-forest text-white" : "border-line hover:border-brand-green/60"}`}
+              className={`min-h-10 rounded-full border-2 px-4 py-2 text-sm font-bold transition-colors ${active ? "border-ink bg-ink text-white" : "border-line hover:border-brand-green/60"}`}
             >
               {t.label} <span className={`tabular ${active ? "text-white/70" : "text-muted"}`}>{t.count}</span>
             </Link>

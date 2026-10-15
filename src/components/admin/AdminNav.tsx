@@ -13,7 +13,7 @@ export default function AdminNav({ groups }: { groups: NavGroup[] }) {
     <nav aria-label="Розділи адмінки" className="flex gap-1 overflow-x-auto pb-1 lg:flex-col lg:gap-5 lg:overflow-visible lg:pb-0">
       {groups.map((group, i) => (
         <div key={group.label ?? i} className="flex gap-1 lg:flex-col">
-          {group.label && <p className="hidden px-4 pb-1 text-xs font-semibold text-white/60 lg:block">{group.label}</p>}
+          {group.label && <p className="hidden px-4 pb-1 text-xs font-semibold text-muted lg:block">{group.label}</p>}
           {group.items.map((item) => {
             const active = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
             return (
@@ -22,7 +22,7 @@ export default function AdminNav({ groups }: { groups: NavGroup[] }) {
                 href={item.href}
                 aria-current={active ? "page" : undefined}
                 className={`whitespace-nowrap rounded-lg px-4 py-2.5 text-sm font-semibold transition-colors ${
-                  active ? "bg-white text-forest" : "text-white/85 hover:bg-white/10 hover:text-white"
+                  active ? "bg-tint text-brand-green" : "text-ink/75 hover:bg-soft hover:text-ink"
                 }`}
               >
                 {item.label}

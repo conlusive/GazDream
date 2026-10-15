@@ -7,9 +7,9 @@ export const STATUS_LABEL: Record<LeadStatus, string> = {
   spam: "Спам",
 };
 export const STATUS_STYLE: Record<LeadStatus, string> = {
-  new: "bg-brand-orange/20 text-[#7a3d00]",
-  in_progress: "bg-forest text-white",
-  closed: "bg-brand-green/10 text-brand-green",
+  new: "bg-brand-green text-white",
+  in_progress: "bg-tint text-brand-green",
+  closed: "bg-soft text-muted ring-1 ring-line",
   spam: "bg-line text-muted",
 };
 export const SOURCE_LABEL: Record<LeadSource | string, string> = {
