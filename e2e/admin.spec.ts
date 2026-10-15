@@ -115,6 +115,38 @@ test("calculator parameters and contacts are editable and reach the site", async
   await visitor.close();
 });
 
+test("projects added in the admin appear on the public Projects page in each language", async ({ page, browser }) => {
+  await signInOk(page, ADMIN.email, ADMIN.password);
+  await page.goto("/admin/projects");
+  await expect(page.getByText("Obwód sumski, Ukraina")).toBeVisible(); // seeded from the old site
+
+  await page.getByText("+ Додати проєкт").click();
+  await page.locator("#lpl-new").fill("Opole, Polska");
+  await page.locator("#len-new").fill("Opole, Poland");
+  await page.locator("#pw-new").fill("3.5");
+  await page.locator("#pd-new").fill("999");
+  await page.getByRole("button", { name: "Додати проєкт" }).click();
+  await expect(page.getByRole("status")).toContainText("додано");
+
+  const visitor = await browser.newPage();
+  await visitor.goto("/pl/projects");
+  await expect(visitor.getByText("Opole, Polska")).toBeVisible();
+  await visitor.goto("/en/projects");
+  await expect(visitor.getByText("Opole, Poland")).toBeVisible();
+  await visitor.goto("/de/projects");
+  await expect(visitor.getByText("Opole, Polska")).toBeVisible(); // no German text: falls back to Polish
+
+  // Hiding it removes it from the site again.
+  await page.goto("/admin/projects");
+  await page.locator("details", { hasText: "Opole, Polska" }).first().locator("summary").click();
+  await page.locator('details[open] input[name="visible"]').first().uncheck();
+  await page.locator("details[open]").first().getByRole("button", { name: "Зберегти" }).click();
+  await expect(page.getByRole("status").first()).toContainText("збережено");
+  await visitor.goto("/pl/projects");
+  await expect(visitor.getByText("Opole, Polska")).toHaveCount(0);
+  await visitor.close();
+});
+
 test("a manager sees only leads, an admin sees everything, and access is enforced", async ({ page, browser }) => {
   await signInOk(page, ADMIN.email, ADMIN.password);
   await page.goto("/admin/users");
@@ -138,7 +170,7 @@ test("a manager sees only leads, an admin sees everything, and access is enforce
   await expect(nav.getByRole("link", { name: "Користувачі" })).toHaveCount(0);
 
   // Direct URLs of admin-only pages bounce back to the dashboard.
-  for (const path of ["/admin/prices", "/admin/users", "/admin/calculator", "/admin/content", "/admin/log"]) {
+  for (const path of ["/admin/prices", "/admin/users", "/admin/calculator", "/admin/content", "/admin/projects", "/admin/log"]) {
     await m.goto(path);
     await expect(m.getByRole("heading", { name: /Вітаємо/ })).toBeVisible();
   }
@@ -171,7 +203,7 @@ test("a manager sees only leads, an admin sees everything, and access is enforce
 
 test("admin panel pages have no detectable accessibility violations", async ({ page }) => {
   await signInOk(page, ADMIN.email, ADMIN.password);
-  for (const path of ["/admin", "/admin/leads", "/admin/calculator", "/admin/content", "/admin/users", "/admin/log", "/admin/account"]) {
+  for (const path of ["/admin", "/admin/leads", "/admin/calculator", "/admin/projects", "/admin/content", "/admin/users", "/admin/log", "/admin/account"]) {
     await page.goto(path);
     await page.waitForLoadState("networkidle");
     await page.waitForTimeout(800);

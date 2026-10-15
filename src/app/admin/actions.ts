@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { clientKey, endSession, requireAdmin, requireUser, startSession } from "@/lib/admin-session";
 import { audit } from "@/lib/db/audit";
 import { addNote, deleteLead, setLeadStatus, STATUSES, type LeadStatus } from "@/lib/db/leads";
+import { deleteProject, saveProject, validateProject } from "@/lib/db/projects";
 import { writePrices, writeSetting } from "@/lib/db/settings";
 import { deleteTestimonial, saveTestimonial, validateTestimonial } from "@/lib/db/testimonials";
 import {
@@ -12,7 +13,7 @@ import {
   setUserPassword, setUserRole, verifyPassword, type Role,
 } from "@/lib/db/users";
 import { getDb } from "@/lib/db";
-import { SETTINGS_TAG, TESTIMONIALS_TAG } from "@/lib/settings";
+import { PROJECTS_TAG, SETTINGS_TAG, TESTIMONIALS_TAG } from "@/lib/settings";
 import {
   CROP_KEYS, CURRENCY_KEYS, FUELS, VAT_LANGS, parseContacts, parseCrops, parseFuelUse, parsePrices, parseVat,
 } from "@/lib/settings-schema";
@@ -26,6 +27,7 @@ const fail = (err: unknown): FormState => ({ error: err instanceof Error ? err.m
 function publicChanged() {
   updateTag(SETTINGS_TAG);
   updateTag(TESTIMONIALS_TAG);
+  updateTag(PROJECTS_TAG);
 }
 
 // ---------------------------------------------------------------- sign in / out
@@ -187,6 +189,42 @@ export async function removeTestimonial(formData: FormData): Promise<void> {
   if (!Number.isInteger(id)) return;
   await deleteTestimonial(id);
   await audit(user, "Видалено відгук", `#${id}`);
+  publicChanged();
+  revalidatePath("/admin", "layout");
+}
+
+export async function saveProjectAction(_prev: FormState, form: FormData): Promise<FormState> {
+  const user = await requireAdmin();
+  try {
+    const idRaw = str(form.get("id"));
+    const input = validateProject({
+      location_pl: str(form.get("location_pl")),
+      location_en: str(form.get("location_en")),
+      location_de: str(form.get("location_de")),
+      location_uk: str(form.get("location_uk")),
+      power_mw: str(form.get("power_mw")),
+      fuel: str(form.get("fuel")),
+      dryer: str(form.get("dryer")),
+      per_day: str(form.get("per_day")),
+      visible: form.get("visible") === "on",
+      sort: Number(str(form.get("sort")) || 0),
+    });
+    await saveProject(idRaw ? Number(idRaw) : null, input);
+    await audit(user, idRaw ? "Змінено проєкт" : "Додано проєкт", `${input.location_pl}, ${input.power_mw} МВт`);
+    publicChanged();
+    revalidatePath("/admin", "layout");
+    return { ok: idRaw ? "Проєкт збережено." : "Проєкт додано." };
+  } catch (err) {
+    return fail(err);
+  }
+}
+
+export async function removeProject(formData: FormData): Promise<void> {
+  const user = await requireAdmin();
+  const id = Number(str(formData.get("id")));
+  if (!Number.isInteger(id)) return;
+  await deleteProject(id);
+  await audit(user, "Видалено проєкт", `#${id}`);
   publicChanged();
   revalidatePath("/admin", "layout");
 }

@@ -43,7 +43,7 @@ async function Shell({ children }: { children: ReactNode }) {
     { items: [{ href: "/admin", label: "Огляд" }, { href: "/admin/leads", label: "Заявки" }] },
     ...(user.role === "admin"
       ? [
-          { label: "Сайт", items: [{ href: "/admin/calculator", label: "Калькулятор" }, { href: "/admin/content", label: "Контакти й відгуки" }] },
+          { label: "Сайт", items: [{ href: "/admin/calculator", label: "Калькулятор" }, { href: "/admin/projects", label: "Проєкти" }, { href: "/admin/content", label: "Контакти й відгуки" }] },
           { label: "Система", items: [{ href: "/admin/users", label: "Користувачі" }, { href: "/admin/log", label: "Журнал дій" }] },
         ]
       : []),

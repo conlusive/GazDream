@@ -1,6 +1,7 @@
 import { beforeAll, describe, expect, it } from "vitest";
 import { getDb } from "./index";
 import { overLimit } from "./rate-limit";
+import { deleteProject, listAllProjects, listVisibleProjects, saveProject, validateProject } from "./projects";
 import {
   addNote, allLeadsForExport, deleteLead, getLead, insertLead, leadsToCsv, leadStats, listLeads, setLeadStatus,
 } from "./leads";
@@ -20,12 +21,12 @@ describe("schema", () => {
   it("applies migrations and enables row level security everywhere", async () => {
     const db = await getDb();
     const rls = await db.query<{ relname: string; relrowsecurity: boolean }>(
-      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts','rate_hits')",
+      "SELECT relname, relrowsecurity FROM pg_class WHERE relname IN ('users','leads','settings','sessions','audit_log','testimonials','lead_notes','price_history','login_attempts','rate_hits','projects')",
     );
-    expect(rls).toHaveLength(10);
+    expect(rls).toHaveLength(11);
     expect(rls.every((r) => r.relrowsecurity)).toBe(true);
     const applied = await db.query("SELECT id FROM schema_migrations ORDER BY id");
-    expect(applied.length).toBeGreaterThanOrEqual(3);
+    expect(applied.length).toBeGreaterThanOrEqual(4);
   });
 });
 
@@ -189,5 +190,36 @@ describe("rate limit", () => {
     expect(await overLimit("lead:1.1.1.1", 3, 10)).toBe(true);
     expect(await overLimit("lead:2.2.2.2", 3, 10)).toBe(false); // other clients are unaffected
     expect(await overLimit("report:1.1.1.1", 3, 10)).toBe(false); // other buckets too
+  });
+});
+
+describe("projects", () => {
+  it("starts with the six installations from the old site", async () => {
+    const all = await listAllProjects();
+    expect(all).toHaveLength(6);
+    expect(all[0].location_pl).toBe("Obwód sumski, Ukraina");
+    expect(all.find((p) => p.location_pl.startsWith("Katowice"))?.power_mw).toBe("2,5");
+  });
+
+  it("adds, edits, hides and deletes a project", async () => {
+    await saveProject(null, validateProject({ location_pl: "Opole, Polska", location_en: "Opole, Poland", power_mw: "3.5", fuel: "chips", per_day: "300-350", sort: 99 }));
+    const added = (await listAllProjects()).find((p) => p.location_pl === "Opole, Polska")!;
+    expect(added.power_mw).toBe("3,5"); // decimal point becomes the comma used on the site
+    expect(added.per_day).toBe("300–350");
+    expect(added.location_de).toBe("");
+
+    await saveProject(added.id, validateProject({ ...added, visible: false, dryer: "Sukup" }));
+    expect((await listVisibleProjects()).some((p) => p.id === added.id)).toBe(false);
+    expect((await listAllProjects()).find((p) => p.id === added.id)?.dryer).toBe("Sukup");
+
+    await deleteProject(added.id);
+    expect((await listAllProjects()).some((p) => p.id === added.id)).toBe(false);
+  });
+
+  it("rejects bad input with a readable message", () => {
+    expect(() => validateProject({ location_pl: "", power_mw: "5" })).toThrow(/польською/);
+    expect(() => validateProject({ location_pl: "X", power_mw: "abc" })).toThrow(/Потужність/);
+    expect(() => validateProject({ location_pl: "X", power_mw: "0" })).toThrow(/Потужність/);
+    expect(() => validateProject({ location_pl: "X", power_mw: "5", per_day: "lots" })).toThrow(/Продуктивність/);
   });
 });

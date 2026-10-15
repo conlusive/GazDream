@@ -141,4 +141,42 @@ export const MIGRATIONS: { id: number; name: string; sql: string }[] = [
       END $$;
     `,
   },
+  {
+    id: 4,
+    name: "projects (installations shown on the site)",
+    sql: `
+      CREATE TABLE projects (
+        id          SERIAL PRIMARY KEY,
+        location_pl TEXT NOT NULL DEFAULT '',
+        location_en TEXT NOT NULL DEFAULT '',
+        location_de TEXT NOT NULL DEFAULT '',
+        location_uk TEXT NOT NULL DEFAULT '',
+        power_mw    TEXT NOT NULL,
+        fuel        TEXT NOT NULL DEFAULT 'chips' CHECK (fuel IN ('chips','moist')),
+        dryer       TEXT NOT NULL DEFAULT '',
+        per_day     TEXT NOT NULL DEFAULT '',
+        visible     BOOLEAN NOT NULL DEFAULT TRUE,
+        sort        INTEGER NOT NULL DEFAULT 0,
+        created_at  TIMESTAMPTZ NOT NULL DEFAULT now()
+      );
+      ALTER TABLE projects ENABLE ROW LEVEL SECURITY;
+      DO $$
+      DECLARE r TEXT;
+      BEGIN
+        FOREACH r IN ARRAY ARRAY['anon','authenticated'] LOOP
+          IF EXISTS (SELECT 1 FROM pg_roles WHERE rolname = r) THEN
+            EXECUTE format('REVOKE ALL ON projects FROM %I', r);
+            EXECUTE format('REVOKE ALL ON SEQUENCE projects_id_seq FROM %I', r);
+          END IF;
+        END LOOP;
+      END $$;
+      INSERT INTO projects (location_pl, location_en, location_de, location_uk, power_mw, fuel, dryer, per_day, sort) VALUES
+        ('Obwód sumski, Ukraina', 'Sumy region, Ukraine', 'Region Sumy, Ukraine', 'Сумська область, Україна', '5,0', 'moist', '', '180–240', 10),
+        ('Obwód kijowski, Ukraina', 'Kyiv region, Ukraine', 'Region Kiew, Ukraine', 'Київська область, Україна', '5,0', 'chips', 'Comil', '350–400', 20),
+        ('Obwód kijowski, Ukraina', 'Kyiv region, Ukraine', 'Region Kiew, Ukraine', 'Київська область, Україна', '6,0', 'chips', 'GSI-9000', '600', 30),
+        ('Obwód czerniowiecki, Ukraina', 'Chernivtsi region, Ukraine', 'Region Czernowitz, Ukraine', 'Чернівецька область, Україна', '4,0', 'chips', 'Sukup', '400', 40),
+        ('Katowice, Polska', 'Katowice, Poland', 'Kattowitz, Polen', 'Катовіце, Польща', '2,5', 'chips', '', '', 50),
+        ('Obwód chmielnicki, Ukraina', 'Khmelnytskyi region, Ukraine', 'Region Chmelnyzkyj, Ukraine', 'Хмельницька область, Україна', '5,0', 'chips', '', '', 60);
+    `,
+  },
 ];

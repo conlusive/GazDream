@@ -36,7 +36,7 @@ describe("pg driver against a Postgres-protocol server", () => {
     expect(storageIsDurable()).toBe(true);
 
     const applied = await db.query<{ id: number }>("SELECT id FROM schema_migrations ORDER BY id");
-    expect(applied.map((r) => r.id)).toEqual([1, 2, 3]);
+    expect(applied.map((r) => r.id)).toEqual([1, 2, 3, 4]);
 
     const { insertLead, listLeads, setLeadStatus, leadStats } = await import("./leads");
     const id = await insertLead({ name: "Pg Test", contact: "pg@example.pl", message: "hello 'quoted' \"text\"", source: "contact", mailed: true });
@@ -59,6 +59,6 @@ describe("pg driver against a Postgres-protocol server", () => {
     const { getDb } = await import("./index");
     const db = await getDb();
     const before = await db.query("SELECT id FROM schema_migrations");
-    expect(before).toHaveLength(3);
+    expect(before).toHaveLength(4);
   });
 });
