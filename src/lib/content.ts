@@ -23,8 +23,8 @@ export const INSTALLATION = {
 export const MODELS = [
   { name: "PUT-1,5", powerKw: "1000–1500", type: "mobile", burnerKw: 1500 },
   { name: "PUT-2,5", powerKw: "2000–2500", type: "mobile", burnerKw: 2500 },
-  { name: "PUT-4", powerKw: "3000–4000", type: "stationary", burnerKw: 4000 },
-  { name: "PUT-6", powerKw: "5000–6000", type: "stationary", burnerKw: 6000 },
+  { name: "PUT-4", powerKw: "3000–4000", type: "mobile", burnerKw: 4000 },
+  { name: "PUT-6", powerKw: "5000–6000", type: "mobile", burnerKw: 6000 },
 ] as const;
 
 export type ProjectKey = "shostka" | "pereselenske" | "skrebyshi" | "buzovytsia" | "katowice" | "iziaslav";
